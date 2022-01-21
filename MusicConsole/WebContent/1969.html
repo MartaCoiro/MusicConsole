@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<title>1969</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/styleAlbum.css">
+<link rel="stylesheet" href="css/styleNav.css">
+<link rel="stylesheet" href="css/styleHome.css">
+<script src="https://kit.fontawesome.com/a076d05399.js"></script> <!-- per l'icona e aprire e chiudere -->
+<!--  script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> <!-- per la nav fissa -->
+
+<script>//barra di navigazione fissa
+$(document).ready(function() {
+var stickyNavTop = $('nav').offset().top;
+
+var stickyNav = function(){
+var scrollTop = $(window).scrollTop();
+
+if (scrollTop > stickyNavTop) {
+$('nav').addClass('sticky');
+} else {
+$('nav').removeClass('sticky');
+}
+};
+
+stickyNav();
+
+$(window).scroll(function() {
+stickyNav();
+});
+});
+</script>
+
+<script>
+	function avviso(){
+	$('#exampleModal').modal({backdrop: 'static',keyboard: true, show:true});
+	}; 
+	
+</script>
+
+<script>
+	function avvisoc(){
+	$('#ModalCar').modal({backdrop: 'static',keyboard: true, show:true});
+	}; 
+	
+</script>
+
+</head>
+
+<!-- 							Sfondo	 							-->
+
+<body background=./imgs/sfondo6.jpg>
+
+<!-- 					Barra di navigazione 						-->
+
+<div>
+<nav class="navbar navbar-expand-sm bg-dark justify-content-center navbar-dark">
+
+
+<input type="checkbox" id="check">
+  <label for="check" class="checkbtn">
+   	<i class="fas fa-bars" id="btn"></i>
+   	<i class="fas fa-times" id="cancel"></i>
+  </label>
+ 
+   <ul class="menu" id="nav" >
+    <li class="nav-item active">
+      <a class="nav-link" href="login.jsp">Login</a>
+    </li>
+    <li class="nav-item active">
+      <a class="nav-link" href="ServletIndex">Home</a>
+    </li>
+    
+  </ul>
+  
+  <form action="ServletCerca" name="ricerca" class="navbar-form navbar-left" role="search">
+  <div id="cerca">
+ <input type="text" id="cerca" name="parola" placeholder="Ricerca"> 
+  </div>
+   <a href="#"> <button type="submit" value="Cerca" id="cerca">Cerca</button></a>
+</form>
+<button id="carrello" onClick="avvisoc()"><img src="./imgs/carrello.png" height="45px" alt="Foto carrello"></button> 
+
+   </nav>
+ </div>
+ 
+  <!-- 						Titolo 									-->
+  
+ <div class="container-fluid" >
+	<div class="titolo">
+	<h1 class="display-1" id="tit" >Music Console</h1>
+</div>
+ 
+ <!-- 						Album								-->
+
+ <h2 id="testo">1969 - Achille Lauro</h2>
+ <hr>
+ 
+  <div class="riempimento2">
+ <div  class="costo" >
+ <h3> Acquista in :</h3>
+ <button id="bott" onclick="avviso()">Aggiungi al Carrello</button>
+ <button id="bott2" onClick="avviso()">Aggiungi al Carrello</button>
+ 
+ <p class="streaming"> Formato <br>
+ 	STREAMING <br>
+ 	  8,00€
+ </p>
+ 
+  <button id="bott1" onClick="avviso()">Aggiungi al Carrello</button>
+  
+ <p class="cd"> Formato <br>
+ 	   CD    <br>
+ 	  14,50€
+ </p>
+
+ <p class="vinile"> Formato <br>
+ 	  VINILE    <br>
+ 	  25,50€
+ </p>
+ </div>
+ 
+ 
+<div class="AchilleLauro img-thumbnail" style="background-image: url(./imgs/img18.png)"> 
+</div>  
+	</div>
+	<h4><hr> Brani </h4>
+	<h5 class="inf"> L'Album ha una durata di 30:08 min ed è stato pubblicato il 12 Aprile 2019. </h5>
+	<p class="brani b">
+    1) Rolls Royce 2:53
+    <br>
+    2) C'est la vie 3:13
+    <br>
+    3) Cadillac 2:33
+    <br>
+    4) Je t'aime 3:30
+     <br>
+    5) Zucchero 3:06
+    <br>
+    6) 1969 3:30
+    <br>
+    7) Roma 2:43
+    <br>
+    8) Sexy Ugly 2:43
+    <br>
+    9) Delinquente 2:36
+    <br>
+    10) Scusa 3:27
+    <br>
+   </p>
+   
+   <!-- Modal -->
+
+ <div class="modal fade" id="exampleModal" data-toggle="modal" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="exampleModalLabel" >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content"> 
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">ATTENZIONE!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Per continuare l'acquisto accedi o iscriviti!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+      </div>
+    </div>
+  </div>
+</div> 
+
+<!-- Modal -->
+
+ <div class="modal fade" id="ModalCar" data-toggle="modal" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="exampleModalLabel" >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content"> 
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">ATTENZIONE!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Per accedere al carrello accedi o registrati!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+      </div>
+    </div>
+  </div>
+</div> 
+
+</div>
+</body>
+</html>

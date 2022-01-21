@@ -1,0 +1,171 @@
+/*Css per quando si apre una determinata playlist e c'è l'elenco dei brani*/
+body{
+	background-repeat: no-repeat;
+	/*background-size: cover;*/
+	background-size: 1000% 300%;
+}
+
+div.titolo{
+	background-image: url(../imgs/onda.gif);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	/*margin-top:-3%;*/
+	/*background-attachment: fixed; fa si che il titolo si muova allo scorrere della pagina*/
+}
+
+h1#tit{
+	z-index: 1;
+	font-family: maiandra gd;
+	font-weight: lighter;
+	font-style: oblique;
+	text-align: center;
+	color: white;
+}
+
+.playlist{
+	
+font-family: maiandra gd;
+font-size: 4rem;
+text-shadow: 3px 3px 3px #ababab;
+color:white;
+text-align:center;
+}
+
+.testo1{
+   position:relative;
+   font-weight:bold;
+   color:white;
+   font-style: maiandra gd;
+   font-size:3.5rem;
+   left:-10%;
+}
+
+.it-list{
+	font-size:1.5rem;
+	color:white !important;
+	
+}
+
+
+
+
+
+@media screen and (max-width: 1002px) {
+	body{
+	background-repeat: no-repeat;
+	/*background-size: cover;*/
+	background-size: 1000% 300%;
+}
+
+.playlist{
+	
+font-family: maiandra gd;
+font-size: 4rem;
+text-shadow: 3px 3px 3px #ababab;
+color:white;
+text-align:center;
+}
+
+.testo1{
+   font-weight:bold;
+   color:white;
+   font-style: maiandra gd;
+   font-size:2.0rem;
+   left:20px;
+   position:relative;
+}
+
+.it-list{
+	font-size:1.5rem;
+	margin-top:5%;
+	color:white !important;
+	line-height:230%;
+	
+}
+}
+
+@media screen and (max-width: 829px) {
+	body{
+	background-repeat: no-repeat;
+	/*background-size: cover;*/
+	background-size: 1200% 500%;
+}
+
+.testo1{
+   position:relative;
+   font-weight:bold;
+   margin-bottom:-15%;
+   margin-left:10%;
+   color:white;
+   font-style: maiandra gd;
+   font-size:2.5rem;
+}
+
+	ul.it-list{
+	font-size:2.0rem;
+	margin-top:10%;
+	margin-left:75px;
+	color:white !important;
+	line-height:230%;
+	font-family:maiandra-gd;
+	font-weight:bold;
+	background-color:transparent;
+}
+
+h1#tit{
+	z-index: 1;
+	font-size: 7rem;
+	font-family: maiandra gd;
+	font-weight: lighter;
+	font-style: oblique;
+	text-align: center;
+	color: white;
+}
+
+div.titolo{
+	height: 8rem;
+	background-image: url(../imgs/onda.gif);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	margin-top:-2%;
+	/*background-attachment: fixed; fa si che il titolo si muova allo scorrere della pagina*/
+}
+}
+
+@media screen and (max-width: 735px) {
+	h1#tit{
+	z-index: 1;
+	font-size: 5rem;
+	font-family: maiandra gd;
+	font-weight: lighter;
+	font-style: oblique;
+	text-align: center;
+	color: white;
+}
+}
+
+@media screen and (max-width: 540px) {
+h1#tit{
+	z-index: 1;
+	font-size: 2rem;
+	font-family: maiandra gd;
+	font-weight: lighter;
+	font-style: oblique;
+	text-align: center;
+	color: white;
+}	
+
+div.titolo{
+	height: 14rem;
+	margin-top:-2%;
+}
+
+ul.it-list{
+	font-size:1.5rem;
+	margin-top:5%;
+	margin-left:-1%;
+}
+
+}

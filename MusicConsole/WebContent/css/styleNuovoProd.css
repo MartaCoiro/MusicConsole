@@ -1,0 +1,72 @@
+h1#tit{
+	z-index:1;
+	font-size: 500%;
+	font-family: maiandra gd;
+	font-weight: lighter;
+	font-style: oblique;
+	text-align: center;
+	color: black;
+}
+
+h2.p{
+	font-family: maiandra gd;
+	font-size:310%;
+	margin-left:40%;
+	margin-top:2%;
+}
+
+div.new{
+	margin-left:40%;
+	margin-top:2%;
+}
+
+#bordo{
+	border:solid #f06;
+	
+}
+
+label.lab{
+	font-size:150%;
+	font-family: maiandra gd;
+	padding:6px;
+}
+
+input{
+	border:solid #f06;
+	
+}
+
+input[type=submit]{
+	font-size:130%;
+	border:solid #f06;
+}
+
+select{
+	border:solid #f06;
+}
+
+@media(max-width:618px){
+
+h2.p{
+	margin-left:10%;
+}	
+	
+div.new{
+	margin-left:10%;
+}
+
+label.lab{
+	padding:4px;
+}
+}
+
+@media(max-width:540px){
+	label.lab{
+	font-size:120%;
+	padding:2px;
+	}
+	
+	div.new{
+	margin-left:7%;
+	}
+}

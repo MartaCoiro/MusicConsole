@@ -1,0 +1,103 @@
+/* Dropdown Button */
+.dropbtn {
+  background-color: #f0f0f0;
+  color: white;
+  width:200% !important;
+  padding: 5px;
+  position:relative;
+  font-size: 16px;
+  border: solid;
+  cursor: auto;
+  border-color: black;
+  border-width: 1px;
+}
+
+/* Drrgb(0, 128, 255)button on hover & focus */
+.dropbtn:hover, .dropbtn:focus {
+  border-color: #ff0080;
+  border-width: 1px;
+}
+
+/* The containergb(255, 255, 255), 255, 255) - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #ff0080;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {
+	display:block;
+}
+
+h2.t{
+	font-size:250%;
+	margin-top:5%;
+	position:relative;
+	margin-left: 5%;
+}
+
+ul.ap{
+	position:relative;
+	width:50%;
+	font-family: maiandra gd;
+	font-weight: lighter;
+	line-height:2;
+}
+
+h1{
+	font-family:maiandra gd;
+	text-align:center;
+}
+
+h3{
+	font-family:maiandra gd;
+	text-align:center;
+}
+
+h2{
+	margin-left:2%;
+	font-family:maiandra gd;
+	font-weight:bold !important;
+	text-decoration:underline;
+}
+
+div.cont{
+	margin-right:10% !important;
+	margin-left:20% !important;
+	position:relative !important;
+	right:10% !important;
+}
+
+div.sez{
+	font-family: maiandra gd;
+	font-weight: lighter;
+	line-height:2;
+	font-size:12pt;
+	border-style:solid;
+	border-width: 2px;
+	border-radius:5px;
+	border-color:#f06;
+	line-height:-1;
+	position:relative;
+	right:-48%;
+	margin-right:80%;
+	margin-bottom:10%;
+	padding:15px;
+	width:30%;
+	background-color:#cccccc;
+}
+
+button#bb{
+	background-color:#ffffff;
+	font-weight: bold;
+	}
