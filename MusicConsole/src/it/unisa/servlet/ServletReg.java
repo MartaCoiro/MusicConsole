@@ -71,8 +71,7 @@ public class ServletReg extends HttpServlet {
 		account.setNickname(name);
 		
 		
-		
-		/*byte[] salt = new String("12345678").getBytes();
+		byte[] salt = new String("12345678").getBytes();
         int iterationCount = 40000;
         int keyLength = 128;
        
@@ -95,7 +94,7 @@ public class ServletReg extends HttpServlet {
 		} catch (GeneralSecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		}
 
 		 //li inseriamo nel profilo
 		pro.setNome(nome);
