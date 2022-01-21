@@ -115,7 +115,6 @@ public class SelectUser extends HttpServlet {
 			
 								 System.out.println(" entra");
 						
-						
 								 currentSession.setMaxInactiveInterval(60*60);
 								 currentSession.setAttribute("acc", name);
 								 currentSession.setAttribute("p", pr);
