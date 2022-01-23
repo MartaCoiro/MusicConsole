@@ -51,6 +51,7 @@ public class ServletAmm extends HttpServlet {
 			}else {
 				if(m.getRuolo().equals("gestore ordini")) {
 				currentSession.setAttribute("yes", false);
+				System.out.println("Katia");
 				request.setAttribute("ruolo", "ordini");
 				getServletContext().getRequestDispatcher("/homeAmm.jsp").forward(request, response); //reindiriziamo alla view	
 			} else if(m.getRuolo().equals("gestore catalogo")) {

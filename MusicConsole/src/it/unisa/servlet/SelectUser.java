@@ -1,5 +1,6 @@
 package it.unisa.servlet;
 
+import it.unisa.servlet.Encryption;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.GeneralSecurityException;
@@ -9,7 +10,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.io.UnsupportedEncodingException;
 
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -65,6 +69,7 @@ public class SelectUser extends HttpServlet {
 		
 		response.setContentType("text/html");//tipo di file
 		
+		KeyGenerator kgen;
 		SecretKeySpec key, key1;
 		String encryptedPassword;
 		AccountUtente m;
@@ -90,25 +95,29 @@ public class SelectUser extends HttpServlet {
 			return;
 			}
 		else {
-			
+			System.out.println("oo");
 			Collection<AccountUtente> au =  model.doRetrieveAll();
 			 for(Iterator<AccountUtente> aa = au.iterator();aa.hasNext();) {
 				 AccountUtente el = (AccountUtente)aa.next();
-				 //if((el.getNickname().equals(name))&&(el.getPassword().equals(pas))) {
-				 
-				//decriptiamo la password per controllare se è giusta
+				  System.out.println("vai");
+				//criptiamo la password per controllare se è giusta
 				 byte[] salt = new String("12345678").getBytes();
 			        int iterationCount = 40000;
 			        int keyLength = 128;
 			        
-			        key = Encryption.createSecretKey(pas.toCharArray(), salt, iterationCount, keyLength);
-					 String originalPassword = pas;
-				        System.out.println("Original password: " + originalPassword);
-						encryptedPassword = Encryption.encrypt(originalPassword, key);
-						 System.out.println("Encrypted password: " + encryptedPassword);
+			        //copiato
+			        kgen=KeyGenerator.getInstance("AES");
+			        kgen.init(128);
+			        
+			       // key = Encryption.createSecretKey(pas.toCharArray(), salt, iterationCount, keyLength);
+					 //String originalPassword = pas;
+				      
+						//encryptedPassword = Encryption.encrypt(originalPassword, key);
+						 //System.out.println("Encrypted password: " + encryptedPassword);
 						 String decryptedPassword;
-						 if(Encryption.decrypt(el.getPassword(), key)!=null) {
-							 decryptedPassword = Encryption.decrypt(el.getPassword(), key);
+						 //if(Encryption.decrypt(el.getPassword(), key)!=null) {
+							 decryptedPassword = Encryption.decrypt(el.getPassword(), (SecretKey) kgen);
+							 //decryptedPassword = Encryption.decrypt(el.getPassword(), key);
 							 System.out.println("Decrypted password: " + decryptedPassword);
 			
 							 if((decryptedPassword.equals(pas))&&(el.getNickname().equals(name))) {
@@ -168,18 +177,28 @@ public class SelectUser extends HttpServlet {
 										 prP.add(al);
 									 }
 								 }
+								 
+								 currentSession.setAttribute("prA", prA);
+									currentSession.setAttribute("prB", prB);
+									currentSession.setAttribute("prP", prP);
+									currentSession.setAttribute("conf", false);
+									currentSession.setAttribute("carrello", car);
+									currentSession.setAttribute("namep", lplay);
+									
+									getServletContext().getRequestDispatcher("/home.jsp").forward(request, response); //reindiriziamo alla view	
+									return;
 							 }
 						 }
 			 
-				else {
+				
 					 request.setAttribute("presente", true);
 						getServletContext().getRequestDispatcher("/login.jsp").forward(request, response); //reindiriziamo alla view
 						return; 
-				 }
+				
 			 }
 		}		
 			 
-				currentSession.setAttribute("prA", prA);
+				/*currentSession.setAttribute("prA", prA);
 				currentSession.setAttribute("prB", prB);
 				currentSession.setAttribute("prP", prP);
 				currentSession.setAttribute("conf", false);
@@ -187,9 +206,9 @@ public class SelectUser extends HttpServlet {
 				currentSession.setAttribute("namep", lplay);
 				
 				getServletContext().getRequestDispatcher("/home.jsp").forward(request, response); //reindiriziamo alla view	
-			
+			*/
 		
-	}
+	
 			
 			 catch(SQLException e){
 			Utility.print(e);
