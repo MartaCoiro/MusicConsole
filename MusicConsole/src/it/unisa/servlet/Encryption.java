@@ -54,7 +54,6 @@ public class Encryption {
 	        String property = string.split(":")[1];
 	        Cipher pbeCipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
 	        System.out.println("entra2");
-	        System.out.println("entra3");
 	        //copiato
 	        pbeCipher.init(Cipher.DECRYPT_MODE, skeySpec);
 	        
