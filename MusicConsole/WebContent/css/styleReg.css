@@ -1,0 +1,94 @@
+body{
+	overflow:auto !important;
+	background-size: cover !important;
+}
+
+h1#accedi {
+	line-height:3;
+	top:-9px;
+	position:relative;
+	font-size:270%;
+}
+
+div.campi{
+	position:relative;
+	/*left:40%;*/
+	margin-right:40%;
+	top:-55px;
+}
+
+b{
+	font-size:180%;
+}
+
+input.rett{
+	height:10%;
+	
+}
+
+input.bottoni{
+		left:-50%;
+		top:50px;
+}
+	
+@media screen and (max-width: 974px) {
+	
+	body{
+	background-size:978px 900px;
+	overflow:hidden;
+	}
+
+	h1#accedi{
+		line-height:3;
+		top:-20px;
+		left:10%;
+		font-size:280%;
+		
+	}
+	
+	div.campi{
+		position:relative;
+		left:40%;
+		top:-70px;
+		/*top:60%;*/
+	}
+	
+	input.rett{
+	height:5%;
+	}
+	
+	input.bottoni{
+		left:-50%;
+		top:60px;
+		}
+}
+
+@media screen and (max-width: 629px) {
+	
+	body{
+	background-size:629px 900px;
+	overflow:hidden;
+	}
+	
+	h1#accedi{
+		line-height:3;
+		top:-20px;
+		font-size: 280%;
+	}
+	
+	div.campi{
+		position:relative;
+		left:20%;
+		top:-70px;
+	}
+	
+	input.rett{
+	height:10%;
+	}
+	
+	input.bottoni{
+		left:-50%;
+		top:60px;
+	
+	}
+}	

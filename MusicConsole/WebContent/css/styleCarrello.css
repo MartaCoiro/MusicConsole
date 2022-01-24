@@ -1,0 +1,209 @@
+body{
+	overflow:auto;
+}
+
+h2.font-effect-neon{
+	font-size:280%;
+	text-align:center;
+} 
+
+div.titolo{
+	height: 20%;
+}
+
+ table{ 
+	border: 3px solid magenta; 
+	border-collapse: collapse;
+	table-layout:auto;
+	width:45%;
+	color:white;
+	font-size:110%;
+}
+
+div.ricerca{
+	position:relative;
+	top:-0.4em !important;
+}
+
+a button.ricerca{
+	top:-0.5em !important;
+	position:relative;
+}
+
+hr{
+	background-color:white;
+    border-width:0;
+    color:#999;
+    height:1px;
+    text-align: right;
+    margin-top:3%;
+	margin-right:230%;
+	border-top: 1px solid #000;
+	width: 45%;
+	position:relative;
+}
+ 
+td{
+ 	padding:20px;
+	border:transparent;
+	font-family: maiandra gd; 
+	border: 3px solid magenta;
+}
+
+
+th{
+	font-size:110%;
+	font-weight:bold;
+	text-align:center;
+	border: 3px solid magenta;
+	font-family: maiandra gd; 
+}
+
+a.car{
+	color:white;
+}
+
+p.menu{
+	font-size:170%;
+	font-family: maiandra gd;
+	margin-left:1%;
+}
+
+
+tr{
+	border: 3px solid magenta; 
+}
+
+.right{
+	text-align: right;
+	}
+	
+.center{
+ text-align: center;
+}
+
+div#cerca{
+	margin-top:8%;
+}
+
+@media(max-width:768px){
+
+	h2.font-effect-neon{
+	font-size:280%;
+	text-align:center;
+	} 
+
+	h1#tit{
+	font-size: 600%;
+	}
+
+ 	table{ 
+	border: 3px solid magenta; 
+	border-collapse: collapse;
+	table-layout:auto;
+	width:100%;
+	color:white;
+	font-size:110%;
+	}
+
+	hr{
+	background-color:white;
+    border-width:0;
+    color:#999;
+    height:1px;
+    text-align: right;
+    margin-top:3%;
+	margin-right:230;
+	border-top: 1px solid #000;
+	width: 100%;
+	position:relative;
+	}
+
+ 
+	td{
+ 	padding:6px;
+	border: 5px solid white;
+	}
+
+	th{
+	font-size:105%;
+	font-weight:bold;
+	text-align:center;
+	border: 3px solid magenta;
+	font-family: maiandra gd; 
+	}
+
+	a.car{
+	color:white;
+	}
+
+	p.menu{
+	font-size:170%;
+	font-family: maiandra gd;
+	margin-left:1%;
+	}
+
+	tr{
+	border: 3px solid magenta; 
+	}
+
+	.right{
+	text-align: right;
+	}
+	
+	.center{
+	 text-align: center;
+	}
+}
+
+@media(max-width:640px){
+	
+	h2.font-effect-neon{
+	text-align:center;
+	font-size:280%;
+	}
+	
+	div.titolo{
+	height: 43%;
+	}
+	
+	h1#tit{
+	font-size: 7rem;
+	}
+}
+
+@media(max-width:550px){
+	
+	h2.font-effect-neon{
+	text-align:center;
+	font-size:280%;
+	}
+	
+	div.titolo{
+	height: 30%;
+	}
+	
+	h1#tit{
+	font-size: 5rem;
+	}
+	
+	div#cerca{
+	margin-top:2%;
+	}
+	
+	td{
+ 	border: 3px solid magenta;
+	}
+
+	th{
+	border: 3px solid magenta; 
+	}
+	
+	tr{
+	border: 3px solid magenta;
+	}
+	
+}
+
+
+

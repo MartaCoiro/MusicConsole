@@ -1,0 +1,60 @@
+body{
+	overflow:auto !important;
+}
+h1{
+	font-family:maiandra gd;
+	text-align:center;
+}
+
+.sposta1{
+	position:relative;
+	margin-left:28%;
+	margin-top:1%;
+	color:black;
+	border: solid #f06;
+	font-family:maiandra gd;
+	font-weight:bold;
+	
+}
+
+.sposta2{
+	position:relative;
+	color:black;
+	border: solid #f06;
+	font-family:maiandra gd;
+	font-weight:bold;
+	margin-left:1%;
+	
+}
+
+.sposta3{
+	position:relative;
+	color:black;
+	border: solid #f06;
+	font-family:maiandra gd;
+	font-weight:bold;
+	margin-left:1%;
+	
+}
+
+h2{
+	
+	margin-left:2%;
+	font-family:maiandra gd;
+	font-weight:bold !important;
+	text-decoration:underline;
+}
+
+.it-list{
+	line-height:3;
+	
+	
+}
+
+.elimina{
+	
+	font-weight:bold; 
+	font-size:1rem; 
+	border:solid #f06; 
+	line-height:2;
+}

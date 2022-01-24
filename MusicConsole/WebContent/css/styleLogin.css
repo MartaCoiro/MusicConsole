@@ -1,0 +1,216 @@
+body{
+	background-repeat: no-repeat;
+	background-size: 1369px 900px;
+}
+
+div.titolo{
+	height: 80px;
+	background-image: url("../imgs/onda.gif");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	/*background-attachment: fixed; fa si che il titolo si muova allo scorrere della pagina*/
+}
+	
+h1#tit{
+	z-index: 1;
+	font-size:400%;
+	font-family: maiandra gd;
+	font-weight: lighter;
+	font-style: oblique;
+	text-align: center;
+	color: white;
+}
+
+
+h1#accedi{
+	color:white;
+	text-align:center;
+	font-size: 360%;
+	font-family: Concert One;
+	line-height:4;
+	font-weight:bold;
+}
+
+div.riempimento3{
+	display:flex;
+	flex-wrap:wrap;
+	position:relative;
+	left:-3%;
+	top:-70px;
+}
+
+div.campi{
+	left:40%;
+	position:absolute;
+	top:25%;
+	font-weight:bold;
+}
+
+input.rett{
+	font-size:140%;
+	border: groove medium #f06;
+	border-radius: .3em;
+	color:black;
+}
+
+b{
+	font-size:200%;
+	color:white;
+}
+
+ input#bott{
+	position:relative;
+	left:10%;
+	text-align:center;
+	font-weight:bold;
+	font-size:140%;
+	border: groove medium #f06;
+	border-radius: .3em;
+}
+
+	
+input.bottoni {
+	position:relative;
+	left:20%;
+	text-align:center;
+	font-weight:bold;
+	font-size:140%;
+	border: groove medium #f06;
+	border-radius: .3em;
+}
+
+input#reg{
+	left:-40%;
+	top:-10px;
+}
+
+form, p, fieldset{
+	display:inline;
+}
+
+@media screen and (max-width: 1000px) {
+	body{
+	background-size:978px 900px;
+	overflow:hidden;
+	}
+
+	h1.display-1#tit{
+	z-index: 1;
+	/*font-size: 480%;*/
+	position:relative;
+	left:2%;
+}		
+	h1#tit{
+	z-index: 1;
+	font-size:400%;
+	font-family: maiandra gd;
+	font-weight: lighter;
+	font-style: oblique;
+	text-align: center;
+	color: white;
+	}
+	
+	div.titolo{
+	height: 100px;
+	width:100%;
+	}
+	
+	h1#accedi{
+		font-size: 330%;
+		line-height:4;
+	}
+	
+	div.campi{
+		position:relative;
+		left:27%;
+		top:-10%;
+	}
+	
+	input.rett{
+		font-size:108%;
+	}
+	
+	b{
+	font-size:170%;
+	}
+	
+	input#bott{
+	left:15%;
+	} 
+	
+	input.bottoni{
+	left:20%;
+	}
+	
+	input#reg{
+	position:relative;
+	left:-30%;
+	top:-10px;
+	}
+	
+	/*form, p, fieldset{
+	display:inline;
+}*/
+}
+@media screen and (max-width: 540px) {
+	body{
+	background-size:540px 1020px;
+	overflow:hidden;
+	}
+	
+	h1.display-1#tit{
+	z-index: 1;
+	font-size: 420%;
+	font-family: maiandra gd;
+	font-weight: lighter;
+	font-style: oblique;
+	color:white;
+	right:-300px;
+	text-align:center;
+	/*margin-top:1%;*/
+
+}
+	
+	div.titolo{
+		width:100%;
+	}
+	
+	h1#accedi{
+		font-size: 330%;
+		line-height:4;
+	}
+	
+	div.campi{
+		position:relative;
+		left:17%;
+		top:-10%;
+	}
+	
+	input.rett{
+		font-size:108%;
+	}
+	
+	b{
+	font-size:160%;
+	}
+	
+	input#bott{
+	left:10%;
+	} 
+	
+	input.bottoni{
+		left:20%;
+	}
+	
+	input#reg{
+	left:-25%;
+	top:-4%;
+	}
+	
+
+}
+
+
+
+

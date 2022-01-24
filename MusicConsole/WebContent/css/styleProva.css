@@ -1,0 +1,63 @@
+#hidden_div {
+    display: none;
+    }
+#hidden_div1 {
+    display: none;
+    }
+#hidden_div2{
+    display: none;
+ }
+ div.m{
+ display:none;
+ }
+#hidden_div3{
+	display:none;
+}
+#hidden_div4{
+	display:visible;
+}
+#hidden_div5{
+	display:visible;
+}
+#hidden_div6{
+	display:visible;
+}
+#hidden_div8{
+	display:none;
+}
+#hidden_div9{
+	display:none;
+}
+#hidden_div10{
+	display:none;
+}
+
+.bg-white{
+	
+	background-color:#d8d8d8!important;
+}
+
+.text-right{
+	color:black !important;
+	font-weight:bold;
+	font-size:x-large;
+	font-family:maiandra gd;
+}
+
+.col-md-6{
+	color:black !important;
+	font-weight:bold;
+	font-size:large;
+	font-family:maiandra gd;
+	
+}
+
+.form-control{
+	
+	border:solid #f06;
+}
+
+.profile-button{
+	background-color:#000048!important;
+}
+

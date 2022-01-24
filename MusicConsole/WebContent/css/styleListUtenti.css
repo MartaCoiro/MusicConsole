@@ -1,0 +1,166 @@
+body{
+	overflow:auto !important;
+}
+
+div.titolo{
+	position:relative;
+	text-align:center;
+	margin-top:3%;
+	font-family:maiandra gd;
+	font-size:100%;
+}
+
+h3{
+	position:relative;
+	text-align:center;
+	margin-top:-20%;
+}
+
+.sticky {
+position: fixed;
+width: 100%;
+left: 0;
+top: 0;
+z-index: 100;
+border-top: 0;
+}
+
+nav.navbar{
+	width:100%;
+	background:#f06;
+	height:70px;
+}
+
+nav ul.menu{
+	margin-right: 20px;
+	float:right;
+}
+
+nav ul.menu li.active{
+	display: inline-block;
+	line-height: 70px;
+	margin:0 5px;
+}
+
+nav ul.menu li.active a{
+	color:#fff;
+	font-size: 17px;
+	padding: 7px 13px;
+	border-radius: 3px;
+	text-transform: uppercase;
+}
+
+nav ul.menu li.active a:before{
+	position: absolute;
+	content: " ";
+	left: 0;
+	bottom: 0;
+	height: 3px;
+	width: 100%;
+	background: #f06;
+	transform: scaleX(0);
+	transform-origin: right;
+	transition: transform .4s linear;
+}
+nav ul.menu li.active a:hover:before{
+	transform: scaleX(1);
+	background: #f06;
+	/*transition: .5s;*/
+	transform-origin: left;
+}
+
+a.nav-link:hover{/*fatto da me*/
+	background: #f06;
+	transition: .5s;
+	color:black;
+}
+
+/* li a{ da chiedereee
+	line-height: 2;
+}*/
+
+label #btn,
+label #cancel{
+	color:white;
+	font-size: 30px;
+	float:left;
+	line-height: 30px;
+	margin-right: 80px;
+	/*margin-right: -15px;*/
+	cursor:pointer;
+	display: none;
+}
+
+#check{
+	display: none;
+}
+
+@media (max-width: 836px){
+
+.sticky {
+position: fixed;
+width: 100%;
+left: 0;
+top: 0;
+z-index: 100;
+border-top: 0;
+}
+	
+label #btn{
+	display:block; 
+}
+
+nav{
+	height:80px;
+}
+
+ul.menu{ /*lista degli elementi*/
+	position: absolute;
+	width:100%;
+	height:85vh;
+	background: #2c3e50;
+	top: 80px;
+	left: -9999px;
+	text-align: center;	
+	transition: all .40s;
+	z-index:1;
+}
+
+nav ul.menu li.active{
+	display: block;
+	margin: 50px 0;
+	line-height: 30px;
+	
+}
+
+nav ul.menu li.active a{
+	font-size: 20px;
+	
+}
+
+a.nav-link:hover{
+	background: none;
+	color: #f06;
+}
+
+nav ul.menu li.active a:hover{
+	transform: scaleX(1);
+	background: #f06;
+	transition: transform .4s linear;
+	transform-origin: left;
+}
+
+#check:checked ~ ul.menu{ /*apre e  chiude*/
+	left: 0;
+}
+
+#check:checked ~ label #btn{
+	display:none;
+}
+
+#check:checked ~ label #btn{
+	display:block;
+}
+
+
+}
