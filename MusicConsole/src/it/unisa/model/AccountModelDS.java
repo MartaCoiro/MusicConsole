@@ -147,7 +147,7 @@ public class AccountModelDS implements ProductModel<AccountUtente> {
 				preparedStatement.setString(1, p2);
 				preparedStatement.setString(2, p3);
 				
-				/*Utility.print("doUpdate: " + preparedStatement.toString());*/
+				Utility.print("doUpdate: " + preparedStatement.toString());
 				
 				 preparedStatement.executeUpdate();
 			}

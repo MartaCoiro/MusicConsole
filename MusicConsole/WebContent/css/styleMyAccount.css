@@ -4,18 +4,21 @@ body{
 }
 
 button.B{
-	background:#000040 !important;  
-  color:#f400f4 !important; 
-  border-color:purple !important;
-  /*margin-left:2%;*/
-  font-family:maiandra gd !important; 
-  font-size:140%;
-  font-weight:bold; 
-  padding: 5px 10px;  
-  cursor: pointer;  
+	border-color:#00ff00;
+	display:line;
+	background:#000040 !important; 
+	color:#f400f4 !important; 
+  	border-color:purple !important;
+  	left:80% !important;
+  	/*margin-left:80%;*/
+  	font-family:maiandra gd !important; 
+  	font-size:140%;
+  	font-weight:bold; 
+  	padding: 5px 10px;  
+  	cursor: pointer;  
 	position:relative;
-	left:80%;
-	bottom:850% !important;
+	/*bottom:800% !important;*/
+	margin-top:-10% !important;
 }
 
 
@@ -23,17 +26,17 @@ h2.inte{
 	font-size:300%;
 	color:white;
 	text-align:center;
-	margin-top:5%;
+	bottom: 800% !important;
 }
 
 p.pro{
+	display:line;
 	font-size:200%;
 	color:white;
 	text-align:left;
 	text-decoration:underline;
 	font-family:maiandra gd	;
 	font-weight:bold;
-	margin-left:2%;
 }
 
 .table-hover{

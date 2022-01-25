@@ -4,7 +4,11 @@ import it.unisa.servlet.*;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
+import java.security.Key;
+import java.security.KeyPair;
 import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
+import java.security.PublicKey;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
 
@@ -40,7 +44,7 @@ public class ServletReg extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException {
+			throws ServletException, IOException{
 		
 		DataSource ds = (DataSource)getServletContext().getAttribute("DataSource");
 		
@@ -48,9 +52,6 @@ public class ServletReg extends HttpServlet {
 		ProfiloModelDS model1 = new ProfiloModelDS(ds);
 		
 		response.setContentType("text/html");//tipo di file
-		
-		 SecretKeySpec key;
-		 String encryptedPassword;
 		 
 		//prendo i valori passati
 		String nome= request.getParameter("nome");
@@ -69,29 +70,13 @@ public class ServletReg extends HttpServlet {
 		//li inseriamo in account
 		
 		account.setNickname(name);
-		
-		
-		byte[] salt = new String("12345678").getBytes();
-        int iterationCount = 40000;
-        int keyLength = 128;
        
 		try {
-			key = Encryption.createSecretKey(p.toCharArray(), salt, iterationCount, keyLength);
-			 String originalPassword = p;
-		        System.out.println("Original password: " + originalPassword);
-				encryptedPassword = Encryption.encrypt(originalPassword, key);
+			//criptiamo la password
+				String encryptedPassword = PasswordHasher.scramble(p);
 				account.setPassword(encryptedPassword);
-				 System.out.println("Encrypted password: " + encryptedPassword);
-				 String decryptedPassword;
-				 decryptedPassword = Encryption.decrypt(encryptedPassword, key);
-				 System.out.println("Decrypted password: " + decryptedPassword);
-		} catch (NoSuchAlgorithmException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (InvalidKeySpecException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (GeneralSecurityException e) {
+				 
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

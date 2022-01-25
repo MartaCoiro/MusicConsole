@@ -56,7 +56,8 @@ public class ServletMyAccount extends HttpServlet {
 			Profilo profil = model1.doRetrieveByKey(p.getUsername());
 			
 			Collection<AccountUtente> cpr = model.doRetrieveAll();
-			AccountUtente pr = model.doRetrieveByKey(p.getUsername(),p.getPassword());
+			String pa = PasswordHasher.scramble(p.getPassword());
+			AccountUtente pr = model.doRetrieveByKey(p.getUsername(),pa);
 			
 			if(!ele1.equals(p.getNome())){
 				p.setNome(ele1);
@@ -83,13 +84,12 @@ public class ServletMyAccount extends HttpServlet {
 				model1.doUpdate("città", ele6, profil.getUsername());
 			}
 			
-			if(!ele8.equals(p.getPassword())){
+			if(!ele8.equals(p.getPassword())){//settiamo la password se diversa in profilo
 				p.setPassword(ele8);
 				model1.doUpdate("password", ele8, profil.getUsername());
-			}
-			
-			if(!pr.getPassword().equals(ele8)){
-				model.doUpdate("password", ele8, pr.getNickname());
+				//cripto la nua password
+				String npas = PasswordHasher.scramble(ele8);
+				model.doUpdate("password", npas, pr.getNickname());
 			}
 		
 			getServletContext().getRequestDispatcher("/MyAccount.jsp").forward(request, response); //reindiriziamo alla view		

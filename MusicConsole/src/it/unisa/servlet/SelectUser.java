@@ -1,9 +1,9 @@
 package it.unisa.servlet;
 
-import it.unisa.servlet.Encryption;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.GeneralSecurityException;
+import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
@@ -23,6 +24,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
+
+import com.mysql.cj.util.Base64Decoder;
 
 import it.unisa.model.AccountModelDS;
 import it.unisa.utils.Utility;
@@ -69,9 +72,6 @@ public class SelectUser extends HttpServlet {
 		
 		response.setContentType("text/html");//tipo di file
 		
-		KeyGenerator kgen;
-		SecretKeySpec key, key1;
-		String encryptedPassword;
 		AccountUtente m;
 		
 		HttpSession currentSession = request.getSession();
@@ -95,34 +95,15 @@ public class SelectUser extends HttpServlet {
 			return;
 			}
 		else {
-			System.out.println("oo");
 			Collection<AccountUtente> au =  model.doRetrieveAll();
 			 for(Iterator<AccountUtente> aa = au.iterator();aa.hasNext();) {
 				 AccountUtente el = (AccountUtente)aa.next();
-				  System.out.println("vai");
-				//criptiamo la password per controllare se è giusta
-				 byte[] salt = new String("12345678").getBytes();
-			        int iterationCount = 40000;
-			        int keyLength = 128;
-			        
-			        //copiato
-			        kgen=KeyGenerator.getInstance("AES");
-			        kgen.init(128);
-			        
-			       // key = Encryption.createSecretKey(pas.toCharArray(), salt, iterationCount, keyLength);
-					 //String originalPassword = pas;
-				      
-						//encryptedPassword = Encryption.encrypt(originalPassword, key);
-						 //System.out.println("Encrypted password: " + encryptedPassword);
-						 String decryptedPassword;
-						 //if(Encryption.decrypt(el.getPassword(), key)!=null) {
-							 decryptedPassword = Encryption.decrypt(el.getPassword(), (SecretKey) kgen);
-							 //decryptedPassword = Encryption.decrypt(el.getPassword(), key);
-							 System.out.println("Decrypted password: " + decryptedPassword);
-			
-							 if((decryptedPassword.equals(pas))&&(el.getNickname().equals(name))) {
-			
-								 System.out.println(" entra");
+				//criptiamo la password inserita per controllare se è giusta
+			   String cryptedPasI = PasswordHasher.scramble(pas);
+			       
+			   String pass = el.getPassword();//STRINGA RECUPERATA DAL DB
+					
+			   if((pass.equals(cryptedPasI))&&(el.getNickname().equals(name))) {
 						
 								 currentSession.setMaxInactiveInterval(60*60);
 								 currentSession.setAttribute("acc", name);
@@ -213,13 +194,7 @@ public class SelectUser extends HttpServlet {
 			 catch(SQLException e){
 			Utility.print(e);
 			request.setAttribute("error", e.getMessage());
-			} catch (NoSuchAlgorithmException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InvalidKeySpecException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (GeneralSecurityException e) {
+			}  catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

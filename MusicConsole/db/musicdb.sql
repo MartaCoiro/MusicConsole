@@ -160,7 +160,7 @@ INSERT INTO image values (58,"sfondoLogin.png");
 
 CREATE TABLE AccountUtente  (
   Nickname varchar(50) not null,
-  Password varchar (500)not null,
+  Password char(40) not null,
   primary key (Nickname)
 );
 
