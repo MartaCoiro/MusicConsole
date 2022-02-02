@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
-
+import Class.GenereMusicale;
 import javax.sql.DataSource;
 
 import it.unisa.utils.Utility;

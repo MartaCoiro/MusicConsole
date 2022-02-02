@@ -9,6 +9,7 @@ package it.unisa.model;
 
 	import javax.sql.DataSource;
 	import it.unisa.utils.Utility;
+	import Class.AccountUtente;
 
 public class AccountModelDS implements ProductModel<AccountUtente> {
 

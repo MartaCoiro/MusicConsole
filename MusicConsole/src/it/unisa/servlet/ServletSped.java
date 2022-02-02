@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Locale;
-
+import Class.Carrello;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,14 +19,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
-
-import it.unisa.model.Carrello;
+import Class.Carta;
 import it.unisa.model.CarrelloModelDS;
-import it.unisa.model.Carta;
+import Class.Magazzino;
 import it.unisa.model.CartaModelDS;
-import it.unisa.model.Magazzino;
+import Class.Ordini;
 import it.unisa.model.MagazzinoModelDS;
-import it.unisa.model.Ordini;
 import it.unisa.model.OrdiniModelDS;
 import it.unisa.utils.Utility;
 

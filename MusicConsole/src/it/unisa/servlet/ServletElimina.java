@@ -13,14 +13,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
-
+import Class.Carrello;
 import org.json.JSONArray;
+import Class.Magazzino;
 
-import it.unisa.model.Carrello;
 import it.unisa.model.CarrelloModelDS;
-import it.unisa.model.Magazzino;
+import Class.Playlist;
 import it.unisa.model.MagazzinoModelDS;
-import it.unisa.model.Playlist;
 import it.unisa.utils.Utility;
 
 

@@ -1,36 +1,37 @@
-package it.unisa.model;
+package Class;
 
 import java.io.Serializable;
-import java.util.Date;
 
-public class Ordini {
+public class Carrello implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	float totq;
 	int quantità;
-	String stato;
 	Integer cod;
-	Integer indice;
 	String utente;
 	String nome;
 	String autore;
 	String tipo;
 	float costo;
-	float tot;
-	Date data = new Date();
-	java.sql.Date dat = new java.sql.Date(data.getTime());
 
-	public Ordini() {
+	public Carrello() {
+		totq = 0.0f;
 		quantità = 0;
-		stato = "";
 		cod = 0;
-		indice = 0;
 		utente = "";
 		nome = "";
 		autore = "";
 		tipo= "";
 		costo = 0.0f;
-		tot = 0.0f;
 		}
+	
+	public float getTotq() {
+		return totq;
+	}
+
+	public void setTotq(float totq) {
+		this.totq = totq;
+	}
 
 	public int getQuantità() {
 		return quantità;
@@ -39,23 +40,7 @@ public class Ordini {
 	public void setQuantità(int quantità) {
 		this.quantità = quantità;
 	}
-
-	public String getStato() {
-		return stato;
-	}
-
-	public void setStato(String stato) {
-		this.stato = stato;
-	}
-
-	public float getTot() {
-		return tot;
-	}
-
-	public void setTot(float tot) {
-		this.tot = tot;
-	}
-
+	
 	public String getUtente() {
 		return utente;
 	}
@@ -100,30 +85,14 @@ public class Ordini {
 		return costo;
 	}
 
+	public void setCosto(Float costo) {
+		this.costo = costo;
+	}
+
 	public void print() {
 		System.out.printf("%10d | %20s | %20s | %10s | %10.2f | %20s \n", cod,nome,autore,tipo,costo,utente);
 	}
 	
-	public Integer getIndice() {
-		return indice;
-	}
-
-	public void setIndice(Integer indice) {
-		this.indice = indice;
-	}
-
-	public java.sql.Date getData() {
-		return dat;
-	}
-
-	public void setData(java.sql.Date dat) {
-		this.dat = dat;
-	}
-
-	public void setCosto(float costo) {
-		this.costo = costo;
-	}
-
 	@Override
 	public String toString() {
 		return cod + "," +  nome + "," + autore + "," + tipo + "," + costo + "," + utente;
@@ -131,6 +100,8 @@ public class Ordini {
 	
 	@Override  //ci dice se ci sono errori
 	public boolean equals(Object other) { //restituisce true se vero
-		return this.getIndice() == ((Ordini) other).getIndice();
+		return this.getNome() == ((Carrello) other).getNome();
 	}
+	
 }
+

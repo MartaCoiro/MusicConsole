@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-
+import Class.AccountUtente;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,9 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
-
-import it.unisa.model.AccountUtente;
-import it.unisa.model.Carrello;
+import Class.Carrello;
 import it.unisa.model.CarrelloModelDS;
 import it.unisa.model.PlaylistModelDS;
 import it.unisa.utils.Utility;

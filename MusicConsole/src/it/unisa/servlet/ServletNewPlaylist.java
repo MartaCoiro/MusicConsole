@@ -11,14 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
-
+import Class.Playlist;
 import it.unisa.utils.Utility;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-
-import it.unisa.model.Playlist;
 import it.unisa.model.PlaylistModelDS;
 
 @WebServlet("/ServletNewPlaylist")

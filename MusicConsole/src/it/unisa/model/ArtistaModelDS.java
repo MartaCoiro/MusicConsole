@@ -6,9 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
-
+import Class.Artista;
 import javax.sql.DataSource;
-
 import it.unisa.utils.Utility;
 
 public class ArtistaModelDS implements ProductModelArtista<Artista> {

@@ -16,10 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
-
-import it.unisa.model.Album;
+import Class.Album;
+import Class.Magazzino;
 import it.unisa.model.AlbumModelDS;
-import it.unisa.model.Magazzino;
 import it.unisa.model.MagazzinoModelDS;
 import it.unisa.utils.Utility;
 

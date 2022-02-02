@@ -17,10 +17,9 @@ import javax.sql.DataSource;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import it.unisa.model.Carrello;
+import Class.Carrello;
+import Class.Playlist;
 import it.unisa.model.CarrelloModelDS;
-import it.unisa.model.Playlist;
 import it.unisa.utils.Utility;
 
 import java.io.FileNotFoundException;

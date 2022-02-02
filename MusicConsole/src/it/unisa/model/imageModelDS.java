@@ -6,7 +6,7 @@ package it.unisa.model;
 	import java.sql.SQLException;
 	import java.util.Collection;
 	import java.util.LinkedList;
-
+	import Class.image;
 	import javax.sql.DataSource;
 
 	import it.unisa.utils.Utility;

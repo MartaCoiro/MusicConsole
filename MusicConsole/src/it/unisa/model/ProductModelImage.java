@@ -2,6 +2,7 @@ package it.unisa.model;
 
 import java.sql.SQLException;
 import java.util.Collection;
+import Class.image;
 
 public interface ProductModelImage<T> { //voglio renderla generica e la definisco su un tamplate
 

@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.Collection;
 import java.util.LinkedList;
-
+import Class.Carrello;
 import javax.sql.DataSource;
 
 import it.unisa.utils.Utility;

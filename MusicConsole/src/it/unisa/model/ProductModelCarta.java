@@ -4,6 +4,7 @@ package it.unisa.model;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Collection;
+import Class.Carta;
 
 
 public interface ProductModelCarta<T> {

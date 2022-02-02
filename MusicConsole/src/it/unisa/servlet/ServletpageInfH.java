@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Iterator;
-
+import Class.Album;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,12 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
-
-import it.unisa.model.Album;
+import Class.Brano;
+import Class.Podcast;
 import it.unisa.model.AlbumModelDS;
 import it.unisa.model.BraniModelDS;
-import it.unisa.model.Brano;
-import it.unisa.model.Podcast;
 import it.unisa.model.PodcastModelDS;
 import it.unisa.utils.Utility;
 

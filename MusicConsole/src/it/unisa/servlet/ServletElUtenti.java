@@ -13,15 +13,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import javax.servlet.http.HttpSession;
-
+import Class.AccountUtente;
 import it.unisa.model.AccountModelDS;
 import it.unisa.utils.Utility;
-import it.unisa.model.AccountUtente;
-import it.unisa.model.Carrello;
+import Class.Carrello;
+import Class.Playlist;
 import it.unisa.model.CarrelloModelDS;
-import it.unisa.model.Playlist;
+import Class.Profilo;
 import it.unisa.model.PlaylistModelDS;
-import it.unisa.model.Profilo;
 import it.unisa.model.ProfiloModelDS;
 
 @WebServlet("/ServletElUtenti")
