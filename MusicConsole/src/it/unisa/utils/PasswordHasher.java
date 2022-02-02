@@ -1,4 +1,4 @@
-package it.unisa.servlet;
+package it.unisa.utils;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;

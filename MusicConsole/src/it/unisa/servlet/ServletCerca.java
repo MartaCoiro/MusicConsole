@@ -16,18 +16,16 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-
-
+import Class.Artista;
+import Class.Brano;
 import it.unisa.model.AlbumModelDS;
-import it.unisa.model.Artista;
+import Class.GenereMusicale;
 import it.unisa.model.ArtistaModelDS;
 import it.unisa.model.BraniModelDS;
-import it.unisa.model.Brano;
 import it.unisa.model.GenereModelDS;
-import it.unisa.model.GenereMusicale;
-import it.unisa.model.Podcast;
+import Class.Podcast;
+import Class.Album;
 import it.unisa.model.PodcastModelDS;
-import it.unisa.model.Album;
 
 
 @WebServlet("/ServletCerca")

@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.sql.DataSource;
 import it.unisa.utils.Utility;
+import Class.Carta;
 
 public class CartaModelDS implements ProductModelCarta<Carta>{
 

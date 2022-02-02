@@ -14,10 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
-
-import it.unisa.model.Carrello;
+import Class.Carrello;
+import Class.Magazzino;
 import it.unisa.model.CarrelloModelDS;
-import it.unisa.model.Magazzino;
 import it.unisa.model.MagazzinoModelDS;
 import it.unisa.utils.Utility;
 

@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="UTF-8" import="java.util.*,it.unisa.model.*"%>
+    pageEncoding="UTF-8" import="java.util.*,it.unisa.model.*, Class.*"%>
 <title>MUSICCONSOLE</title>
 <meta charset="UTF-8">
 <script

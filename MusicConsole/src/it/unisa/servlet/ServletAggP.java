@@ -15,9 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import javax.sql.DataSource;
-
-import it.unisa.model.Album;
-import it.unisa.model.Podcast;
+import Class.Album;
+import Class.Podcast;
 import it.unisa.model.PodcastModelDS;
 import it.unisa.utils.Utility;
 

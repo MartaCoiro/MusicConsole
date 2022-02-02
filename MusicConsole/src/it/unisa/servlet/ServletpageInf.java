@@ -2,7 +2,9 @@ package it.unisa.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
-
+import Class.Podcast;
+import Class.Brano;
+import Class.Album;
 import javax.servlet.ServletException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,12 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
-
-import it.unisa.model.Album;
 import it.unisa.model.AlbumModelDS;
 import it.unisa.model.BraniModelDS;
-import it.unisa.model.Brano;
-import it.unisa.model.Podcast;
 import it.unisa.model.PodcastModelDS;
 import it.unisa.utils.Utility;
 

@@ -10,8 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
-
-import it.unisa.model.Playlist;
+import Class.Playlist;
 import it.unisa.model.PlaylistModelDS;
 import it.unisa.utils.Utility;
 import java.util.ArrayList;

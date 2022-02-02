@@ -4,6 +4,7 @@ package it.unisa.model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
+import Class.Carrello;
 
 public interface ProductModelCarrello<T> {
 

@@ -2,6 +2,7 @@ package it.unisa.model;
 
 import java.sql.SQLException;
 import java.util.Collection;
+import Class.Brano;
 
 public interface ProductModelBrani<T> {
 

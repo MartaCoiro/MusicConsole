@@ -28,19 +28,20 @@ import javax.sql.DataSource;
 import com.mysql.cj.util.Base64Decoder;
 
 import it.unisa.model.AccountModelDS;
+import it.unisa.utils.PasswordHasher;
 import it.unisa.utils.Utility;
-import it.unisa.model.AccountUtente;
-import it.unisa.model.Album;
+import Class.AccountUtente;
+import Class.Album;
 import it.unisa.model.AlbumModelDS;
 import it.unisa.model.BraniModelDS;
-import it.unisa.model.Brano;
-import it.unisa.model.Carrello;
+import Class.Brano;
+import Class.Carrello;
+import Class.Playlist;
+import Class.Podcast;
+import Class.Profilo;
 import it.unisa.model.CarrelloModelDS;
-import it.unisa.model.Playlist;
 import it.unisa.model.PlaylistModelDS;
-import it.unisa.model.Podcast;
 import it.unisa.model.PodcastModelDS;
-import it.unisa.model.Profilo;
 import it.unisa.model.ProfiloModelDS;
 
 

@@ -3,6 +3,7 @@ package it.unisa.model;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import Class.Ordini;
 
 public interface ProductModelOrdini<T> {
 

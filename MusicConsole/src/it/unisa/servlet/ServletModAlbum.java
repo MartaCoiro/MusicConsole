@@ -14,12 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import javax.sql.DataSource;
-
-import it.unisa.model.Album;
+import Class.Album;
+import Class.Podcast;
+import Class.Brano;
 import it.unisa.model.AlbumModelDS;
 import it.unisa.model.BraniModelDS;
-import it.unisa.model.Brano;
-import it.unisa.model.Podcast;
 import it.unisa.model.PodcastModelDS;
 import it.unisa.utils.Utility;
 

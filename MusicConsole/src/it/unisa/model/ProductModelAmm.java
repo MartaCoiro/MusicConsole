@@ -2,6 +2,7 @@ package it.unisa.model;
 
 import java.sql.SQLException;
 import java.util.Collection;
+import Class.Amm;
 
 public interface ProductModelAmm<T> {//voglio renderla generica e la definisco su un tamplate
 
