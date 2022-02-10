@@ -26,7 +26,7 @@ INSERT INTO profilo values (3,"Rita","Cuccaro","Bologna","via del sole","1234567
 */
 CREATE TABLE Carta(
 utente varchar(50) not null,
-cvv int not null auto_increment,
+cvv int not null,
 nome varchar(20) not null,
 cognome varchar(30) not null,
 numero varchar(20) not null,
@@ -549,4 +549,3 @@ CREATE TABLE Ascolta (
     
 
 /*INSERT INTO Ascolta values("m.coiro",	"Audio Racconti");
-INSERT INTO Ascolta values("g.aniello",	"Rilassamento");*/

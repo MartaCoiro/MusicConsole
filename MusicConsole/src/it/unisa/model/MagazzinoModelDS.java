@@ -65,6 +65,7 @@ private DataSource ds = null;
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
+		//Magazzino bean;
 		Magazzino bean = new Magazzino();
 		
 		String selectSQL = " SELECT * FROM  Magazzino  WHERE COD = ? ";
@@ -76,6 +77,8 @@ private DataSource ds = null;
 
 			ResultSet rs = preparedStatement.executeQuery();
 
+			//bean = new Magazzino(rs.getInt("quantità"),rs.getString("nome"),rs.getString("autore"),rs.getString("tipo"),rs.getFloat("costo"));
+			
 			while (rs.next()) {
 				bean.setNome(rs.getString("nome"));
 				bean.setAutore(rs.getString("autore"));

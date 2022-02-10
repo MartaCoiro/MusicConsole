@@ -78,6 +78,7 @@ public class ServletAgg extends HttpServlet {
 		AlbumModelDS model = new AlbumModelDS(ds);
 		MagazzinoModelDS model1 = new MagazzinoModelDS(ds);
 	
+		//Album al = new Album(codice,nome,picName,artista,tipo,prezzoS,prezzoV,prezzoC,descrizione);
 		Album al = new Album();
 		al.setCodiceAlbum(codice);
 		al.setNomeAlbum(nome);
@@ -119,6 +120,7 @@ public class ServletAgg extends HttpServlet {
 			l.add(tipo);
 			
 			//aggiunta in magazzino
+			//Magazzino m1 = new Magazzino(quant,nome,artista,"CD",prezzoC);
 			Magazzino m1 = new Magazzino();
 			m1.setNome(nome);
 			m1.setAutore(artista);
@@ -127,6 +129,7 @@ public class ServletAgg extends HttpServlet {
 			m1.setQuantità(quant);
 			
 			Magazzino m2 = new Magazzino();
+			//Magazzino m2 = new Magazzino(quant,nome,artista,"Vinile",prezzoV);
 			m2.setNome(nome);
 			m2.setAutore(artista);
 			m2.setTipo("Vinile");

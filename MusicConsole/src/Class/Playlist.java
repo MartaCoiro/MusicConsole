@@ -12,6 +12,14 @@ public class Playlist implements Serializable{
 	Integer numBrani;
 	String nomeArtista;
 	
+	public Playlist(String nomeUtente, String nome, String nomeBrano, int numBrani, String nomeArtista ) {
+		this.nomeUtente = nomeUtente;
+		this.nome = nome;
+		this.nomeBrano= nomeBrano;
+		this.numBrani = numBrani;
+		this.nomeArtista = nomeArtista;
+		}
+	
 	public Playlist() {
 		id = 0;
 		nomeUtente = "";

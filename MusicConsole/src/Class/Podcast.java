@@ -18,6 +18,17 @@ public class Podcast implements Serializable{
 	java.sql.Date dat = new java.sql.Date(dataa.getTime()); 
 	Float prezzo;
 	 
+	 public Podcast(String nomePodcast, String ideatore, String descrizione, float durata, int numeroEpisodi, String imgPod, String tipo, float prezzo ) { 
+		 this.nomePodcast = nomePodcast;
+		 this.ideatore = ideatore;
+		 this.descrizione = descrizione;
+		 this.durata = durata;
+		 this.numeroEpisodi = numeroEpisodi;
+		 this.imgPod = imgPod;
+		 this.tipo = tipo;
+		 this.prezzo = prezzo;
+			}
+	 
 	 public Podcast() { 
 		 nomePodcast = "";
 		 ideatore = "";

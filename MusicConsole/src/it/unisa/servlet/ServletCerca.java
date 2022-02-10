@@ -62,9 +62,11 @@ public class ServletCerca extends HttpServlet {
 					 
 					for (Iterator<Album> i = al.iterator();i.hasNext();) {
 						Album elemento1 = (Album)i.next();
+						
 					 if(elemento1.getNomeAlbum().toLowerCase().equals(input)) {
 							 risAlbum.add(elemento1);
 					 	}
+					
 					 if(elemento1.getNartista().toLowerCase().equals(input)) {
 						 risAlbum.add(elemento1);
 					 }

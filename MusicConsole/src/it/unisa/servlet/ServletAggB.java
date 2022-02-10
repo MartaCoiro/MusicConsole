@@ -74,6 +74,7 @@ public class ServletAggB extends HttpServlet {
 		
 		BraniModelDS model = new BraniModelDS(ds);
 		
+		//Brano b = new Brano(codice,nome,0,artista,picName,genere,tipo,soundname,prezzo,descrizione);
 		Brano b = new Brano();
 		b.setCodice(codice);
 		b.setTitolo(nome);

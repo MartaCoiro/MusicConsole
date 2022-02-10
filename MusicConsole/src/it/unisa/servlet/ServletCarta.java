@@ -47,6 +47,8 @@ public class ServletCarta extends HttpServlet {
 					if(ele.getUtente().equals(ut)) {
 						currentSession.setAttribute("posCard", true);
 						currentSession.setAttribute("cart", ele);
+						getServletContext().getRequestDispatcher("/checkout.jsp").forward(request, response);
+						return;
 					}
 					else {currentSession.setAttribute("posCard", false);}
 				}

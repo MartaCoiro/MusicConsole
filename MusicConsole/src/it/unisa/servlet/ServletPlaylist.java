@@ -46,6 +46,7 @@ public class ServletPlaylist extends HttpServlet {
 				
 		PlaylistModelDS model = new PlaylistModelDS(ds);
 		Playlist pl = new Playlist();
+		//Playlist pl = new Playlist(ut,plist,brano,0,artista);
 		pl.setNome(plist);
 		pl.setNomeArtista(artista);
 		pl.setNomeBrano(brano);

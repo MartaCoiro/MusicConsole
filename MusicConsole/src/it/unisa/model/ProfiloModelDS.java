@@ -26,7 +26,7 @@ private DataSource ds = null;
 		String selectSQL = "SELECT * FROM  profilo";
 		
 		Collection<Profilo> al = new LinkedList<Profilo>();
-		
+		//Profilo bean;
 		try {
 			connection = ds.getConnection(); //recupero connessione dal data source
 			preparedStatement = connection.prepareStatement(selectSQL);
@@ -34,7 +34,7 @@ private DataSource ds = null;
 			Utility.print("doRetrieveAll: " + preparedStatement.toString());
 			
 			ResultSet rs = preparedStatement.executeQuery();			
-		
+			//bean = new Profilo();
 			while(rs.next()) {
 				Profilo bean = new Profilo();
 				bean.setId(rs.getInt("id"));
@@ -67,6 +67,7 @@ private DataSource ds = null;
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
+		//Profilo bean;
 		Profilo bean = new Profilo();
 		
 		String selectSQL = " SELECT * FROM  profilo  WHERE USERNAME = ? ";
@@ -75,10 +76,9 @@ private DataSource ds = null;
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 			preparedStatement.setString(1, nome);
-		
 
 			ResultSet rs = preparedStatement.executeQuery();
-
+			
 			while (rs.next()) {
 				bean.setId(rs.getInt("id"));
 				bean.setNome(rs.getString("nome"));
@@ -89,7 +89,10 @@ private DataSource ds = null;
 				bean.setEmail(rs.getString("email"));
 				bean.setUsername(rs.getString("username"));
 				bean.setPassword(rs.getString("password"));
+				
 			}
+			//bean = new Profilo(rs.getString("nome"),rs.getString("cognome"),rs.getString("citta"),rs.getString("indirizzo"),rs.getString("telefono"),rs.getString("email"),rs.getString("username"),rs.getString("password"));
+			
 
 		} finally {
 			try {

@@ -38,7 +38,7 @@ public class AlbumModelDS implements ProductModelAlbum<Album> {
 			Utility.print("doRetrieveAll: " + preparedStatement.toString());
 			
 			ResultSet rs = preparedStatement.executeQuery();			
-		
+			
 			while(rs.next()) {
 				Album bean = new Album();
 				bean.setNomeAlbum(rs.getString("nomeAlbum"));
@@ -71,10 +71,10 @@ public class AlbumModelDS implements ProductModelAlbum<Album> {
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-
-		Album bean = new Album();
 		
 		String selectSQL = " SELECT * FROM  Album  WHERE NOMEALBUM = ? AND NARTISTA = ? ";
+		//Album bean;
+		Album bean = new Album();
 		
 		try {
 			connection = ds.getConnection();
@@ -82,10 +82,13 @@ public class AlbumModelDS implements ProductModelAlbum<Album> {
 			preparedStatement.setString(1, nome);
 			preparedStatement.setString(2, artista);
 		
-
 			ResultSet rs = preparedStatement.executeQuery();
 
-			while (rs.next()) {
+			//bean = new Album(rs.getInt("codiceAlbum"),rs.getString("nomeAlbum"),rs.getString("imgAlbum"),rs.getString("nartista"),rs.getString("tipo"),rs.getFloat("prezzoS"),rs.getFloat("prezzoV"),rs.getFloat("prezzoC"),rs.getString("descrizione"));
+			//Album bean = new Album(0,"","","","",0.0f,0.0f,0.0f,"");
+			
+				while (rs.next()) {
+					
 				bean.setNomeAlbum(rs.getString("nomeAlbum"));
 				bean.setCodiceAlbum(rs.getInt("codiceAlbum"));
 				bean.setImgAlbum(rs.getString("imgAlbum"));
@@ -98,6 +101,7 @@ public class AlbumModelDS implements ProductModelAlbum<Album> {
 				bean.setDescrizione(rs.getString("descrizione"));
 				
 			}
+			
 
 		} finally {
 			try {

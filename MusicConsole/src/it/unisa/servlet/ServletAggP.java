@@ -63,6 +63,7 @@ public class ServletAggP extends HttpServlet {
 		PodcastModelDS model = new PodcastModelDS(ds);
 		
 		Podcast p = new Podcast();
+		//Podcast p = new Podcast(nome,artista,descrizione,0,0,picName,tipo,prezzo);
 		p.setNomePodcast(nome);
 		p.setIdeatore(artista);
 		p.setImgPod(picName);

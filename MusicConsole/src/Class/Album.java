@@ -19,6 +19,18 @@ public class Album implements Serializable {
 	float prezzoC;
 	String descrizione;
 
+	public Album(int codiceAlbum, String nomeAlbum, String imgAlbum,String nartista, String tipo, float prezzoS,float prezzoV,float prezzoC, String descrizione) { 
+		this.codiceAlbum = codiceAlbum;
+		this.nomeAlbum = nomeAlbum;
+		this.imgAlbum = imgAlbum;
+		this.nartista = nartista;
+		this.tipo = tipo;
+		this.prezzoS = prezzoS;
+		this.prezzoV = prezzoV;
+		this.prezzoC = prezzoC;
+		this.descrizione= descrizione;
+		}
+	
 	public Album() { 
 		codiceAlbum = 0;
 		nomeAlbum = "";
@@ -30,6 +42,7 @@ public class Album implements Serializable {
 		prezzoC = 0.0f;
 		descrizione= "";
 		}
+
 	
 	public Float getPrezzoS() {
 		return prezzoS;

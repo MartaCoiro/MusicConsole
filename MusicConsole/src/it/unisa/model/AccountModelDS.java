@@ -8,8 +8,9 @@ package it.unisa.model;
 	import java.util.LinkedList;
 
 	import javax.sql.DataSource;
-	import it.unisa.utils.Utility;
-	import Class.AccountUtente;
+
+import Class.AccountUtente;
+import it.unisa.utils.Utility;
 
 public class AccountModelDS implements ProductModel<AccountUtente> {
 
@@ -33,7 +34,7 @@ public class AccountModelDS implements ProductModel<AccountUtente> {
 			}*/
 			
 			Collection<AccountUtente> account = new LinkedList<AccountUtente>();
-			
+			//AccountUtente bean;
 			try {
 				connection = ds.getConnection(); //recupero connessione dal data source
 				preparedStatement = connection.prepareStatement(selectSQL);
@@ -41,9 +42,8 @@ public class AccountModelDS implements ProductModel<AccountUtente> {
 				Utility.print("doRetrieveAll: " + preparedStatement.toString());
 				
 				ResultSet rs = preparedStatement.executeQuery();			
-			
+				AccountUtente bean = new AccountUtente();
 				while(rs.next()) {
-					AccountUtente bean = new AccountUtente();
 					bean.setNickname(rs.getString("nickname"));
 					bean.setPassword(rs.getString("password"));
 					
@@ -67,8 +67,8 @@ public class AccountModelDS implements ProductModel<AccountUtente> {
 			Connection connection = null;
 			PreparedStatement preparedStatement = null;
 
+			//AccountUtente bean = new AccountUtente(utente,pass);
 			AccountUtente bean = new AccountUtente();
-			
 			String selectSQL = " SELECT * FROM  AccountUtente  WHERE NICKNAME = ? AND PASSWORD = ? ";
 			
 			try {

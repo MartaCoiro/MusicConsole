@@ -121,7 +121,6 @@ public class ServletModBrano extends HttpServlet {
 				}
 			}
 			//controllo immagine
-			System.out.println(picName);
 			if((picName!=null)&&(picName.length()>0)) {
 				if(!picName.toLowerCase().equals(a.getImgBrano().toLowerCase())) {
 					model.doUpdate("img", picName, aa.getCodice());
@@ -196,8 +195,8 @@ public class ServletModBrano extends HttpServlet {
 					if((picName==null)||(picName.length()==0)) {
 						picName=aa.getImgBrano();
 					}
-					
 					Album b = new Album();
+					//Album b = new Album(cod,nome,picName,nomeA,tipo,prezzoS,prezzoV,prezzoC,descrizione);
 					b.setCodiceAlbum(cod);
 					b.setNomeAlbum(nome);
 					b.setNartista(nomeA);
@@ -259,8 +258,8 @@ public class ServletModBrano extends HttpServlet {
 					if((picName==null)||(picName.length()==0)) {
 						picName=aa.getImgBrano();
 					}
-					
 					Podcast o = new Podcast();
+					//Podcast o = new Podcast(nome,nomeA,descrizione,0,0,picName,tipo,prezzo);
 					o.setNomePodcast(nome);
 					o.setIdeatore(nomeA);
 					o.setImgPod(picName);

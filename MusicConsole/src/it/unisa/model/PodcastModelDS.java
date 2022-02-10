@@ -68,7 +68,9 @@ public class PodcastModelDS implements ProductModelPodcast<Podcast>{
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
+		//Podcast bean;
 		Podcast bean = new Podcast();
+		
 		
 		String selectSQL = " SELECT * FROM  Podcast  WHERE NOMEPODCAST = ? OR IDEATORE = ? ";
 		
@@ -80,6 +82,8 @@ public class PodcastModelDS implements ProductModelPodcast<Podcast>{
 
 			ResultSet rs = preparedStatement.executeQuery();
 
+			//bean = new Podcast(rs.getString("nomePodcast"),rs.getString("ideatore"),rs.getString("descrizione"),rs.getFloat("durata"),rs.getInt("numeroEpisodi"),rs.getString("imgPod"),rs.getString("tipo"),rs.getFloat("prezzo"));
+			
 			while (rs.next()) {
 				bean.setNomePodcast(rs.getString("nomePodcast"));
 				bean.setIdeatore(rs.getString("ideatore"));
@@ -249,7 +253,9 @@ public class PodcastModelDS implements ProductModelPodcast<Podcast>{
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
+		//Podcast bean;
 		Podcast bean = new Podcast();
+		
 		
 		String selectSQL = " SELECT * FROM  Podcast  WHERE NOMEPODCAST = ? ";
 		
@@ -260,6 +266,8 @@ public class PodcastModelDS implements ProductModelPodcast<Podcast>{
 
 			ResultSet rs = preparedStatement.executeQuery();
 
+			//bean = new Podcast(rs.getString("nomePodcast"),rs.getString("ideatore"),rs.getString("descrizione"),rs.getFloat("durata"),rs.getInt("numeroEpisodi"),rs.getString("imgPod"),rs.getString("tipo"),rs.getFloat("prezzo"));
+			
 			while (rs.next()) {
 				bean.setNomePodcast(rs.getString("nomePodcast"));
 				bean.setIdeatore(rs.getString("ideatore"));

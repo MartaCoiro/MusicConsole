@@ -37,8 +37,10 @@ public class ServletNewPlaylist extends HttpServlet {
 		
 		HttpSession currentSession = request.getSession();
 		
-		Playlist pl = new Playlist();
 		String nut =(String)currentSession.getAttribute("acc");
+		
+		Playlist pl = new Playlist();
+		//Playlist pl = new Playlist(nut,namep,"",0,"");
 		pl.setNomeUtente(nut);
 		pl.setNome(namep);
 		try {

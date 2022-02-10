@@ -14,6 +14,16 @@ public class Carrello implements Serializable {
 	String tipo;
 	float costo;
 
+	public Carrello(float totq, int quantità, String utente, String nome, String autore, String tipo, float costo) {
+		this.totq = totq;
+		this.quantità = quantità;
+		this.utente = utente;
+		this.nome = nome;
+		this.autore = autore;
+		this.tipo= tipo;
+		this.costo = costo;
+		}
+	
 	public Carrello() {
 		totq = 0.0f;
 		quantità = 0;

@@ -16,6 +16,17 @@ public class Profilo implements Serializable {
 		String username;
 		String password;
 
+		public Profilo(String nome, String cognome, String citta, String indirizzo, String telefono, String email, String username, String password) { 
+			this.nome = nome;
+			this.cognome = cognome;
+			this.citta = citta;
+			this.indirizzo = indirizzo;
+			this.telefono = telefono;
+			this.email = email;
+			this.username = username;
+			this.password = password;
+			}
+		
 		public Profilo() { 
 			id = 0;
 			nome = "";

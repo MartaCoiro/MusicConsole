@@ -87,7 +87,7 @@ public class ServletMyAccount extends HttpServlet {
 			if(!ele8.equals(p.getPassword())){//settiamo la password se diversa in profilo
 				p.setPassword(ele8);
 				model1.doUpdate("password", ele8, profil.getUsername());
-				//cripto la nua password
+				//cripto la sua password
 				String npas = PasswordHasher.scramble(ele8);
 				model.doUpdate("password", npas, pr.getNickname());
 			}

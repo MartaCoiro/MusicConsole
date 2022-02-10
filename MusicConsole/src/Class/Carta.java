@@ -14,6 +14,15 @@ public class Carta implements Serializable{
 	String numero;
 	String dataa;
 
+	public Carta(String dataa, int cvv, String nome, String cognome, String numero, String utente) { 
+		this.dataa = dataa;
+		this.cvv = cvv;
+		this.nome = nome;
+		this.cognome = cognome;
+		this.numero = numero;
+		this.utente = utente;
+		}
+	
 	public Carta() { 
 		dataa = "";
 		cvv = 0;

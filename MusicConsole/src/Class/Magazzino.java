@@ -12,6 +12,14 @@ public class Magazzino {
 	String tipo;
 	float costo;
 	
+	public Magazzino(int quantità, String nome, String autore, String tipo, float costo) {
+		this.quantità = quantità;
+		this.nome = nome;
+		this.autore = autore;
+		this.tipo= tipo;
+		this.costo = costo;
+	}
+	
 	public Magazzino() {
 		quantità = 0;
 		cod = 0;
@@ -20,6 +28,7 @@ public class Magazzino {
 		tipo= "";
 		costo = 0.0f;
 	}
+
 
 	public int getQuantità() {
 		return quantità;

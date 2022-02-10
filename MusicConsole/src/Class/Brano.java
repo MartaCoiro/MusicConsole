@@ -21,6 +21,19 @@ public class Brano  implements Serializable {
 	Float prezzo;
 	String descrizione;
 
+	public Brano(int codice,String titolo,float durata,String cantante,String imgBrano,String genere,String tipo,String suono,float prezzo,String descrizione) { 
+		 this.codice = codice; 
+		 this.titolo = titolo;
+		 this.durata = durata;
+		 this.cantante = cantante;
+		 this.imgBrano = imgBrano;
+		 this.genere = genere;
+		 this.tipo = tipo;
+		 this.suono = suono;
+		 this.prezzo = prezzo;
+		 this.descrizione = descrizione;
+		 }
+	
 	public Brano() { 
 		 codice = 0; 
 		 titolo = "";
@@ -33,6 +46,7 @@ public class Brano  implements Serializable {
 		 prezzo = 0.0f;
 		 descrizione = "";
 		 }
+
 	
 	public Float getPrezzo() {
 		return prezzo;

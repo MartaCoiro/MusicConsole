@@ -6,14 +6,19 @@ public class AccountUtente implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	//valori della tabella
-		String nickname;
-		String password;
+		private String nickname;
+		private String password;
 
+		public AccountUtente(String nickname,String password) { 
+			this.nickname = nickname;
+			this.password = password;
+			}
+		
 		public AccountUtente() { 
 			nickname = "";
 			password = "";
 			}
-		
+
 		public String getNickname() {
 			return nickname;
 		}

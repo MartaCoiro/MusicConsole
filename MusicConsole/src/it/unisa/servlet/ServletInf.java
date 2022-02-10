@@ -58,8 +58,10 @@ public class ServletInf extends HttpServlet {
 		ca.setTipo(tipo);
 		ca.setUtente(ut);
 		if(tipo.toLowerCase().equals("streaming")) {
+			//ca = new Carrello(prezzo,0,ut,nome,autore,tipo,prezzo);
 			ca.setQuantità(0);
 		}else {
+			//ca = new Carrello(prezzo,1,ut,nome,autore,tipo,prezzo);
 			ca.setQuantità(1);
 		}
 		ca.setTotq(prezzo);

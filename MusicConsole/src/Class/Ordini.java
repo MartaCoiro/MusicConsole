@@ -19,6 +19,18 @@ public class Ordini {
 	Date data = new Date();
 	java.sql.Date dat = new java.sql.Date(data.getTime());
 
+	public Ordini(int quantità,String stato,int indice,String utente,String nome,String autore,String tipo,float costo,float tot) {
+		this.quantità = quantità;
+		this.stato = stato;
+		this.indice = indice;
+		this.utente = utente;
+		this.nome = nome;
+		this.autore = autore;
+		this.tipo= tipo;
+		this.costo = costo;
+		this.tot = tot;
+		}
+
 	public Ordini() {
 		quantità = 0;
 		stato = "";

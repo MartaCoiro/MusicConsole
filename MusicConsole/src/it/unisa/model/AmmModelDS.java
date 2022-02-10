@@ -65,6 +65,7 @@ public class AmmModelDS implements ProductModelAmm<Amm> {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
+		//Amm bean;
 		Amm bean = new Amm();
 		
 		String selectSQL = " SELECT * FROM  Amm  WHERE UTENTE = ? AND PASSWORD = ? ";
@@ -77,6 +78,8 @@ public class AmmModelDS implements ProductModelAmm<Amm> {
 
 			ResultSet rs = preparedStatement.executeQuery();
 
+			//bean = new Amm(rs.getString("ruolo"),rs.getString("utente"),rs.getString("password"));
+			
 			while (rs.next()) {
 				bean.setUtente(rs.getString("utente"));
 				bean.setPassword(rs.getString("password"));
@@ -135,7 +138,7 @@ public class AmmModelDS implements ProductModelAmm<Amm> {
 	}
 
 	@Override
-	public synchronized boolean doDelete(int code) throws SQLException {
+	public synchronized boolean doDelete(String nickname) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -146,7 +149,7 @@ public class AmmModelDS implements ProductModelAmm<Amm> {
 		try {
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(deleteSQL);
-			preparedStatement.setInt(1, code);
+			preparedStatement.setString(1, nickname);
 
 			result = preparedStatement.executeUpdate();
 

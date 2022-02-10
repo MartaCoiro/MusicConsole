@@ -70,6 +70,7 @@ public class BraniModelDS implements ProductModelBrani<Brano> {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
+		//Brano bean;
 		Brano bean = new Brano();
 		
 		String selectSQL = " SELECT * FROM  Brano  WHERE TITOLO = ? AND CANTANTE = ? ";
@@ -82,6 +83,8 @@ public class BraniModelDS implements ProductModelBrani<Brano> {
 
 			ResultSet rs = preparedStatement.executeQuery();
 
+			//bean = new Brano(rs.getInt("codice"),rs.getString("titolo"),rs.getFloat("durata"),rs.getString("cantante"),rs.getString("imgBrano"),rs.getString("genere"),rs.getString("tipo"),rs.getString("suono"),rs.getFloat("prezzo"),rs.getString("descrizione"));
+			
 			while (rs.next()) {
 				bean.setTitolo(rs.getString("titolo"));
 				bean.setCodice(rs.getInt("codice"));

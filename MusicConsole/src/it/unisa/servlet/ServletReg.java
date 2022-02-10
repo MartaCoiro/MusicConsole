@@ -52,6 +52,8 @@ public class ServletReg extends HttpServlet {
 		
 		response.setContentType("text/html");//tipo di file
 		 
+		String encryptedPassword;
+		
 		//prendo i valori passati
 		String nome= request.getParameter("nome");
 		String cognome= request.getParameter("cognome");
@@ -62,9 +64,10 @@ public class ServletReg extends HttpServlet {
 		
 		String name = request.getParameter("nickname");//prendo i valori passati
 		String p = request.getParameter("password");//prendo i valori passati
-	
+		
 		AccountUtente account = new AccountUtente();
 		Profilo pro = new Profilo();
+		//Profilo pro = new Profilo(nome,cognome,citta,indirizzo,telefono,email,name,p);
 		ArrayList<Profilo> profil = new ArrayList<Profilo>();
 		//li inseriamo in account
 		
@@ -72,13 +75,15 @@ public class ServletReg extends HttpServlet {
        
 		try {
 			//criptiamo la password
-				String encryptedPassword = PasswordHasher.scramble(p);
+				encryptedPassword = PasswordHasher.scramble(p);
 				account.setPassword(encryptedPassword);
 				 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		 //account = new AccountUtente(name,encryptedPassword);
 
 		 //li inseriamo nel profilo
 		pro.setNome(nome);
@@ -91,7 +96,14 @@ public class ServletReg extends HttpServlet {
 		pro.setPassword(p);
 		
 	try {
-			//recupero la sessione corrente
+		
+		/*
+		//criptiamo la password
+		encryptedPassword = PasswordHasher.scramble(p);
+		//account.setPassword(encryptedPassword);
+		account = new AccountUtente(name,encryptedPassword);
+*/
+		//recupero la sessione corrente
 		HttpSession oldSession = request.getSession(false);//se non c'è non crearla
 		if(oldSession != null) {
 			oldSession.invalidate();//la invalido

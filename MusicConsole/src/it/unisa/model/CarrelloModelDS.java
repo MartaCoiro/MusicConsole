@@ -36,9 +36,10 @@ public class CarrelloModelDS implements ProductModelCarrello<Carrello> {
 			Utility.print("doRetrieveAll: " + preparedStatement.toString());
 			
 			ResultSet rs = preparedStatement.executeQuery();			
-		
+			
 			while(rs.next()) {
 				Carrello bean = new Carrello();
+				//Carrello bean = new Carrello(0.0f,0,"","","","",0.0f);
 				bean.setCod(rs.getInt("cod"));
 				bean.setUtente(rs.getString("utente"));
 				bean.setNome(rs.getString("nome"));
@@ -68,7 +69,9 @@ public class CarrelloModelDS implements ProductModelCarrello<Carrello> {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
+		//Carrello bean;
 		Carrello bean = new Carrello();
+		
 		
 		String selectSQL = " SELECT * FROM  Carrello  WHERE nome = ? ";
 		
@@ -79,6 +82,8 @@ public class CarrelloModelDS implements ProductModelCarrello<Carrello> {
 
 			ResultSet rs = preparedStatement.executeQuery();
 
+			//bean = new Carrello(rs.getFloat("totq"),rs.getInt("quantità"),rs.getString("utente"),rs.getString("nome"),rs.getString("autore"),rs.getString("tipo"),rs.getFloat("costo"));
+			
 			while (rs.next()) {
 				bean.setCod(rs.getInt("cod"));
 				bean.setNome(rs.getString("nome"));
@@ -250,6 +255,7 @@ public class CarrelloModelDS implements ProductModelCarrello<Carrello> {
 
 			while (rs.next()) {
 				Carrello bean = new Carrello();
+				//Carrello bean = new Carrello(rs.getFloat("totq"),rs.getInt("quantità"),rs.getString("utente"),rs.getString("nome"),rs.getString("autore"),rs.getString("tipo"),rs.getFloat("costo"));
 				bean.setCod(rs.getInt("cod"));
 				bean.setNome(rs.getString("nome"));
 				bean.setAutore(rs.getString("autore"));

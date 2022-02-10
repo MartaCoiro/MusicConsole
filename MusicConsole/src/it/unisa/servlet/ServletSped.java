@@ -58,7 +58,7 @@ public class ServletSped extends HttpServlet {
 		int in;
 		int max=0;
 		
-		String memCart = request.getParameter("conserva");//recupero la deci sione dell'utente se vuole o meno memorizzare i dati della carta
+		String memCart = request.getParameter("conserva");//recupero la decisione dell'utente se vuole o meno memorizzare i dati della carta
 		String nome = request.getParameter("cardname");
 		String cognome = request.getParameter("cardsurname");
 		String numeroC = request.getParameter("cardnumber");
@@ -67,6 +67,7 @@ public class ServletSped extends HttpServlet {
 		int cvv = Integer.parseInt(vv);
 		
 		Carta card = new Carta();
+		//Carta card = new Carta(data,cvv,nome,cognome,numeroC,ut);
 		card.setNome(nome);
 		card.setCognome(cognome);
 		card.setNumero(numeroC);
@@ -81,12 +82,12 @@ public class ServletSped extends HttpServlet {
 				Collection <Carta> c = model2.doRetrieveAll();
 				for(Iterator<Carta> i = c.iterator();i.hasNext();) {
 					Carta ele = (Carta)i.next();
-					if(ele.getUtente().equals(ut)) {
+					if((ele.getUtente().equals(ut))&&(ele.getCvv()!=cvv)) {
 						model2.doDelete(ele.getCvv());
 					}
 					if(ele.getCvv()==cvv) {
 						request.setAttribute("error", true);
-						getServletContext().getRequestDispatcher("/ServletCarta").forward(request, response);
+						getServletContext().getRequestDispatcher("/checkout.jsp").forward(request, response);
 						return;
 					}
 				}
@@ -111,6 +112,8 @@ public class ServletSped extends HttpServlet {
 					Collection<Carrello> el = model.RestXUtente(ut);//restituisce tutti i carrelli dell'utente in sessione
 					for(Iterator<Carrello> i = el.iterator();i.hasNext();) {
 						Carrello ele = (Carrello)i.next();
+						//float tot = (float)currentSession.getAttribute("tot");
+						//o = new Ordini(ele.getQuantità(),"false",1,ut,ele.getNome(),ele.getAutore(),ele.getTipo(),ele.getCosto(),tot);
 						o.setUtente(ut);
 						o.setAutore(ele.getAutore());
 						o.setNome(ele.getNome());
@@ -148,6 +151,8 @@ public class ServletSped extends HttpServlet {
 						Collection<Carrello> el = model.RestXUtente(ut);//restituisce tutti i carrelli dell'utente in sessione
 						for(Iterator<Carrello> i = el.iterator();i.hasNext();) {
 							Carrello ele = (Carrello)i.next();
+							//float tot = (float)currentSession.getAttribute("tot");
+							//o = new Ordini(ele.getQuantità(),"falso",max,ut,ele.getNome(),ele.getAutore(),ele.getTipo(),ele.getCosto(),tot);
 							o.setIndice(max);
 							o.setUtente(ut);
 							o.setAutore(ele.getAutore());

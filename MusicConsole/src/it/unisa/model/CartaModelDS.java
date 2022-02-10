@@ -66,6 +66,7 @@ private DataSource ds = null;
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
+		//Carta bean;
 		Carta bean = new Carta();
 		
 		String selectSQL = " SELECT * FROM  Carta  WHERE CVV = ? ";
@@ -77,6 +78,8 @@ private DataSource ds = null;
 		
 			ResultSet rs = preparedStatement.executeQuery();
 
+			//bean = new Carta(rs.getString("dataScadenza"),rs.getInt("cvv"),rs.getString("nome"),rs.getString("cognome"),rs.getString("numero"),rs.getString("utente"));
+			
 			while (rs.next()) {
 				bean.setNome(rs.getString("nome"));
 				bean.setCvv(rs.getInt("cvv"));

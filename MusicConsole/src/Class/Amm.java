@@ -10,11 +10,18 @@ public class Amm implements Serializable{
 		String utente;
 		String password;
 		
+		public Amm(String ruolo, String utente,String password) { 
+			this.ruolo = ruolo;
+			this.utente = utente;
+			this.password = password;
+			}
+		
 		public Amm() { 
 			ruolo = "";
 			utente = "";
 			password = "";
 			}
+		
 		
 		public String getRuolo() {
 			return ruolo;

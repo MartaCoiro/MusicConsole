@@ -165,8 +165,8 @@ public class ServletModPodcast extends HttpServlet {
 					if((picName==null)||(picName.length()==0)) {
 						picName=aa.getImgPod();
 					}
-					
 					Album b = new Album();
+					//Album b = new Album(cod,nome,picName,nomeA,tipo,prezzoS,prezzoV,prezzoC,descrizione);
 					b.setCodiceAlbum(cod);
 					b.setNomeAlbum(nome);
 					b.setNartista(nomeA);
@@ -254,8 +254,8 @@ public class ServletModPodcast extends HttpServlet {
 					if((picName==null)||(picName.length()==0)) {
 						picName=aa.getImgPod();
 					}
-					
 					Brano b = new Brano();
+					//Brano b = new Brano(cod,nome,0,nomeA,picName,genere,tipo,soundname,prezzo,descrizione);
 					b.setCodice(cod);
 					b.setTitolo(nome);
 					b.setCantante(nomeA);

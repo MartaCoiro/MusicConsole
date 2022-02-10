@@ -132,6 +132,7 @@ private DataSource ds = null;
 
 			while (rs.next()) {
 				Ordini bean = new Ordini();
+				//Ordini bean = new Ordini(rs.getInt("quantità"),rs.getString("stato"),rs.getInt("indice"),rs.getString("utente"),rs.getString("nome"),rs.getString("autore"),rs.getString("tipo"),rs.getFloat("costo"),rs.getFloat("tot"));
 				bean.setCod(rs.getInt("cod"));
 				bean.setNome(rs.getString("nome"));
 				bean.setAutore(rs.getString("autore"));
@@ -269,6 +270,7 @@ private DataSource ds = null;
 
 			while (rs.next()) {
 				Ordini bean = new Ordini();
+				//Ordini bean = new Ordini(rs.getInt("quantità"),rs.getString("stato"),rs.getInt("indice"),rs.getString("utente"),rs.getString("nome"),rs.getString("autore"),rs.getString("tipo"),rs.getFloat("costo"),rs.getFloat("tot"));
 				bean.setIndice(rs.getInt("indice"));
 				br.add(bean);	
 			}

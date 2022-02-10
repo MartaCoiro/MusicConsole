@@ -38,6 +38,8 @@ public class ServletIndex extends HttpServlet {
 		BraniModelDS model2 = new BraniModelDS(ds);
 		PodcastModelDS model3 = new PodcastModelDS(ds);
 	
+		HttpSession currentSession = request.getSession();
+		
 		response.setContentType("text/html");//tipo di file
 		
 		ArrayList<Album> prA = new ArrayList<Album>();
@@ -71,7 +73,7 @@ public class ServletIndex extends HttpServlet {
 					prP.add(al);
 				}
 			}
-			
+			currentSession.setAttribute("acc", null);
 			request.setAttribute("prA", prA);
 			request.setAttribute("prB", prB);
 			request.setAttribute("prP", prP);

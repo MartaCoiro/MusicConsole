@@ -77,7 +77,7 @@ public class ServletElUtenti extends HttpServlet {
 					newu.add(ele.getNickname());
 			}*/
 				//currentSession.setAttribute("lutenti", newu);
-				getServletContext().getRequestDispatcher(response.encodeURL("/index.jsp")).forward(request, response); //reindiriziamo alla view
+				getServletContext().getRequestDispatcher(response.encodeURL("/ServletIndex")).forward(request, response); //reindiriziamo alla view
 		
 	}
 		catch(SQLException e){

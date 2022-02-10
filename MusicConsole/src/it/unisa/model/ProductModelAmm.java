@@ -14,5 +14,5 @@ public interface ProductModelAmm<T> {//voglio renderla generica e la definisco s
 		
 		public void doUpdate(T item) throws SQLException;
 
-		public boolean doDelete(int code) throws SQLException;
+		public boolean doDelete(String nickname) throws SQLException;
 	}
