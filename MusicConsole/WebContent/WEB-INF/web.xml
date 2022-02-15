@@ -7,7 +7,7 @@
     </welcome-file-list>
    <servlet>
     <servlet-name>ServletIndex</servlet-name>
-    <servlet-class>it.unisa.servlet.ServletIndex</servlet-class>
+    <servlet-class>gestioneProdotti.ServletIndex</servlet-class>
   </servlet>
   <servlet-mapping>
   <servlet-name>ServletIndex</servlet-name>

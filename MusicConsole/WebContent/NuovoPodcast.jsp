@@ -80,10 +80,10 @@ if(request.getAttribute("sb")!=null){
       <a class="nav-link" href="${pageContext.request.contextPath}/ServletLogout">Logout</a>
     </li>
     <li class="nav-item active">
-      <a class="nav-link" href="${pageContext.request.contextPath}/ServletUtenti">Utenti</a>
+      <a class="nav-link" href="${pageContext.request.contextPath}/ServletProd?tipo=magazzino">Magazzino</a>
     </li>
     <li class="nav-item active">
-      <a class="nav-link" href="${pageContext.request.contextPath}/ServletProd">Prodotti</a>
+      <a class="nav-link" href="${pageContext.request.contextPath}/ServletMagazzino">Quantità</a>
     </li>
     
 </ul>

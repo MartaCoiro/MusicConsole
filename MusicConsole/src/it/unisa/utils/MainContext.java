@@ -16,14 +16,14 @@ import javax.sql.DataSource;
 @WebListener
 public class MainContext implements ServletContextListener {
 
-	
+	static DataSource ds;
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
 		Utility.print("Startup web application");
 		
 		ServletContext context = sce.getServletContext();
 		
-		DataSource ds = null;
+		//ds = null;
 		
 		try {
 			Context initCtx = new InitialContext();//accediamo ai servizi di tomcat
@@ -60,6 +60,11 @@ public class MainContext implements ServletContextListener {
 		
 		Utility.print("Shotdown web application");
 	}
+	
+	public static Connection getConnection() throws SQLException {
+	    System.out.println(ds.getConnection());
+		return ds.getConnection();
+	  }
 	
 
 }
