@@ -63,7 +63,7 @@ public class ServletMyAccount extends HttpServlet {
 			String pa = PasswordHasher.scramble(p.getPassword());
 			AccountUtente pr = model.doRetrieveByKey(p.getUsername(),pa);
 			
-			if(!ele1.equals(p.getNome())){
+			if(!ele1.equals(p.getNome())){ 
 				p.setNome(ele1);
 				model1.doUpdate("nome", ele1, profil.getUsername());
 			}

@@ -1,6 +1,7 @@
 package gestioneAccount;
 
-	import java.sql.Connection;
+	import java.io.Serializable;
+import java.sql.Connection;
 	import java.sql.PreparedStatement;
 	import java.sql.ResultSet;
 	import java.sql.SQLException;
@@ -26,8 +27,7 @@ public class AccountModelDS implements ProductModel<AccountUtente> {
 			this.connection = connection;
 		}
 		
-		@Override
-		public Collection<AccountUtente> doRetrieveAll() throws SQLException {
+		public Collection<AccountUtente> doRetrieveAll()throws SQLException{
 			//Connection connection = null;
 			PreparedStatement preparedStatement = null;
 			
@@ -45,7 +45,10 @@ public class AccountModelDS implements ProductModel<AccountUtente> {
 				
 				Utility.print("doRetrieveAll: " + preparedStatement.toString());
 				
-				ResultSet rs = preparedStatement.executeQuery();			
+				ResultSet rs = preparedStatement.executeQuery();	
+				
+				if(!rs.next())
+					return null;
 			
 				while(rs.next()) {
 					AccountUtente bean = new AccountUtente();
@@ -60,13 +63,13 @@ public class AccountModelDS implements ProductModel<AccountUtente> {
 			return account;
 		}
 
-		@Override
-		public AccountUtente doRetrieveByKey(String utente, String pass) throws SQLException {
+
+		public AccountUtente doRetrieveByKey(String utente, String pass) {
 			
 			//Connection connection = null;
 			PreparedStatement preparedStatement = null;
 
-			AccountUtente bean = new AccountUtente();
+			AccountUtente bean = null;
 			
 			String selectSQL = " SELECT * FROM  AccountUtente  WHERE NICKNAME = ? AND PASSWORD = ? ";
 			
@@ -79,6 +82,7 @@ public class AccountModelDS implements ProductModel<AccountUtente> {
 				ResultSet rs = preparedStatement.executeQuery();
 
 				while (rs.next()) {
+					bean = new AccountUtente();
 					bean.setNickname(rs.getString("nickname"));
 					bean.setPassword(rs.getString("password"));
 				}
@@ -90,12 +94,11 @@ public class AccountModelDS implements ProductModel<AccountUtente> {
 			}
 		
 		
-		@Override
-		public boolean doSave(AccountUtente item) throws SQLException {
+		public boolean doSave(AccountUtente item)throws SQLException  {
 			//Connection connection = null;
 			PreparedStatement preparedStatement = null;
 
-			String insertSQL = "INSERT INTO AccountUtente (NICKNAME, PASSWORD) VALUES (?, ?)";
+			String insertSQL = "INSERT INTO AccountUtente (NICKNAME,PASSWORD) VALUES (?, ?)";
 
 			try {
 				//connection = ds.getConnection();
@@ -115,7 +118,7 @@ public class AccountModelDS implements ProductModel<AccountUtente> {
 			return true;
 		}
 
-		@Override
+
 		public void doUpdate(String p1, String p2, String p3) throws SQLException {
 			//Connection connection = null;
 			PreparedStatement preparedStatement = null;
@@ -147,7 +150,6 @@ public class AccountModelDS implements ProductModel<AccountUtente> {
 
 		
 
-		@Override
 		public synchronized boolean doDelete(String utente) throws SQLException {
 			//Connection connection = null;
 			PreparedStatement preparedStatement = null;
@@ -170,5 +172,4 @@ public class AccountModelDS implements ProductModel<AccountUtente> {
 		}
 		
 }
-
 

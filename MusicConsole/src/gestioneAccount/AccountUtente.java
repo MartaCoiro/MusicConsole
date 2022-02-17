@@ -48,7 +48,7 @@ public class AccountUtente implements Serializable {
 		
 		@Override
 		public String toString() {
-			return nickname + "," +  password;
+			return nickname + " " +  password;
 		}
  
 		@Override

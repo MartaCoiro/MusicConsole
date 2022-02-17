@@ -1,5 +1,8 @@
 package Test.Model;
 
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -7,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 import java.sql.Connection;
 
 import org.dbunit.IDatabaseTester;
@@ -27,14 +31,15 @@ import org.mockito.Mockito;
 
 import gestioneAccount.AccountModelDS;
 import gestioneAccount.AccountUtente;
+import it.unisa.utils.DBConnectionPool;
 
 public class AccountModelTest {
 	private AccountModelDS dao;
 	private static IDatabaseTester t;
-	//private DataSource ds;
+	Connection db;
 	AccountUtente ut1,ut2;
 	 
-	
+	 
   @BeforeAll
    public static void setUpAll() throws ClassNotFoundException {
 	   t = new JdbcDatabaseTester(org.h2.Driver.class.getName(),
@@ -44,45 +49,56 @@ public class AccountModelTest {
    }
   
   private static void refreshDataSet(String filename) throws Exception {//legge un file per popolare il db
-	   IDataSet initialState = new FlatXmlDataSetBuilder()
-			   .build(AccountModelTest.class.getClassLoader().getResourceAsStream(filename));
+	   IDataSet initialState = new FlatXmlDataSetBuilder().build(AccountModelTest.class.getClassLoader().getResourceAsStream(filename));
 	   t.setDataSet(initialState);
 	   t.onSetup();
   }
  
    
-   @BeforeEach
+   @Before
    public void setUp() throws Exception {//impostiamo il db ad uno stato iniziale
-	   refreshDataSet("resources/db/init/init.xml");
-	   DataSource ds = Mockito.mock(DataSource.class);
-	    Mockito.when(ds.getConnection()).thenReturn(t.getConnection().getConnection());
-	    dao = new AccountModelDS(ds);
+	   try {
+		   db = DBConnectionPool.getConnection();
+	   }catch(SQLException e){
+		   e.printStackTrace();
+	   }
+	    dao = new AccountModelDS(db);
+	    ut1 = creaUtenteRegistrato("p.paola","e21fc56c1a272b630e0d1439079d0598cf8b8329");
+		//ut2 = creaUtenteRegistrato("m.maria","825e064b2c85b54b1e40c143e31f24c19bbac07b");
+		ut2 = new AccountUtente();
+		ut2.setNickname("m.maria");
+		ut2.setPassword("825e064b2c85b54b1e40c143e31f24c19bbac07b");
+	    dao.doSave(ut1);
+		//dao.doSave(ut2);
+		//dao.doDelete(ut2.getNickname());
 	 }
 
-   @AfterEach
+   @After
    public void tearDown() throws Exception {
-    t.onTearDown();
+	   System.out.println("Sono entrato nella tearDown");
+	   //t.onTearDown();
+	   dao.doDelete(ut1.getNickname());
+	   
     }
    
-   
+ 
    @Test
 	public void testDoRetrieveAll() throws Exception {
-	   //risultato che ci aspettiamo
-		Collection<AccountUtente> listA = new LinkedList<AccountUtente>();
-		ut1 = creaUtenteRegistrato("p.paola","e21fc56c1a272b630e0d1439079d0598cf8b8329");
-		ut2 = creaUtenteRegistrato("m.maria","825e064b2c85b54b1e40c143e31f24c19bbac07b");
-		listA.add(ut1);
-		listA.add(ut2);
-		//dao.doSave(ut1);
-		//dao.doSave(ut2);
-		//test di una funzione
-		Collection<AccountUtente> actual = dao.doRetrieveAll();
-		//assertEquals(2, actual.size());
-		assertEquals(actual,dao.doRetrieveAll());
-		/*model.doDelete("l.laura");
-		model.doDelete("p.paolo");
-		model.doDelete("m.maria");*/
-   } 
+	    List<AccountUtente> utente = new ArrayList<>();
+		assertNotEquals(utente,dao.doRetrieveAll());
+	} 
+   
+   @Test
+   public void TestGetUserExisting () {
+       assertNotNull(dao.doRetrieveByKey(ut1.getNickname(),ut1.getPassword()));
+   }
+
+   @Test
+   public void TestGetUserNotExisting () {
+       assertNull(dao.doRetrieveByKey(ut2.getNickname(),ut2.getPassword()));
+   }
+
+
 	  
 	  private AccountUtente creaUtenteRegistrato(String nickname,String pass) {
 			AccountUtente x = new AccountUtente();
