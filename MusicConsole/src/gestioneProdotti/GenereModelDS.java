@@ -13,15 +13,20 @@ import it.unisa.utils.Utility;
 
 public class GenereModelDS  implements ProductModelGenere<GenereMusicale> {
 
-	private DataSource ds = null;
+	//private DataSource ds = null;
+	private Connection connection;
 	
-	public GenereModelDS(DataSource ds) {
+	/*public GenereModelDS(DataSource ds) {
 		this.ds = ds;
+	}*/
+	
+	public GenereModelDS(Connection connection) {
+		this.connection = connection;
 	}
 	
 	@Override
 	public Collection<GenereMusicale> doRetrieveAll() throws SQLException {
-		Connection connection = null;
+		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
 		String selectSQL = "SELECT * FROM  GenereMusicale";
@@ -33,7 +38,7 @@ public class GenereModelDS  implements ProductModelGenere<GenereMusicale> {
 		Collection<GenereMusicale> gm = new LinkedList<GenereMusicale>();
 		
 		try {
-			connection = ds.getConnection(); //recupero connessione dal data source
+			//connection = ds.getConnection(); //recupero connessione dal data source
 			preparedStatement = connection.prepareStatement(selectSQL);
 			
 			Utility.print("doRetrieveAll: " + preparedStatement.toString());
@@ -48,14 +53,8 @@ public class GenereModelDS  implements ProductModelGenere<GenereMusicale> {
 				
 				gm.add(bean);
 			}
-		} finally {
-			try {
-			if(preparedStatement != null)
-				preparedStatement.close();
-			}finally {
-			if(connection != null)
-				connection.close();
-			}
+		} catch(SQLException e) {
+			e.printStackTrace();
 		}
 		return gm;
 	}
@@ -63,7 +62,7 @@ public class GenereModelDS  implements ProductModelGenere<GenereMusicale> {
 	@Override
 	public GenereMusicale doRetrieveByKey(String parola) throws SQLException {
 		
-		Connection connection = null;
+		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		GenereMusicale bean = new GenereMusicale();
@@ -71,7 +70,7 @@ public class GenereModelDS  implements ProductModelGenere<GenereMusicale> {
 		String selectSQL = " SELECT * FROM  GenereMusicale  WHERE CATEGORIA = ? ";
 		
 		try {
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 			preparedStatement.setString(1, parola);
 
@@ -82,14 +81,9 @@ public class GenereModelDS  implements ProductModelGenere<GenereMusicale> {
 				bean.setCategoria(rs.getString("categoria"));
 			}
 
-		} finally {
-			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
-			} finally {
-				if (connection != null)
-					connection.close();
-			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		
 		}
 		return bean;
 		}
@@ -97,15 +91,15 @@ public class GenereModelDS  implements ProductModelGenere<GenereMusicale> {
 	
 	@Override
 	public void doSave(GenereMusicale item) throws SQLException {
-		Connection connection = null;
+		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		String insertSQL = "INSERT INTO GenereMusicale (IDGENERE, CATEGORIA) VALUES (?, ?)";
 
 		try {
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
 			
-			connection.setAutoCommit(false);
+			//connection.setAutoCommit(false);
 			
 			preparedStatement = connection.prepareStatement(insertSQL);
 			preparedStatement.setInt(1, item.getIdGenere());
@@ -113,15 +107,9 @@ public class GenereModelDS  implements ProductModelGenere<GenereMusicale> {
 
 			preparedStatement.executeUpdate();
 
-			connection.commit();
-		} finally {
-			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
-			} finally {
-				if (connection != null)
-					connection.close();
-			}
+			//connection.commit();
+		} catch(SQLException e) {
+			e.printStackTrace();
 		}
 
 	}
@@ -134,7 +122,7 @@ public class GenereModelDS  implements ProductModelGenere<GenereMusicale> {
 
 	@Override
 	public synchronized boolean doDelete(int code) throws SQLException {
-		Connection connection = null;
+		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		int result = 0;
@@ -142,20 +130,14 @@ public class GenereModelDS  implements ProductModelGenere<GenereMusicale> {
 		String deleteSQL = "DELETE FROM GenereMusicale WHERE CODE = ?";
 
 		try {
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(deleteSQL);
 			preparedStatement.setInt(1, code);
 
 			result = preparedStatement.executeUpdate();
 
-		} finally {
-			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
-			} finally {
-				if (connection != null)
-					connection.close();
-			}
+		} catch(SQLException e) {
+			e.printStackTrace();
 		}
 		return (result != 0);
 	}

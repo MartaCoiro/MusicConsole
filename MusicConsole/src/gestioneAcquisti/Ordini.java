@@ -137,12 +137,84 @@ public class Ordini {
 	}
 
 	@Override
-	public String toString() {
-		return cod + "," +  nome + "," + autore + "," + tipo + "," + costo + "," + utente;
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((autore == null) ? 0 : autore.hashCode());
+		result = prime * result + ((cod == null) ? 0 : cod.hashCode());
+		result = prime * result + Float.floatToIntBits(costo);
+		result = prime * result + ((dat == null) ? 0 : dat.hashCode());
+		result = prime * result + ((data == null) ? 0 : data.hashCode());
+		result = prime * result + ((indice == null) ? 0 : indice.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + quantità;
+		result = prime * result + ((stato == null) ? 0 : stato.hashCode());
+		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
+		result = prime * result + Float.floatToIntBits(tot);
+		result = prime * result + ((utente == null) ? 0 : utente.hashCode());
+		return result;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!(obj instanceof Ordini))
+			return false;
+		Ordini other = (Ordini) obj;
+		if (autore == null) {
+			if (other.autore != null)
+				return false;
+		} else if (!autore.equals(other.autore))
+			return false;
+		if (cod == null) {
+			if (other.cod != null)
+				return false;
+		} else if (!cod.equals(other.cod))
+			return false;
+		if (Float.floatToIntBits(costo) != Float.floatToIntBits(other.costo))
+			return false;
+		if (dat == null) {
+			if (other.dat != null)
+				return false;
+		} else if (!dat.equals(other.dat))
+			return false;
+		if (data == null) {
+			if (other.data != null)
+				return false;
+		} else if (!data.equals(other.data))
+			return false;
+		if (indice == null) {
+			if (other.indice != null)
+				return false;
+		} else if (!indice.equals(other.indice))
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		if (quantità != other.quantità)
+			return false;
+		if (stato == null) {
+			if (other.stato != null)
+				return false;
+		} else if (!stato.equals(other.stato))
+			return false;
+		if (tipo == null) {
+			if (other.tipo != null)
+				return false;
+		} else if (!tipo.equals(other.tipo))
+			return false;
+		if (Float.floatToIntBits(tot) != Float.floatToIntBits(other.tot))
+			return false;
+		if (utente == null) {
+			if (other.utente != null)
+				return false;
+		} else if (!utente.equals(other.utente))
+			return false;
+		return true;
+	}
+
 	
-	@Override  //ci dice se ci sono errori
-	public boolean equals(Object other) { //restituisce true se vero
-		return this.getIndice() == ((Ordini) other).getIndice();
-	}
 }

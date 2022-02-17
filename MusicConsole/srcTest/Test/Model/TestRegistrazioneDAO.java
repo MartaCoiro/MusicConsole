@@ -19,9 +19,11 @@ import org.dbunit.operation.DatabaseOperation;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mockito;
 
-import Test.AccountModelDS;
+import gestioneAccount.AccountModelDS;
 import gestioneAccount.AccountUtente;
 
 
@@ -35,8 +37,8 @@ public class TestRegistrazioneDAO {
 	private DataSource ds;
     
     public TestRegistrazioneDAO () {}
-
-    @Before
+ 
+    @BeforeEach
     public void setUp() throws SQLException, Exception {
 
     tester = new JdbcDatabaseTester(org.h2.Driver.class.getName(),
@@ -63,12 +65,12 @@ public class TestRegistrazioneDAO {
     utenteNonEsistente.setNickname("Utente");
     utenteNonEsistente.setPassword("e21fc56c1a272b630e0d1439079d0598cf8b8329");
     }
-/*
+
     @Test
     public void TestVerificaPresenzaUtenteNonEsistente () throws SQLException {
-    assertNotEquals(utenteNonEsistente,userDAO.doRetrieveByKey(utenteNonEsistente.getEmail()));
+    assertNotEquals(utenteNonEsistente,userDAO.doRetrieveByKey("Utente","e21fc56c1a272b630e0d1439079d0598cf8b8329"));
     }
-
+/*
     @Test
     public void TestTrovaUtenteEsistente() throws SQLException {
     assertEquals(utenteEsistente,userDAO.doRetrieveByKey(utenteEsistente.getEmail()));
@@ -174,14 +176,14 @@ public class TestRegistrazioneDAO {
     Collection<AccountUtente> expected = new LinkedList<AccountUtente>();
     expected.add(utenteEsistente);
     assertEquals(expected,userDAO.doRetrieveAll());
-    }
+    } 
 
-
+ 
 
     @After
     public void tearDown () throws SQLException {
     System.out.println("Sono entrato nella tearDown");
-    userDAO.doDelete(utenteEsistente.getNickname());
+    userDAO.doDelete("PPEsistente");
     //userDAO.doDelete(utenteNonEsistente.getNickname());
     }
 

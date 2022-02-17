@@ -14,15 +14,16 @@ import it.unisa.utils.Utility;
 
 public class CarrelloModelDS implements ProductModelCarrello<Carrello> {
 	
-	private DataSource ds = null;
+	//private DataSource ds = null;
+	private Connection connection;
 	
-	public CarrelloModelDS(DataSource ds) {
-		this.ds = ds;
+	public CarrelloModelDS(Connection connection) {
+		this.connection = connection;
 	}
 	
 	@Override
 	public Collection<Carrello> doRetrieveAll() throws SQLException {
-		Connection connection = null;
+		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
 		String selectSQL = "SELECT * FROM  Carrello";
@@ -30,7 +31,7 @@ public class CarrelloModelDS implements ProductModelCarrello<Carrello> {
 		Collection<Carrello> br = new LinkedList<Carrello>();
 		
 		try {
-			connection = ds.getConnection(); //recupero connessione dal data source
+			//connection = ds.getConnection(); //recupero connessione dal data source
 			preparedStatement = connection.prepareStatement(selectSQL);
 			
 			Utility.print("doRetrieveAll: " + preparedStatement.toString());
@@ -51,14 +52,8 @@ public class CarrelloModelDS implements ProductModelCarrello<Carrello> {
 				
 				br.add(bean);
 			}
-		} finally {
-			try {
-			if(preparedStatement != null)
-				preparedStatement.close();
-			}finally {
-			if(connection != null)
-				connection.close();
-			}
+		} catch(SQLException e){
+			e.printStackTrace();
 		}
 		return br;
 	}
@@ -66,7 +61,7 @@ public class CarrelloModelDS implements ProductModelCarrello<Carrello> {
 	@Override
 	public Carrello doRetrieveByKey(String parola) throws SQLException {
 		
-		Connection connection = null;
+		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		//Carrello bean;
@@ -76,7 +71,7 @@ public class CarrelloModelDS implements ProductModelCarrello<Carrello> {
 		String selectSQL = " SELECT * FROM  Carrello  WHERE nome = ? ";
 		
 		try {
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 			preparedStatement.setString(1, parola);
 
@@ -95,14 +90,8 @@ public class CarrelloModelDS implements ProductModelCarrello<Carrello> {
 				bean.setTotq(rs.getFloat("totq"));
 				}
 
-		} finally {
-			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
-			} finally {
-				if (connection != null)
-					connection.close();
-			}
+		} catch(SQLException e){
+				e.printStackTrace();
 		}
 		return bean;
 		}
@@ -110,15 +99,15 @@ public class CarrelloModelDS implements ProductModelCarrello<Carrello> {
 	
 	@Override
 	public boolean doSave(Carrello item) throws SQLException {
-		Connection connection = null;
+		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		String insertSQL = "INSERT INTO Carrello (COD, UTENTE, NOME, AUTORE, TIPO, COSTO, QUANTITà, TOTQ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try {
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
 			
-			connection.setAutoCommit(false);
+			//connection.setAutoCommit(false);
 			
 			preparedStatement = connection.prepareStatement(insertSQL);
 			preparedStatement.setInt(1, item.getCod());
@@ -132,26 +121,20 @@ public class CarrelloModelDS implements ProductModelCarrello<Carrello> {
 		
 			preparedStatement.executeUpdate();
 
-			connection.commit();
-		} finally {
-			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
-			} finally {
-				if (connection != null)
-					connection.close();
-			}
+			//connection.commit();
+		} catch(SQLException e){
+			e.printStackTrace();
 		}
 		return true;
 	}
 
 	@Override
 	public void doUpdate(int quantit, float prez, int cod) throws SQLException {
-		Connection connection = null;
+		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
 		String updateSQL = "UPDATE carrello SET QUANTITà = ? , TOTQ = ? where COD = ?";
-		connection = ds.getConnection();
+		//connection = ds.getConnection();
 		preparedStatement = connection.prepareStatement(updateSQL);
 		
 		try {
@@ -162,20 +145,14 @@ public class CarrelloModelDS implements ProductModelCarrello<Carrello> {
 			
 			 preparedStatement.executeUpdate();
 			}
-		finally {
-			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
-			} finally {
-				if (connection != null)
-					connection.close();
-			}
+		catch(SQLException e){
+			e.printStackTrace();
 		}
 	}
 
 	@Override
 	public synchronized boolean doDelete(Integer code) throws SQLException {
-		Connection connection = null;
+		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		int result = 0;
@@ -183,20 +160,14 @@ public class CarrelloModelDS implements ProductModelCarrello<Carrello> {
 		String deleteSQL = "DELETE FROM Carrello WHERE COD = ?";
 
 		try {
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(deleteSQL);
 			preparedStatement.setInt(1, code);
 
 			result = preparedStatement.executeUpdate();
 
-		} finally {
-			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
-			} finally {
-				if (connection != null)
-					connection.close();
-			}
+		} catch(SQLException e){
+			e.printStackTrace();
 		}
 		return (result != 0);
 	}
@@ -204,7 +175,7 @@ public class CarrelloModelDS implements ProductModelCarrello<Carrello> {
 	@Override
 	public Float doSum(String utente) throws SQLException {
 		
-		Connection connection = null;
+		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		Float somma = 0.0f;
@@ -212,7 +183,7 @@ public class CarrelloModelDS implements ProductModelCarrello<Carrello> {
 		String sumSQL = "SELECT SUM(totq) AS costototale FROM Carrello WHERE UTENTE = ?";
 		
 		try {
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(sumSQL);
 			preparedStatement.setString(1, utente);
 
@@ -224,14 +195,8 @@ public class CarrelloModelDS implements ProductModelCarrello<Carrello> {
 					somma = Float.valueOf(str);
 					}
 			
-		}finally {
-				try {
-					if (preparedStatement != null)
-						preparedStatement.close();
-				} finally {
-					if (connection != null)
-						connection.close();
-				}
+		}catch(SQLException e){
+			e.printStackTrace();
 			}
 		return somma;
 	}
@@ -239,7 +204,7 @@ public class CarrelloModelDS implements ProductModelCarrello<Carrello> {
 	@Override
 	public  Collection<Carrello> RestXUtente(String utente) throws SQLException {
 		
-		Connection connection = null;
+		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
 		String selectSQL = " SELECT * FROM  Carrello  WHERE utente = ? ";
@@ -247,7 +212,7 @@ public class CarrelloModelDS implements ProductModelCarrello<Carrello> {
 		Collection<Carrello> br = new LinkedList<Carrello>();
 		
 		try {
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 			preparedStatement.setString(1, utente);
 
@@ -268,14 +233,8 @@ public class CarrelloModelDS implements ProductModelCarrello<Carrello> {
 				br.add(bean);
 				}
 
-		} finally {
-			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
-			} finally {
-				if (connection != null)
-					connection.close();
-			}
+		} catch(SQLException e){
+			e.printStackTrace();
 		}
 		return br;
 		}

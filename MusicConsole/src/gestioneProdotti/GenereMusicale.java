@@ -35,13 +35,34 @@ public class GenereMusicale implements Serializable {
 	}
 
 	@Override
-	public String toString() {
-		return "genereMusicale(" + idGenere + "):" + categoria;
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((categoria == null) ? 0 : categoria.hashCode());
+		result = prime * result + ((idGenere == null) ? 0 : idGenere.hashCode());
+		return result;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!(obj instanceof GenereMusicale))
+			return false;
+		GenereMusicale other = (GenereMusicale) obj;
+		if (categoria == null) {
+			if (other.categoria != null)
+				return false;
+		} else if (!categoria.equals(other.categoria))
+			return false;
+		if (idGenere == null) {
+			if (other.idGenere != null)
+				return false;
+		} else if (!idGenere.equals(other.idGenere))
+			return false;
+		return true;
+	}
+
 	
-	@Override  //ci dice se ci sono errori
-	public boolean equals(Object other) { //restituisce true se vero
-		return this.getCategoria() == ((GenereMusicale) other).getCategoria();
-	}
 	
 }

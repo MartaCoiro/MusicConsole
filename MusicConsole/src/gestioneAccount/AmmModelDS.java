@@ -12,16 +12,19 @@ import javax.sql.DataSource;
 import it.unisa.utils.Utility;
 
 public class AmmModelDS implements ProductModelAmm<Amm> {
-
-	private DataSource ds = null;
+	private Connection connection;
+	//private DataSource ds = null;
 	
-	public AmmModelDS(DataSource ds) {
+	/*public AmmModelDS(DataSource ds) {
 		this.ds = ds;
+	}*/
+	public AmmModelDS(Connection connection) {
+		this.connection = connection;
 	}
 	
 	@Override
 	public Collection<Amm> doRetrieveAll(String order) throws SQLException {
-		Connection connection = null;
+		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
 		String selectSQL = "SELECT * FROM  Amm";
@@ -33,7 +36,7 @@ public class AmmModelDS implements ProductModelAmm<Amm> {
 		Collection<Amm> account = new LinkedList<Amm>();
 		
 		try {
-			connection = ds.getConnection(); //recupero connessione dal data source
+			//connection = ds.getConnection(); //recupero connessione dal data source
 			preparedStatement = connection.prepareStatement(selectSQL);
 			
 			Utility.print("doRetrieveAll: " + preparedStatement.toString());
@@ -48,14 +51,8 @@ public class AmmModelDS implements ProductModelAmm<Amm> {
 				
 				account.add(bean);
 			}
-		} finally {
-			try {
-			if(preparedStatement != null)
-				preparedStatement.close();
-			}finally {
-			if(connection != null)
-				connection.close();
-			}
+		}  catch(SQLException e) {
+			e.printStackTrace();
 		}
 		return account;
 	}
@@ -63,7 +60,7 @@ public class AmmModelDS implements ProductModelAmm<Amm> {
 	@Override
 	public Amm doRetrieveByKey(String utente, String pass) throws SQLException {
 		
-		Connection connection = null;
+		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		//Amm bean;
@@ -72,7 +69,7 @@ public class AmmModelDS implements ProductModelAmm<Amm> {
 		String selectSQL = " SELECT * FROM  Amm  WHERE UTENTE = ? AND PASSWORD = ? ";
 		
 		try {
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 			preparedStatement.setString(1, utente);
 			preparedStatement.setString(2, pass);
@@ -87,14 +84,8 @@ public class AmmModelDS implements ProductModelAmm<Amm> {
 				bean.setRuolo(rs.getString("ruolo"));
 			}
 
-		} finally {
-			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
-			} finally {
-				if (connection != null)
-					connection.close();
-			}
+		}  catch(SQLException e) {
+			e.printStackTrace();
 		}
 		return bean;
 		}
@@ -102,15 +93,15 @@ public class AmmModelDS implements ProductModelAmm<Amm> {
 	
 	@Override
 	public void doSave(Amm item) throws SQLException {
-		Connection connection = null;
+		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		String insertSQL = "INSERT INTO Amm (UTENTE, PASSWORD, RUOLO) VALUES (?, ?, ?)";
 
 		try {
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
 			
-			connection.setAutoCommit(false);
+			//connection.setAutoCommit(false);
 			
 			preparedStatement = connection.prepareStatement(insertSQL);
 			preparedStatement.setString(1, item.getUtente());
@@ -119,15 +110,9 @@ public class AmmModelDS implements ProductModelAmm<Amm> {
 
 			preparedStatement.executeUpdate();
 
-			connection.commit();
-		} finally {
-			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
-			} finally {
-				if (connection != null)
-					connection.close();
-			}
+			//connection.commit();
+		}  catch(SQLException e) {
+			e.printStackTrace();
 		}
 
 	}
@@ -140,7 +125,7 @@ public class AmmModelDS implements ProductModelAmm<Amm> {
 
 	@Override
 	public synchronized boolean doDelete(String nickname) throws SQLException {
-		Connection connection = null;
+		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		int result = 0;
@@ -148,20 +133,14 @@ public class AmmModelDS implements ProductModelAmm<Amm> {
 		String deleteSQL = "DELETE FROM Amm WHERE CODE = ?";
 
 		try {
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(deleteSQL);
 			preparedStatement.setString(1, nickname);
 
 			result = preparedStatement.executeUpdate();
 
-		} finally {
-			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
-			} finally {
-				if (connection != null)
-					connection.close();
-			}
+		}  catch(SQLException e) {
+			e.printStackTrace();
 		}
 		return (result != 0);
 	}
