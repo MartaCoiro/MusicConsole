@@ -13,22 +13,15 @@ import it.unisa.utils.Utility;
 
 public class PlaylistModelDS implements ProductModelPlaylist<Playlist> {
 
-	//private DataSource ds = null;
+	private DataSource ds = null;
 	
-	private Connection connection;
-	
-	/*public PlaylistModelDS(DataSource ds) {
+	public PlaylistModelDS(DataSource ds) {
 		this.ds = ds;
-	}*/
-	
-	public PlaylistModelDS(Connection connection) {
-		this.connection = connection;
 	}
-	
 	
 	@Override
 	public Collection<Playlist> doRetrieveAll() throws SQLException {
-		//Connection connection = null;
+		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
 		String selectSQL = "SELECT * FROM  playlist";
@@ -36,7 +29,7 @@ public class PlaylistModelDS implements ProductModelPlaylist<Playlist> {
 		Collection<Playlist> al = new LinkedList<Playlist>();
 		
 		try {
-			//connection = ds.getConnection(); //recupero connessione dal data source
+			connection = ds.getConnection(); //recupero connessione dal data source
 			preparedStatement = connection.prepareStatement(selectSQL);
 			
 			Utility.print("doRetrieveAll: " + preparedStatement.toString());
@@ -54,8 +47,14 @@ public class PlaylistModelDS implements ProductModelPlaylist<Playlist> {
 				
 				al.add(bean);
 			}
-		} catch(SQLException e) {
-			e.printStackTrace();
+		} finally {
+			try {
+			if(preparedStatement != null)
+				preparedStatement.close();
+			}finally {
+			if(connection != null)
+				connection.close();
+			}
 		}
 		return al;
 	}
@@ -63,7 +62,7 @@ public class PlaylistModelDS implements ProductModelPlaylist<Playlist> {
 	@Override
 	public Playlist doRetrieveByKey(String nome) throws SQLException {
 		
-		//Connection connection = null;
+		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		//Playlist bean;
@@ -72,7 +71,7 @@ public class PlaylistModelDS implements ProductModelPlaylist<Playlist> {
 		String selectSQL = " SELECT * FROM  playlist  WHERE NOME	= ? ";
 		
 		try {
-			//connection = ds.getConnection();
+			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 			preparedStatement.setString(1, nome);
 		
@@ -90,8 +89,14 @@ public class PlaylistModelDS implements ProductModelPlaylist<Playlist> {
 				bean.setNomeArtista(rs.getString("nomeArtista"));
 			}
 
-		} catch(SQLException e) {
-			e.printStackTrace();
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
 		}
 		return bean;
 		}
@@ -99,15 +104,15 @@ public class PlaylistModelDS implements ProductModelPlaylist<Playlist> {
 	
 	@Override
 	public void doSave(Playlist item) throws SQLException {
-		//Connection connection = null;
+		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		String insertSQL = "INSERT INTO playlist (NOMEUTENTE, NOME, NOMEBRANO, NUMBRANI, NOMEARTISTA) VALUES (?, ?, ?, ?, ?)";
 
 		try {
-			//connection = ds.getConnection();
+			connection = ds.getConnection();
 			
-			//connection.setAutoCommit(false);
+			connection.setAutoCommit(false);
 			
 			preparedStatement = connection.prepareStatement(insertSQL);
 			//preparedStatement.setInt(1, item.getId());
@@ -119,9 +124,15 @@ public class PlaylistModelDS implements ProductModelPlaylist<Playlist> {
 			
 			preparedStatement.executeUpdate();
 
-			//connection.commit();
-		} catch(SQLException e) {
-			e.printStackTrace();
+			connection.commit();
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
 		}
 
 	}
@@ -134,7 +145,7 @@ public class PlaylistModelDS implements ProductModelPlaylist<Playlist> {
 
 	@Override
 	public synchronized boolean doDelete(String brano, String artista, String nplaylist, String nutente) throws SQLException {
-		//Connection connection = null;
+		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		int result = 0;
@@ -142,7 +153,7 @@ public class PlaylistModelDS implements ProductModelPlaylist<Playlist> {
 		String deleteSQL = "DELETE FROM playlist WHERE NOMEBRANO = ? AND NOMEARTISTA = ? AND NOME = ? AND NOMEUTENTE = ?";
 
 		try {
-			//connection = ds.getConnection();
+			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(deleteSQL);
 			preparedStatement.setString(1, brano);
 			preparedStatement.setString(2, artista);
@@ -151,15 +162,21 @@ public class PlaylistModelDS implements ProductModelPlaylist<Playlist> {
 
 			result = preparedStatement.executeUpdate();
 
-		} catch(SQLException e) {
-			e.printStackTrace();
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
 		}
 		return (result != 0);
 	}
 	
 	@Override
 	public synchronized boolean doDeletep(int code) throws SQLException {
-		//Connection connection = null;
+		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		int result = 0;
@@ -167,15 +184,21 @@ public class PlaylistModelDS implements ProductModelPlaylist<Playlist> {
 		String deleteSQL = "DELETE FROM playlist WHERE ID = ? ";
 
 		try {
-			//connection = ds.getConnection();
+			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(deleteSQL);
 			preparedStatement.setInt(1, code);
 			
 
 			result = preparedStatement.executeUpdate();
 
-		} catch(SQLException e) {
-			e.printStackTrace();
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
 		}
 		return (result != 0);
 	}
@@ -183,7 +206,7 @@ public class PlaylistModelDS implements ProductModelPlaylist<Playlist> {
 
 	@Override
 	public synchronized boolean doDeleteProd(String brano, String artista) throws SQLException {
-		//Connection connection = null;
+		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		int result = 0;
@@ -191,15 +214,21 @@ public class PlaylistModelDS implements ProductModelPlaylist<Playlist> {
 		String deleteSQL = "DELETE FROM playlist WHERE NOMEBRANO = ? AND NOMEARTISTA = ? ";
 
 		try {
-			//connection = ds.getConnection();
+			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(deleteSQL);
 			preparedStatement.setString(1, brano);
 			preparedStatement.setString(2, artista);
 
 			result = preparedStatement.executeUpdate();
 
-		} catch(SQLException e) {
-			e.printStackTrace();
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
 		}
 		return (result != 0);
 	}

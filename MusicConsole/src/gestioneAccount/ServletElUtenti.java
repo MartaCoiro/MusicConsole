@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-import java.sql.Connection;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -15,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import javax.servlet.http.HttpSession;
 
-import it.unisa.utils.DBConnectionPool;
 import it.unisa.utils.Utility;
 import gestioneCarrello.Carrello;
 import gestioneCarrello.CarrelloModelDS;
@@ -34,13 +32,8 @@ public class ServletElUtenti extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
-		//DataSource ds = (DataSource)getServletContext().getAttribute("DataSource");
-		Connection ds = null;
-		try {
-			ds = DBConnectionPool.getConnection();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		DataSource ds = (DataSource)getServletContext().getAttribute("DataSource");
+		
 		AccountModelDS model = new AccountModelDS(ds);
 		ProfiloModelDS model1 = new ProfiloModelDS(ds);
 		CarrelloModelDS model2 = new CarrelloModelDS(ds);

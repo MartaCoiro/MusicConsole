@@ -88,61 +88,16 @@ public class Playlist implements Serializable{
 	public void print() {
 		System.out.printf("%20s | %20s | %10d | %50s | %20s \n", nomeUtente,nome,numBrani,nomeBrano,nomeArtista);
 	}
-
+	
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result + ((nomeArtista == null) ? 0 : nomeArtista.hashCode());
-		result = prime * result + ((nomeBrano == null) ? 0 : nomeBrano.hashCode());
-		result = prime * result + ((nomeUtente == null) ? 0 : nomeUtente.hashCode());
-		result = prime * result + ((numBrani == null) ? 0 : numBrani.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!(obj instanceof Playlist))
-			return false;
-		Playlist other = (Playlist) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (nome == null) {
-			if (other.nome != null)
-				return false;
-		} else if (!nome.equals(other.nome))
-			return false;
-		if (nomeArtista == null) {
-			if (other.nomeArtista != null)
-				return false;
-		} else if (!nomeArtista.equals(other.nomeArtista))
-			return false;
-		if (nomeBrano == null) {
-			if (other.nomeBrano != null)
-				return false;
-		} else if (!nomeBrano.equals(other.nomeBrano))
-			return false;
-		if (nomeUtente == null) {
-			if (other.nomeUtente != null)
-				return false;
-		} else if (!nomeUtente.equals(other.nomeUtente))
-			return false;
-		if (numBrani == null) {
-			if (other.numBrani != null)
-				return false;
-		} else if (!numBrani.equals(other.numBrani))
-			return false;
-		return true;
+	public String toString() {
+		return nomeUtente + "," +  nome + "," + numBrani + "," + nomeBrano + "," + nomeArtista;
 	}
 	
-	
+	@Override  //ci dice se ci sono errori
+	public boolean equals(Object other) { //restituisce true se vero
+		return this.getNome() == ((Playlist) other).getNome();
+	}
 	
 	
 }

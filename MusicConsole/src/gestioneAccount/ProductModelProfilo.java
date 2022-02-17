@@ -9,9 +9,9 @@ public interface ProductModelProfilo<T> {
 		
 		public Collection<T> doRetrieveAll() throws SQLException;
 		
-		public boolean doSave(T item) throws SQLException;
+		public void doSave(T item) throws SQLException;
 		
-		public boolean doUpdate(String p1, String p2, String p3) throws SQLException;
+		public void doUpdate(String p1, String p2, String p3) throws SQLException;
 
 		public boolean doDelete(int code) throws SQLException;
 }

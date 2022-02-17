@@ -15,19 +15,15 @@ import it.unisa.utils.Utility;
 
 public class OrdiniModelDS implements ProductModelOrdini<Ordini> {
 
-	private Connection connection;
-//private DataSource ds = null;
-	 
-	/*public OrdiniModelDS(DataSource ds) {
+private DataSource ds = null;
+	
+	public OrdiniModelDS(DataSource ds) {
 		this.ds = ds;
-	}*/
-	public OrdiniModelDS(Connection connection) {
-		this.connection = connection;
 	}
-	  
-@Override
-	public Collection<Ordini> doRetrieveAll() {
-		//Connection connection = null;
+	
+	@Override
+	public Collection<Ordini> doRetrieveAll() throws SQLException {
+		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
 		String selectSQL = "SELECT * FROM  Ordini";
@@ -35,7 +31,7 @@ public class OrdiniModelDS implements ProductModelOrdini<Ordini> {
 		Collection<Ordini> br = new LinkedList<Ordini>();
 		
 		try {
-			//connection = ds.getConnection(); //recupero connessione dal data source
+			connection = ds.getConnection(); //recupero connessione dal data source
 			preparedStatement = connection.prepareStatement(selectSQL);
 			
 			Utility.print("doRetrieveAll: " + preparedStatement.toString());
@@ -58,15 +54,21 @@ public class OrdiniModelDS implements ProductModelOrdini<Ordini> {
 				
 				br.add(bean);
 			}
-		} catch(SQLException e) {
-			e.printStackTrace();
+		} finally {
+			try {
+			if(preparedStatement != null)
+				preparedStatement.close();
+			}finally {
+			if(connection != null)
+				connection.close();
+			}
 		}
 		return br;
 	}
 
 	@Override
 	public Collection<Ordini> doRetrieveAllOrdinato() throws SQLException {
-		//Connection connection = null;
+		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
 		String selectSQL = "SELECT * FROM  Ordini ORDER BY data DESC";
@@ -74,7 +76,7 @@ public class OrdiniModelDS implements ProductModelOrdini<Ordini> {
 		Collection<Ordini> br = new LinkedList<Ordini>();
 		
 		try {
-			//connection = ds.getConnection(); //recupero connessione dal data source
+			connection = ds.getConnection(); //recupero connessione dal data source
 			preparedStatement = connection.prepareStatement(selectSQL);
 			
 			Utility.print("doRetrieveAllOrdinato: " + preparedStatement.toString());
@@ -97,25 +99,31 @@ public class OrdiniModelDS implements ProductModelOrdini<Ordini> {
 				
 				br.add(bean);
 			}
-		} catch(SQLException e) {
-			e.printStackTrace();
+		} finally {
+			try {
+			if(preparedStatement != null)
+				preparedStatement.close();
+			}finally {
+			if(connection != null)
+				connection.close();
+			}
 		}
 		return br;
 	}
 	
 	@Override
-	public Collection<Ordini> doRetrieveByKey(String parola) {
+	public Collection<Ordini> doRetrieveByKey(String parola) throws SQLException {
 		
-		//Connection connection = null;
+		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
 		Collection<Ordini> br = new LinkedList<Ordini>();
 		
 		
-		String selectSQL = " SELECT * FROM  Ordini  WHERE UTENTE = ? ORDER BY data DESC";
+		String selectSQL = " SELECT * FROM  Ordini  WHERE utente = ? ORDER BY data DESC";
 		
 		try {
-			//connection = ds.getConnection();
+			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 			preparedStatement.setString(1, parola);
 
@@ -139,24 +147,30 @@ public class OrdiniModelDS implements ProductModelOrdini<Ordini> {
 				br.add(bean);
 				}
 
-		} catch(SQLException e) {
-			e.printStackTrace();
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
 		}
 		return br;
 		}
 	
-	 
+	
 	@Override
-	public void doSave(Ordini item) {
-		//Connection connection = null;
+	public void doSave(Ordini item) throws SQLException {
+		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		String insertSQL = "INSERT INTO Ordini (COD, UTENTE, DATA, INDICE, NOME, AUTORE, TIPO, COSTO, TOT, STATO, QUANTITà) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try {
-			//connection = ds.getConnection();
+			connection = ds.getConnection();
 			
-			//connection.setAutoCommit(false);
+			connection.setAutoCommit(false);
 			
 			preparedStatement = connection.prepareStatement(insertSQL);
 			preparedStatement.setInt(1, item.getCod());
@@ -173,49 +187,67 @@ public class OrdiniModelDS implements ProductModelOrdini<Ordini> {
 			
 			preparedStatement.executeUpdate();
 
-			//connection.commit();
-		} catch(SQLException e) {
-			e.printStackTrace();
+			connection.commit();
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
 		}
 		return;
 	}
 
 	@Override
 	public void doUpdate(String val, int ind) throws SQLException {
-		//Connection connection = null;
+		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
 		String updateSQL = "UPDATE Ordini SET STATO = ? where INDICE = ?";
-			//connection = ds.getConnection();
+			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(updateSQL);
 			try {
 				preparedStatement.setString(1, val);
 				preparedStatement.setInt(2, ind);
 				preparedStatement.executeUpdate();
 	}
-			catch(SQLException e) {
-				e.printStackTrace();
+			finally {
+				try {
+					if (preparedStatement != null)
+						preparedStatement.close();
+				} finally {
+					if (connection != null)
+						connection.close();
 			}
+		}
 }
 
 	@Override
-	public synchronized boolean doDelete(int indice) throws SQLException {
-		//Connection connection = null;
+	public synchronized boolean doDelete(int code) throws SQLException {
+		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		int result = 0;
 
-		String deleteSQL = "DELETE FROM Ordini WHERE INDICE = ?";
+		String deleteSQL = "DELETE FROM Ordini WHERE COD = ?";
 
 		try {
-			//connection = ds.getConnection();
+			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(deleteSQL);
-			preparedStatement.setInt(1, indice);
+			preparedStatement.setInt(1, code);
 
 			result = preparedStatement.executeUpdate();
 
-		} catch(SQLException e) {
-			e.printStackTrace();
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
 		}
 		return (result != 0);
 	}
@@ -223,14 +255,14 @@ public class OrdiniModelDS implements ProductModelOrdini<Ordini> {
 	@Override
 	public Collection<Ordini> getIndici() throws SQLException {
 		
-		//Connection connection = null;
+		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		String selectSQL = " SELECT indice FROM  Ordini ";
 		Collection<Ordini> br = new LinkedList<Ordini>();
 		
 		try {
-			//connection = ds.getConnection();
+			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 
 			ResultSet rs = preparedStatement.executeQuery();
@@ -242,8 +274,14 @@ public class OrdiniModelDS implements ProductModelOrdini<Ordini> {
 				br.add(bean);	
 			}
 
-		} catch(SQLException e) {
-			e.printStackTrace();
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
 		}
 		return br;
 		}

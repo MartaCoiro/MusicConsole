@@ -13,16 +13,15 @@ import it.unisa.utils.Utility;
 
 public class ArtistaModelDS implements ProductModelArtista<Artista> {
 
-	//private DataSource ds = null;
-	private Connection connection;
+	private DataSource ds = null;
 	
-	public ArtistaModelDS(Connection connection) {
-		this.connection = connection;
+	public ArtistaModelDS(DataSource ds) {
+		this.ds = ds;
 	}
 	
 	@Override
 	public Collection<Artista> doRetrieveAll() throws SQLException {
-		//Connection connection = null;
+		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
 		String selectSQL = "SELECT * FROM  Artista";
@@ -34,7 +33,7 @@ public class ArtistaModelDS implements ProductModelArtista<Artista> {
 		Collection<Artista> ar = new LinkedList<Artista>();
 		
 		try {
-			//connection = ds.getConnection(); //recupero connessione dal data source
+			connection = ds.getConnection(); //recupero connessione dal data source
 			preparedStatement = connection.prepareStatement(selectSQL);
 			
 			Utility.print("doRetrieveAll: " + preparedStatement.toString());
@@ -51,8 +50,14 @@ public class ArtistaModelDS implements ProductModelArtista<Artista> {
 				
 				ar.add(bean);
 			}
-		} catch(SQLException e){
-			e.printStackTrace();
+		} finally {
+			try {
+			if(preparedStatement != null)
+				preparedStatement.close();
+			}finally {
+			if(connection != null)
+				connection.close();
+			}
 		}
 		return ar;
 	}
@@ -60,7 +65,7 @@ public class ArtistaModelDS implements ProductModelArtista<Artista> {
 	@Override
 	public Artista doRetrieveByKey(String parola) throws SQLException {
 		
-		//Connection connection = null;
+		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		Artista bean = new Artista();
@@ -68,7 +73,7 @@ public class ArtistaModelDS implements ProductModelArtista<Artista> {
 		String selectSQL = " SELECT * FROM  Artista  WHERE NOMEARTISTA = ? ";
 		
 		try {
-			//connection = ds.getConnection();
+			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 			preparedStatement.setString(1, parola);
 
@@ -82,8 +87,14 @@ public class ArtistaModelDS implements ProductModelArtista<Artista> {
 				bean.setNumeroAscoltatori(rs.getInt("NumeroAscoltatori"));
 			}
 
-		} catch(SQLException e){
-			e.printStackTrace();
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
 		}
 		return bean;
 		}
@@ -91,15 +102,15 @@ public class ArtistaModelDS implements ProductModelArtista<Artista> {
 	
 	@Override
 	public void doSave(Artista item) throws SQLException {
-		//Connection connection = null;
+		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		String insertSQL = "INSERT INTO Artista (NOMEARTISTA, DESCRIZIONE, OFFERTA, IDCOLLABORAZIONI, NUMEROASCOLTATORI) VALUES (?, ?, ?, ?, ?)";
 
 		try {
-			//connection = ds.getConnection();
+			connection = ds.getConnection();
 			
-			//connection.setAutoCommit(false);
+			connection.setAutoCommit(false);
 			
 			preparedStatement = connection.prepareStatement(insertSQL);
 			preparedStatement.setString(1, item.getNomeArtista());
@@ -110,9 +121,15 @@ public class ArtistaModelDS implements ProductModelArtista<Artista> {
 
 			preparedStatement.executeUpdate();
 
-			//connection.commit();
-		} catch(SQLException e){
-			e.printStackTrace();
+			connection.commit();
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
 		}
 
 	}
@@ -125,7 +142,7 @@ public class ArtistaModelDS implements ProductModelArtista<Artista> {
 
 	@Override
 	public synchronized boolean doDelete(int code) throws SQLException {
-		//Connection connection = null;
+		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		int result = 0;
@@ -133,14 +150,20 @@ public class ArtistaModelDS implements ProductModelArtista<Artista> {
 		String deleteSQL = "DELETE FROM Artista WHERE CODE = ?";
 
 		try {
-			//connection = ds.getConnection();
+			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(deleteSQL);
 			preparedStatement.setInt(1, code);
 
 			result = preparedStatement.executeUpdate();
 
-		} catch(SQLException e){
-			e.printStackTrace();
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
 		}
 		return (result != 0);
 	}

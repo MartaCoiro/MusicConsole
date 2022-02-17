@@ -37,35 +37,6 @@ public class image implements Serializable {
 		public void print() {
 			System.out.printf("%10d | %8s \n", imageId,imageFileName);
 		}
-
-		@Override
-		public int hashCode() {
-			final int prime = 31;
-			int result = 1;
-			result = prime * result + ((imageFileName == null) ? 0 : imageFileName.hashCode());
-			result = prime * result + ((imageId == null) ? 0 : imageId.hashCode());
-			return result;
-		}
-
-		@Override
-		public boolean equals(Object obj) {
-			if (this == obj)
-				return true;
-			if (!(obj instanceof image))
-				return false;
-			image other = (image) obj;
-			if (imageFileName == null) {
-				if (other.imageFileName != null)
-					return false;
-			} else if (!imageFileName.equals(other.imageFileName))
-				return false;
-			if (imageId == null) {
-				if (other.imageId != null)
-					return false;
-			} else if (!imageId.equals(other.imageId))
-				return false;
-			return true;
-		}
 		
 		/*public boolean valid(String utente) {
 			if(this.getNickname()==utente) {
@@ -74,7 +45,15 @@ public class image implements Serializable {
 				else return false;
 		}*/
 		
+		@Override
+		public String toString() {
+			return imageId + "," +  imageFileName;
+		}
 		
+		@Override  //ci dice se ci sono errori
+		public boolean equals(Object other) { //restituisce true se vero
+			return this.getImageFileName() == ((image) other).getImageFileName();
+		}
 		
 		
 		

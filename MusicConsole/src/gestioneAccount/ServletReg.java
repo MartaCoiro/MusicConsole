@@ -9,7 +9,6 @@ import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.spec.InvalidKeySpecException;
-import java.sql.Connection;
 import java.sql.SQLException;
 
 import javax.crypto.spec.SecretKeySpec;
@@ -22,7 +21,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
-import it.unisa.utils.DBConnectionPool;
 import it.unisa.utils.PasswordHasher;
 import it.unisa.utils.Utility;
 import java.util.ArrayList;
@@ -35,7 +33,7 @@ import java.util.List;
 @WebServlet("/ServletReg")
 public class ServletReg extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-        
+       
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doPost(request, response);
@@ -44,18 +42,13 @@ public class ServletReg extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException{
 		
-		//DataSource ds = (DataSource)getServletContext().getAttribute("DataSource");
-		Connection ds = null;
-		try {
-			ds = DBConnectionPool.getConnection();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		DataSource ds = (DataSource)getServletContext().getAttribute("DataSource");
+		
 		AccountModelDS model = new AccountModelDS(ds);
 		ProfiloModelDS model1 = new ProfiloModelDS(ds);
 		
 		response.setContentType("text/html");//tipo di file
-		  
+		 
 		String encryptedPassword;
 		
 		//prendo i valori passati
@@ -77,12 +70,15 @@ public class ServletReg extends HttpServlet {
 		
 		account.setNickname(name);
        
-		//try {
+		try {
 			//criptiamo la password
 				encryptedPassword = PasswordHasher.scramble(p);
 				account.setPassword(encryptedPassword);
 				 
-		//}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		 //account = new AccountUtente(name,encryptedPassword);
 
@@ -96,7 +92,7 @@ public class ServletReg extends HttpServlet {
 		pro.setUsername(name);
 		pro.setPassword(p);
 		
-	//try {
+	try {
 		
 		/*
 		//criptiamo la password
@@ -114,20 +110,23 @@ public class ServletReg extends HttpServlet {
 		currentSession.setMaxInactiveInterval(60*60);
 		currentSession.setAttribute("p", pro);
 		currentSession.setAttribute("nome", name);
+			/*request.setAttribute("p", profil);*/
 			
-			if(model.doRetrieveByKey(name,encryptedPassword)==null) {
-				model.doSave(account);//controlla se quell'utente è presente o meno, se non presente entra
+			
+			AccountUtente m =model.doRetrieveByKey(name,p); 
+			String k=m.getNickname();
+				boolean val = model.doSave(account);//controlla se quell'utente è presente o meno, se non presente entra
+				if(val==true) {
 				model1.doSave(pro);
 				getServletContext().getRequestDispatcher("/login.jsp").forward(request, response); //reindiriziamo alla view		
-				return;
-			}
-				else {
-					request.setAttribute("presente", true);
-					getServletContext().getRequestDispatcher("/registrazione.jsp").forward(request, response); //reindiriziamo alla view
-					return;	
 				}
-			
-	//}
+			}
+			 catch(SQLException e){ //se invece l'utente è presente
+			Utility.print(e);
+			request.setAttribute("presente", true);
+			getServletContext().getRequestDispatcher("/registrazione.jsp").forward(request, response); //reindiriziamo alla view
+			request.setAttribute("error", e.getMessage());
+			}
 		}
 }
 		

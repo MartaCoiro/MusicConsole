@@ -1,7 +1,6 @@
 package gestioneProdotti;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
-import it.unisa.utils.DBConnectionPool;
 import it.unisa.utils.Utility;
 
 @WebServlet("/ServletIndex")
@@ -29,14 +27,7 @@ public class ServletIndex extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
-		//DataSource ds = (DataSource)getServletContext().getAttribute("DataSource");
-		
-		Connection ds=null;
-		try {
-			ds=DBConnectionPool.getConnection();
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}
+		DataSource ds = (DataSource)getServletContext().getAttribute("DataSource");
 		
 		AlbumModelDS model1 = new AlbumModelDS(ds);
 		BraniModelDS model2 = new BraniModelDS(ds);

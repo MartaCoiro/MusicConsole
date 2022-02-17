@@ -1,7 +1,6 @@
 package gestioneCarrello;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -17,7 +16,6 @@ import javax.sql.DataSource;
 
 import gestioneAccount.AccountUtente;
 import gestioneProdotti.PlaylistModelDS;
-import it.unisa.utils.DBConnectionPool;
 import it.unisa.utils.Utility;
 
 @WebServlet("/ServletSvuota")
@@ -27,15 +25,8 @@ public class ServletSvuota extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		//DataSource ds = (DataSource)getServletContext().getAttribute("DataSource");
-		
-		Connection ds=null;
-		try {
-			ds=DBConnectionPool.getConnection();
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}
-		
+		DataSource ds = (DataSource)getServletContext().getAttribute("DataSource");
+	
 		CarrelloModelDS model = new CarrelloModelDS(ds);
 		
 		HttpSession currentSession = request.getSession();

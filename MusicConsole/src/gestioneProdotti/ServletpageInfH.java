@@ -1,7 +1,6 @@
 package gestioneProdotti;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Iterator;
@@ -14,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
-import it.unisa.utils.DBConnectionPool;
 import it.unisa.utils.Utility;
 
 @WebServlet("/ServletpageInfH")
@@ -27,13 +25,8 @@ public class ServletpageInfH extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-//DataSource ds = (DataSource)getServletContext().getAttribute("DataSource");
-		Connection ds = null;
-		try {
-			ds = DBConnectionPool.getConnection();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+DataSource ds = (DataSource)getServletContext().getAttribute("DataSource");
+		
 		HttpSession currentSession = request.getSession();
 		
 		response.setContentType("text/html");//tipo di file

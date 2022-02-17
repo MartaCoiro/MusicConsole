@@ -1,7 +1,6 @@
 package gestioneAccount;
 
-	import java.io.Serializable;
-import java.sql.Connection;
+	import java.sql.Connection;
 	import java.sql.PreparedStatement;
 	import java.sql.ResultSet;
 	import java.sql.SQLException;
@@ -15,20 +14,21 @@ import it.unisa.utils.Utility;
 public class AccountModelDS implements ProductModel<AccountUtente> {
 
 		/*private DataSource ds;*/
-		//private DataSource ds = null;
+		private DataSource ds = null;
 		private Connection connection;
-		 
-		/*public AccountModelDS(DataSource ds) {
+		
+		public AccountModelDS(DataSource ds) {
 			this.ds = ds;
-			//System.out.println(ds);
-		}*/
+			/*System.out.println(ds);*/
+		}
 		
 		public AccountModelDS(Connection connection) {
 			this.connection = connection;
 		}
 		
-		public Collection<AccountUtente> doRetrieveAll()throws SQLException{
-			//Connection connection = null;
+		@Override
+		public Collection<AccountUtente> doRetrieveAll() throws SQLException {
+			Connection connection = null;
 			PreparedStatement preparedStatement = null;
 			
 			String selectSQL = "SELECT * FROM  AccountUtente";
@@ -40,15 +40,12 @@ public class AccountModelDS implements ProductModel<AccountUtente> {
 			Collection<AccountUtente> account = new LinkedList<AccountUtente>();
 			
 			try {
-				//connection = ds.getConnection(); //recupero connessione dal data source
+				connection = ds.getConnection(); //recupero connessione dal data source
 				preparedStatement = connection.prepareStatement(selectSQL);
 				
 				Utility.print("doRetrieveAll: " + preparedStatement.toString());
 				
-				ResultSet rs = preparedStatement.executeQuery();	
-				
-				/*if(!rs.next())
-					return null;*/
+				ResultSet rs = preparedStatement.executeQuery();			
 			
 				while(rs.next()) {
 					AccountUtente bean = new AccountUtente();
@@ -57,24 +54,30 @@ public class AccountModelDS implements ProductModel<AccountUtente> {
 					
 					account.add(bean);
 				}
-			} catch(SQLException e) {
-				e.printStackTrace();
+			} finally {
+				try {
+				if(preparedStatement != null)
+					preparedStatement.close();
+				}finally {
+				if(connection != null)
+					connection.close();
+				}
 			}
 			return account;
 		}
- 
 
-		public AccountUtente doRetrieveByKey(String utente, String pass) {
+		@Override
+		public AccountUtente doRetrieveByKey(String utente, String pass) throws SQLException {
 			
-			//Connection connection = null;
+			Connection connection = null;
 			PreparedStatement preparedStatement = null;
 
-			AccountUtente bean = null;
-			 
+			AccountUtente bean = new AccountUtente();
+			
 			String selectSQL = " SELECT * FROM  AccountUtente  WHERE NICKNAME = ? AND PASSWORD = ? ";
-			 
+			
 			try {
-				//connection = ds.getConnection();
+				connection = ds.getConnection();
 				preparedStatement = connection.prepareStatement(selectSQL);
 				preparedStatement.setString(1, utente);
 				preparedStatement.setString(2, pass);
@@ -82,28 +85,34 @@ public class AccountModelDS implements ProductModel<AccountUtente> {
 				ResultSet rs = preparedStatement.executeQuery();
 
 				while (rs.next()) {
-					bean = new AccountUtente();
 					bean.setNickname(rs.getString("nickname"));
 					bean.setPassword(rs.getString("password"));
 				}
 
-			} catch(SQLException e) {
-				e.printStackTrace();
+			} finally {
+				try {
+					if (preparedStatement != null)
+						preparedStatement.close();
+				} finally {
+					if (connection != null)
+						connection.close();
+				}
 			}
 			return bean;
 			}
 		
 		
-		public boolean doSave(AccountUtente item)  {
-			//Connection connection = null;
+		@Override
+		public boolean doSave(AccountUtente item) throws SQLException {
+			Connection connection = null;
 			PreparedStatement preparedStatement = null;
 
-			String insertSQL = "INSERT INTO AccountUtente (NICKNAME,PASSWORD) VALUES (?, ?)";
+			String insertSQL = "INSERT INTO AccountUtente (NICKNAME, PASSWORD) VALUES (?, ?)";
 
 			try {
-				//connection = ds.getConnection();
+				connection = ds.getConnection();
 				
-				//connection.setAutoCommit(false);
+				connection.setAutoCommit(false);
 				
 				preparedStatement = connection.prepareStatement(insertSQL);
 				preparedStatement.setString(1, item.getNickname());
@@ -111,49 +120,60 @@ public class AccountModelDS implements ProductModel<AccountUtente> {
 
 				preparedStatement.executeUpdate();
 
-				//connection.commit();
-			} catch(SQLException e) {
-				e.printStackTrace();
+				connection.commit();
+			} finally {
+				try {
+					if (preparedStatement != null)
+						preparedStatement.close();
+				} finally {
+					if (connection != null)
+						connection.close();
+				}
 			}
 			return true;
 		}
- 
 
-		public void doUpdate(String p1, String p2) throws SQLException  {
-			//Connection connection = null;
+		@Override
+		public void doUpdate(String p1, String p2, String p3) throws SQLException {
+			Connection connection = null;
 			PreparedStatement preparedStatement = null;
 			
-			//if(p1.equals("password")) {
+			if(p1.equals("password")) {
 			String updateSQL = "UPDATE accountutente SET PASSWORD=? where NICKNAME=?";
-			//connection = ds.getConnection();
-			
-				preparedStatement = connection.prepareStatement(updateSQL);
-			
-			/*}else if(p1.equals("nickname")) {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(updateSQL);
+			}else if(p1.equals("nickname")) {
 				String updateSQL = "UPDATE accountutente SET NICKNAME=? where NICKNAME=?";
-				//connection = ds.getConnection();
+				connection = ds.getConnection();
 				preparedStatement = connection.prepareStatement(updateSQL);
-			}*/
+			}
 			
 			try {
 				
-				preparedStatement.setString(1, p1);
-				preparedStatement.setString(2, p2);
+				preparedStatement.setString(1, p2);
+				preparedStatement.setString(2, p3);
 				
 				Utility.print("doUpdate: " + preparedStatement.toString());
 				
 				 preparedStatement.executeUpdate();
 			}
-			catch(SQLException e) {
-				e.printStackTrace();
+			finally {
+				try {
+					if (preparedStatement != null)
+						preparedStatement.close();
+				} finally {
+					if (connection != null)
+						connection.close();
+				}
 			}
 		}
 	
 
 		
 
-		public synchronized boolean doDelete(String utente)  {
-			//Connection connection = null;
+		@Override
+		public synchronized boolean doDelete(String utente) throws SQLException {
+			Connection connection = null;
 			PreparedStatement preparedStatement = null;
 
 			int result = 0;
@@ -161,17 +181,24 @@ public class AccountModelDS implements ProductModel<AccountUtente> {
 			String deleteSQL = "DELETE FROM AccountUtente WHERE NICKNAME = ?";
 
 			try {
-				//connection = ds.getConnection();
+				connection = ds.getConnection();
 				preparedStatement = connection.prepareStatement(deleteSQL);
 				preparedStatement.setString(1, utente);
 
 				result = preparedStatement.executeUpdate();
 
-			} catch(SQLException e) {
-				e.printStackTrace();
+			} finally {
+				try {
+					if (preparedStatement != null)
+						preparedStatement.close();
+				} finally {
+					if (connection != null)
+						connection.close();
+				}
 			}
 			return (result != 0);
 		}
 		
 }
+
 

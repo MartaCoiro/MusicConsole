@@ -2,7 +2,6 @@ package gestioneProdotti;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -12,8 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
-
-import it.unisa.utils.DBConnectionPool;
 import it.unisa.utils.Utility;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,15 +25,8 @@ public class ServletCerca extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 				
-				//DataSource ds = (DataSource)getServletContext().getAttribute("DataSource");
+				DataSource ds = (DataSource)getServletContext().getAttribute("DataSource");
 				
-		Connection ds=null;
-		try {
-			ds=DBConnectionPool.getConnection();
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}
-		
 				AlbumModelDS model1 = new AlbumModelDS(ds);
 				ArtistaModelDS model2 = new ArtistaModelDS(ds);
 				BraniModelDS model3 = new BraniModelDS(ds);

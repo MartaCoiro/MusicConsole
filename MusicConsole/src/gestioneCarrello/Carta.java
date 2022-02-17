@@ -82,54 +82,10 @@ public class Carta implements Serializable{
 		this.dataa = dataa;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((cognome == null) ? 0 : cognome.hashCode());
-		result = prime * result + cvv;
-		result = prime * result + ((dataa == null) ? 0 : dataa.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result + ((numero == null) ? 0 : numero.hashCode());
-		result = prime * result + ((utente == null) ? 0 : utente.hashCode());
-		return result;
+	@Override  //ci dice se ci sono errori
+	public boolean equals(Object other) { //restituisce true se vero
+		return this.getUtente() == ((Carta) other).getUtente();
 	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!(obj instanceof Carta))
-			return false;
-		Carta other = (Carta) obj;
-		if (cognome == null) {
-			if (other.cognome != null)
-				return false;
-		} else if (!cognome.equals(other.cognome))
-			return false;
-		if (cvv != other.cvv)
-			return false;
-		if (dataa == null) {
-			if (other.dataa != null)
-				return false;
-		} else if (!dataa.equals(other.dataa))
-			return false;
-		if (nome == null) {
-			if (other.nome != null)
-				return false;
-		} else if (!nome.equals(other.nome))
-			return false;
-		if (numero == null) {
-			if (other.numero != null)
-				return false;
-		} else if (!numero.equals(other.numero))
-			return false;
-		if (utente == null) {
-			if (other.utente != null)
-				return false;
-		} else if (!utente.equals(other.utente))
-			return false;
-		return true;
-	}	
+	
 	
 }

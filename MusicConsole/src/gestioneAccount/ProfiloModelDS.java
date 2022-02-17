@@ -12,19 +12,15 @@ import it.unisa.utils.Utility;
 
 public class ProfiloModelDS implements ProductModelProfilo<Profilo> {
 
-	private Connection connection;
-//private DataSource ds = null;
+private DataSource ds = null;
 	
-	/*public ProfiloModelDS(DataSource ds) {
+	public ProfiloModelDS(DataSource ds) {
 		this.ds = ds;
-	}*/
-	public ProfiloModelDS(Connection connection) {
-		this.connection = connection;
 	}
-	 
+	
 	@Override
 	public Collection<Profilo> doRetrieveAll() throws SQLException {
-		//Connection connection = null;
+		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
 		String selectSQL = "SELECT * FROM  profilo";
@@ -32,7 +28,7 @@ public class ProfiloModelDS implements ProductModelProfilo<Profilo> {
 		Collection<Profilo> al = new LinkedList<Profilo>();
 		//Profilo bean;
 		try {
-			//connection = ds.getConnection(); //recupero connessione dal data source
+			connection = ds.getConnection(); //recupero connessione dal data source
 			preparedStatement = connection.prepareStatement(selectSQL);
 			
 			Utility.print("doRetrieveAll: " + preparedStatement.toString());
@@ -53,32 +49,37 @@ public class ProfiloModelDS implements ProductModelProfilo<Profilo> {
 				
 				al.add(bean);
 			}
-		}catch(SQLException e) {
-			e.printStackTrace();
+		} finally {
+			try {
+			if(preparedStatement != null)
+				preparedStatement.close();
+			}finally {
+			if(connection != null)
+				connection.close();
+			}
 		}
 		return al;
 	}
 
 	@Override
-	public Profilo doRetrieveByKey(String nome) {
+	public Profilo doRetrieveByKey(String nome) throws SQLException {
 		
-		//Connection connection = null;
+		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		//Profilo bean;
-		Profilo bean = null;
+		Profilo bean = new Profilo();
 		
 		String selectSQL = " SELECT * FROM  profilo  WHERE USERNAME = ? ";
 		
 		try {
-			//connection = ds.getConnection();
+			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 			preparedStatement.setString(1, nome);
 
 			ResultSet rs = preparedStatement.executeQuery();
 			
 			while (rs.next()) {
-				 bean = new Profilo();
 				bean.setId(rs.getInt("id"));
 				bean.setNome(rs.getString("nome"));
 				bean.setCognome(rs.getString("cognome"));
@@ -93,24 +94,30 @@ public class ProfiloModelDS implements ProductModelProfilo<Profilo> {
 			//bean = new Profilo(rs.getString("nome"),rs.getString("cognome"),rs.getString("citta"),rs.getString("indirizzo"),rs.getString("telefono"),rs.getString("email"),rs.getString("username"),rs.getString("password"));
 			
 
-		} catch(SQLException e) {
-			e.printStackTrace();
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
 		}
 		return bean;
 		}
 	
 	
 	@Override
-	public boolean doSave(Profilo item)  {
-		//Connection connection = null;
+	public void doSave(Profilo item) throws SQLException {
+		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		String insertSQL = "INSERT INTO profilo (ID, NOME, COGNOME, CITTA, INDIRIZZO, TELEFONO, EMAIL, USERNAME, PASSWORD) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try {
-			//connection = ds.getConnection();
+			connection = ds.getConnection();
 			
-			//connection.setAutoCommit(false);
+			connection.setAutoCommit(false);
 			
 			preparedStatement = connection.prepareStatement(insertSQL);
 			preparedStatement.setInt(1, item.getId());
@@ -126,74 +133,80 @@ public class ProfiloModelDS implements ProductModelProfilo<Profilo> {
 
 			preparedStatement.executeUpdate();
 
-			//connection.commit();
-		} catch(SQLException e) {
-			e.printStackTrace();
+			connection.commit();
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
 		}
-		return true;
+
 	}
 
-@Override
-	public boolean doUpdate(String p1, String p2, String p3)  {
-		//Connection connection = null;
+	@Override
+	public void doUpdate(String p1, String p2, String p3) throws SQLException {
+		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
-		try {
-			
 		if(p1.equals("nome")) {
 		String updateSQL = "UPDATE profilo SET NOME=? where USERNAME=?";
-		//connection = ds.getConnection();
+		connection = ds.getConnection();
 		preparedStatement = connection.prepareStatement(updateSQL);
 		}else if(p1.equals("cognome")) {
 			String updateSQL = "UPDATE profilo SET COGNOME=? where USERNAME=?";
-			//connection = ds.getConnection();
+			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(updateSQL);
 		}else if(p1.equals("email")) {
 			String updateSQL = "UPDATE profilo SET EMAIL=? where USERNAME=?";
-			//connection = ds.getConnection();
+			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(updateSQL);
 		}else if(p1.equals("telefono")) {
 			String updateSQL = "UPDATE profilo SET TELEFONO=? where USERNAME=?";
-			//connection = ds.getConnection();
+			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(updateSQL);
 		}else if(p1.equals("indirizzo")) {
 			String updateSQL = "UPDATE profilo SET INDIRIZZO=? where USERNAME=?";
-			//connection = ds.getConnection();
+			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(updateSQL);
 		}else if(p1.equals("città")) {
 			String updateSQL = "UPDATE profilo SET CITTA=? where USERNAME=?";
-			//connection = ds.getConnection();
+			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(updateSQL);
 		}else if(p1.equals("password")) {
 			String updateSQL = "UPDATE profilo SET PASSWORD=? where USERNAME=?";
-			//connection = ds.getConnection();
+			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(updateSQL);
 		}else if(p1.equals("username")) {
 			String updateSQL = "UPDATE profilo SET USERNAME=? where USERNAME=?";
-			//connection = ds.getConnection();
+			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(updateSQL);
 		}
-		
+		try {
+			
 			preparedStatement.setString(1, p2);
 			preparedStatement.setString(2, p3);
 			
 			/*Utility.print("doUpdate: " + preparedStatement.toString());*/
-			if (preparedStatement.executeUpdate()==0) {
-				return false;
-			}
 			
 			 preparedStatement.executeUpdate();
-			 return true;
 		}
-		catch(SQLException e) {
-			e.printStackTrace();
+		finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
 		}
-		return false;
 	}
 
 	@Override
-	public synchronized boolean doDelete(int code)  {
-		//Connection connection = null;
+	public synchronized boolean doDelete(int code) throws SQLException {
+		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		int result = 0;
@@ -201,14 +214,20 @@ public class ProfiloModelDS implements ProductModelProfilo<Profilo> {
 		String deleteSQL = "DELETE FROM profilo WHERE ID = ?";
 
 		try {
-			//connection = ds.getConnection();
+			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(deleteSQL);
 			preparedStatement.setInt(1, code);
 
 			result = preparedStatement.executeUpdate();
 
-		} catch(SQLException e) {
-			e.printStackTrace();
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
 		}
 		return (result != 0);
 	}

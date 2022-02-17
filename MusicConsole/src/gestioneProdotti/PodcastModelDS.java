@@ -13,20 +13,15 @@ import it.unisa.utils.Utility;
 
 public class PodcastModelDS implements ProductModelPodcast<Podcast>{
 
-	//private DataSource ds = null;
-	private Connection connection;
+	private DataSource ds = null;
 	
-	/*public PodcastModelDS(DataSource ds) {
+	public PodcastModelDS(DataSource ds) {
 		this.ds = ds;
-	}*/
-	
-	public PodcastModelDS(Connection connection) {
-		this.connection = connection;
 	}
 	
 	@Override
 	public Collection<Podcast> doRetrieveAll() throws SQLException {
-		//Connection connection = null;
+		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
 		String selectSQL = "SELECT * FROM  Podcast";
@@ -34,7 +29,7 @@ public class PodcastModelDS implements ProductModelPodcast<Podcast>{
 		Collection<Podcast> pd = new LinkedList<Podcast>();
 		
 		try {
-			//connection = ds.getConnection(); //recupero connessione dal data source
+			connection = ds.getConnection(); //recupero connessione dal data source
 			preparedStatement = connection.prepareStatement(selectSQL);
 			
 			Utility.print("doRetrieveAll: " + preparedStatement.toString());
@@ -55,8 +50,14 @@ public class PodcastModelDS implements ProductModelPodcast<Podcast>{
 				
 				pd.add(bean);
 			}
-		} catch(SQLException e) {
-			e.printStackTrace();
+		} finally {
+			try {
+			if(preparedStatement != null)
+				preparedStatement.close();
+			}finally {
+			if(connection != null)
+				connection.close();
+			}
 		}
 		return pd;
 	}
@@ -64,7 +65,7 @@ public class PodcastModelDS implements ProductModelPodcast<Podcast>{
 	@Override
 	public Podcast doRetrieveByKey(String parola) throws SQLException {
 		
-		//Connection connection = null;
+		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		//Podcast bean;
@@ -74,7 +75,7 @@ public class PodcastModelDS implements ProductModelPodcast<Podcast>{
 		String selectSQL = " SELECT * FROM  Podcast  WHERE NOMEPODCAST = ? OR IDEATORE = ? ";
 		
 		try {
-			//connection = ds.getConnection();
+			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 			preparedStatement.setString(1, parola);
 			preparedStatement.setString(2, parola);
@@ -95,8 +96,14 @@ public class PodcastModelDS implements ProductModelPodcast<Podcast>{
 				bean.setPrezzo(rs.getFloat("prezzo"));
 			}
 
-		} catch(SQLException e) {
-			e.printStackTrace();
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
 		}
 		return bean;
 		}
@@ -104,15 +111,15 @@ public class PodcastModelDS implements ProductModelPodcast<Podcast>{
 	
 	@Override
 	public void doSave(Podcast item) throws SQLException {
-		//Connection connection = null;
+		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		String insertSQL = "INSERT INTO Podcast (NOMEPODCAST, IDEATORE, DESCRIZIONE, DURATA, NUMEROEPISODI, IMGPOD, TIPO, DATAA, PREZZO) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try {
-			//connection = ds.getConnection();
+			connection = ds.getConnection();
 			
-			//connection.setAutoCommit(false);
+			connection.setAutoCommit(false);
 			
 			preparedStatement = connection.prepareStatement(insertSQL);
 			preparedStatement.setString(1, item.getNomePodcast());
@@ -127,37 +134,43 @@ public class PodcastModelDS implements ProductModelPodcast<Podcast>{
 
 			preparedStatement.executeUpdate();
 
-			//connection.commit();
-		} catch(SQLException e) {
-			e.printStackTrace();
+			connection.commit();
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
 		}
 
 	}
 
 	@Override
 	public void doUpdate(String p1, String p2, String p3) throws SQLException {
-		//Connection connection = null;
+		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
 		if(p1.equals("artista")) {
 			String updateSQL = "UPDATE Podcast SET IDEATORE=? where NOMEPODCAST = ?";
-			//connection = ds.getConnection();
+			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(updateSQL);
 		}else if(p1.equals("img")) {
 			String updateSQL = "UPDATE Podcast SET IMGPOD=? where NOMEPODCAST = ?";
-			//connection = ds.getConnection();
+			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(updateSQL);
 		}else if(p1.equals("tipo")) {
 			String updateSQL = "UPDATE Podcast SET TIPO=? where NOMEPODCAST = ?";
-			//connection = ds.getConnection();
+			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(updateSQL);
 		}else if(p1.equals("prezzo")) {
 			String updateSQL = "UPDATE Podcast SET PREZZO=? where NOMEPODCAST = ?";
-			//connection = ds.getConnection();
+			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(updateSQL);
 		}else if(p1.equals("descrizione")) {
 			String updateSQL = "UPDATE Podcast SET DESCRIZIONE=? where NOMEPODCAST = ?";
-			//connection = ds.getConnection();
+			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(updateSQL);
 		}
 		try {
@@ -167,19 +180,25 @@ public class PodcastModelDS implements ProductModelPodcast<Podcast>{
 			
 			 preparedStatement.executeUpdate();
 		}
-		catch(SQLException e) {
-			e.printStackTrace();
+		finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
 		}
 	}
 
 	@Override
 	public void doUpdatePrezzo(String p1, Float p2, String p3) throws SQLException {
-		//Connection connection = null;
+		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
 		if(p1.equals("prezzo")) {
 			String updateSQL = "UPDATE Podcast SET PREZZO=? where NomePodcast = ?";
-			//connection = ds.getConnection();
+			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(updateSQL);
 		}
 		try {
@@ -189,14 +208,20 @@ public class PodcastModelDS implements ProductModelPodcast<Podcast>{
 			
 			 preparedStatement.executeUpdate();
 		}
-		catch(SQLException e) {
-			e.printStackTrace();
+		finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
 		}
 	}
 
 	@Override
 	public synchronized boolean doDelete(String nomepod) throws SQLException {
-		//Connection connection = null;
+		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		int result = 0;
@@ -204,14 +229,20 @@ public class PodcastModelDS implements ProductModelPodcast<Podcast>{
 		String deleteSQL = "DELETE FROM Podcast WHERE NOMEPODCAST = ?";
 
 		try {
-			//connection = ds.getConnection();
+			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(deleteSQL);
 			preparedStatement.setString(1, nomepod);
 
 			result = preparedStatement.executeUpdate();
 
-		} catch(SQLException e) {
-			e.printStackTrace();
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
 		}
 		return (result != 0);
 	}
@@ -219,7 +250,7 @@ public class PodcastModelDS implements ProductModelPodcast<Podcast>{
 	@Override
 	public Podcast Restituisci(String nome) throws SQLException {
 		
-		//Connection connection = null;
+		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		//Podcast bean;
@@ -229,7 +260,7 @@ public class PodcastModelDS implements ProductModelPodcast<Podcast>{
 		String selectSQL = " SELECT * FROM  Podcast  WHERE NOMEPODCAST = ? ";
 		
 		try {
-			//connection = ds.getConnection();
+			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 			preparedStatement.setString(1, nome);
 
@@ -249,8 +280,14 @@ public class PodcastModelDS implements ProductModelPodcast<Podcast>{
 				bean.setPrezzo(rs.getFloat("prezzo"));
 			}
 
-		} catch(SQLException e) {
-			e.printStackTrace();
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
 		}
 		return bean;
 		}

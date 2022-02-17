@@ -1,7 +1,6 @@
 package gestioneProdotti;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Collection;
 
@@ -12,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
-import it.unisa.utils.DBConnectionPool;
 import it.unisa.utils.Utility;
 
 @WebServlet("/ServletHome")
@@ -23,15 +21,8 @@ public class ServletHome extends HttpServlet {
 			throws ServletException, IOException {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	
-		//DataSource ds = (DataSource)getServletContext().getAttribute("DataSource");
+		DataSource ds = (DataSource)getServletContext().getAttribute("DataSource");
 	
-		Connection ds=null;
-		try {
-			ds=DBConnectionPool.getConnection();
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}
-		
 		BraniModelDS model = new BraniModelDS(ds);
 		
 		response.setContentType("text/html");//tipo di file

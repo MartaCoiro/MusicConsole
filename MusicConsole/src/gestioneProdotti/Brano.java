@@ -141,91 +141,13 @@ public class Brano  implements Serializable {
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((cantante == null) ? 0 : cantante.hashCode());
-		result = prime * result + ((codice == null) ? 0 : codice.hashCode());
-		result = prime * result + ((dat == null) ? 0 : dat.hashCode());
-		result = prime * result + ((dataa == null) ? 0 : dataa.hashCode());
-		result = prime * result + ((descrizione == null) ? 0 : descrizione.hashCode());
-		result = prime * result + Float.floatToIntBits(durata);
-		result = prime * result + ((genere == null) ? 0 : genere.hashCode());
-		result = prime * result + ((imgBrano == null) ? 0 : imgBrano.hashCode());
-		result = prime * result + ((prezzo == null) ? 0 : prezzo.hashCode());
-		result = prime * result + ((suono == null) ? 0 : suono.hashCode());
-		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
-		result = prime * result + ((titolo == null) ? 0 : titolo.hashCode());
-		return result;
+	public String toString() {
+		return "Brano(" + codice + "):" + titolo + " " + durata + " " + " " + cantante + " " + imgBrano + " " + genere;
 	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!(obj instanceof Brano))
-			return false;
-		Brano other = (Brano) obj;
-		if (cantante == null) {
-			if (other.cantante != null)
-				return false;
-		} else if (!cantante.equals(other.cantante))
-			return false;
-		if (codice == null) {
-			if (other.codice != null)
-				return false;
-		} else if (!codice.equals(other.codice))
-			return false;
-		if (dat == null) {
-			if (other.dat != null)
-				return false;
-		} else if (!dat.equals(other.dat))
-			return false;
-		if (dataa == null) {
-			if (other.dataa != null)
-				return false;
-		} else if (!dataa.equals(other.dataa))
-			return false;
-		if (descrizione == null) {
-			if (other.descrizione != null)
-				return false;
-		} else if (!descrizione.equals(other.descrizione))
-			return false;
-		if (Float.floatToIntBits(durata) != Float.floatToIntBits(other.durata))
-			return false;
-		if (genere == null) {
-			if (other.genere != null)
-				return false;
-		} else if (!genere.equals(other.genere))
-			return false;
-		if (imgBrano == null) {
-			if (other.imgBrano != null)
-				return false;
-		} else if (!imgBrano.equals(other.imgBrano))
-			return false;
-		if (prezzo == null) {
-			if (other.prezzo != null)
-				return false;
-		} else if (!prezzo.equals(other.prezzo))
-			return false;
-		if (suono == null) {
-			if (other.suono != null)
-				return false;
-		} else if (!suono.equals(other.suono))
-			return false;
-		if (tipo == null) {
-			if (other.tipo != null)
-				return false;
-		} else if (!tipo.equals(other.tipo))
-			return false;
-		if (titolo == null) {
-			if (other.titolo != null)
-				return false;
-		} else if (!titolo.equals(other.titolo))
-			return false;
-		return true;
-	}
-
 	
+	@Override  //ci dice se ci sono errori
+	public boolean equals(Object other) { //restituisce true se vero
+		return this.getTitolo() == ((Brano) other).getTitolo();
+	}
 }
 
