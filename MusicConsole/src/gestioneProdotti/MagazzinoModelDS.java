@@ -13,15 +13,19 @@ import it.unisa.utils.Utility;
 
 public class MagazzinoModelDS implements ProductModelMagazzino<Magazzino> {
 
-private DataSource ds = null;
-	
+//private DataSource ds = null;
+	private Connection connection;
+	/*
 	public MagazzinoModelDS(DataSource ds) {
 		this.ds = ds;
+	}*/
+	public MagazzinoModelDS(Connection connection) {
+		this.connection = connection;
 	}
 	
 	@Override
 	public Collection<Magazzino> doRetrieveAll() throws SQLException {
-		Connection connection = null;
+		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
 		String selectSQL = "SELECT * FROM  Magazzino";
@@ -29,7 +33,7 @@ private DataSource ds = null;
 		Collection<Magazzino> mag = new LinkedList<Magazzino>();
 		
 		try {
-			connection = ds.getConnection(); //recupero connessione dal data source
+			//connection = ds.getConnection(); //recupero connessione dal data source
 			preparedStatement = connection.prepareStatement(selectSQL);
 			
 			Utility.print("doRetrieveAll: " + preparedStatement.toString());
@@ -47,14 +51,9 @@ private DataSource ds = null;
 				
 				mag.add(bean);
 			}
-		} finally {
-			try {
-			if(preparedStatement != null)
-				preparedStatement.close();
-			}finally {
-			if(connection != null)
-				connection.close();
-			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		
 		}
 		return mag;
 	}
@@ -62,7 +61,7 @@ private DataSource ds = null;
 	@Override
 	public Magazzino doRetrieveByKey(int cod) throws SQLException {
 		
-		Connection connection = null;
+		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		//Magazzino bean;
@@ -71,7 +70,7 @@ private DataSource ds = null;
 		String selectSQL = " SELECT * FROM  Magazzino  WHERE COD = ? ";
 		
 		try {
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 			preparedStatement.setInt(1, cod);
 
@@ -88,14 +87,8 @@ private DataSource ds = null;
 				bean.setQuantità(rs.getInt("quantità"));
 			}
 
-		} finally {
-			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
-			} finally {
-				if (connection != null)
-					connection.close();
-			}
+		} catch(SQLException e) {
+			e.printStackTrace();
 		}
 		return bean;
 		}
@@ -103,15 +96,15 @@ private DataSource ds = null;
 	
 	@Override
 	public void doSave(Magazzino item) throws SQLException {
-		Connection connection = null;
+		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		String insertSQL = "INSERT INTO Magazzino (COD, NOME, AUTORE, TIPO, COSTO, QUANTITà) VALUES (?, ?, ?, ?, ?, ?)";
 
 		try {
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
 			
-			connection.setAutoCommit(false);
+			//connection.setAutoCommit(false);
 			
 			preparedStatement = connection.prepareStatement(insertSQL);
 			preparedStatement.setInt(1, item.getCod());
@@ -123,26 +116,20 @@ private DataSource ds = null;
 
 			preparedStatement.executeUpdate();
 
-			connection.commit();
-		} finally {
-			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
-			} finally {
-				if (connection != null)
-					connection.close();
-			}
+			//connection.commit();
+		} catch(SQLException e) {
+			e.printStackTrace();
 		}
 
 	}
 
 	@Override
 	public void doUpdate(int quantità, int cod) throws SQLException {
-		Connection connection = null;
+		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
 		String updateSQL = "UPDATE Magazzino SET quantità = ? where COD = ?";
-		connection = ds.getConnection();
+		//connection = ds.getConnection();
 		preparedStatement = connection.prepareStatement(updateSQL);
 
 		try {
@@ -151,20 +138,14 @@ private DataSource ds = null;
 			
 			 preparedStatement.executeUpdate();
 		}
-		finally {
-			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
-			} finally {
-				if (connection != null)
-					connection.close();
-			}
+		catch(SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
 	@Override
 	public synchronized boolean doDelete(int cod) throws SQLException {
-		Connection connection = null;
+		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		int result = 0;
@@ -172,20 +153,14 @@ private DataSource ds = null;
 		String deleteSQL = "DELETE FROM Magazzino WHERE COD = ?";
 
 		try {
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(deleteSQL);
 			preparedStatement.setInt(1, cod);
 
 			result = preparedStatement.executeUpdate();
 
-		} finally {
-			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
-			} finally {
-				if (connection != null)
-					connection.close();
-			}
+		} catch(SQLException e) {
+			e.printStackTrace();
 		}
 		return (result != 0);
 	}

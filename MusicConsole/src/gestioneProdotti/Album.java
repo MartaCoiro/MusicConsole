@@ -129,13 +129,78 @@ public class Album implements Serializable {
 	}
 
 	@Override
-	public String toString() {
-		return "Album(" + codiceAlbum + "):" + nomeAlbum + " " + " " + imgAlbum + " " + nartista;
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((codiceAlbum == null) ? 0 : codiceAlbum.hashCode());
+		result = prime * result + ((dat == null) ? 0 : dat.hashCode());
+		result = prime * result + ((dataa == null) ? 0 : dataa.hashCode());
+		result = prime * result + ((descrizione == null) ? 0 : descrizione.hashCode());
+		result = prime * result + ((imgAlbum == null) ? 0 : imgAlbum.hashCode());
+		result = prime * result + ((nartista == null) ? 0 : nartista.hashCode());
+		result = prime * result + ((nomeAlbum == null) ? 0 : nomeAlbum.hashCode());
+		result = prime * result + Float.floatToIntBits(prezzoC);
+		result = prime * result + Float.floatToIntBits(prezzoS);
+		result = prime * result + Float.floatToIntBits(prezzoV);
+		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
+		return result;
 	}
-	
-	@Override  //ci dice se ci sono errori
-	public boolean equals(Object other) { //restituisce true se vero
-		return this.getNomeAlbum() == ((Album) other).getNomeAlbum();
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!(obj instanceof Album))
+			return false;
+		Album other = (Album) obj;
+		if (codiceAlbum == null) {
+			if (other.codiceAlbum != null)
+				return false;
+		} else if (!codiceAlbum.equals(other.codiceAlbum))
+			return false;
+		if (dat == null) {
+			if (other.dat != null)
+				return false;
+		} else if (!dat.equals(other.dat))
+			return false;
+		if (dataa == null) {
+			if (other.dataa != null)
+				return false;
+		} else if (!dataa.equals(other.dataa))
+			return false;
+		if (descrizione == null) {
+			if (other.descrizione != null)
+				return false;
+		} else if (!descrizione.equals(other.descrizione))
+			return false;
+		if (imgAlbum == null) {
+			if (other.imgAlbum != null)
+				return false;
+		} else if (!imgAlbum.equals(other.imgAlbum))
+			return false;
+		if (nartista == null) {
+			if (other.nartista != null)
+				return false;
+		} else if (!nartista.equals(other.nartista))
+			return false;
+		if (nomeAlbum == null) {
+			if (other.nomeAlbum != null)
+				return false;
+		} else if (!nomeAlbum.equals(other.nomeAlbum))
+			return false;
+		if (Float.floatToIntBits(prezzoC) != Float.floatToIntBits(other.prezzoC))
+			return false;
+		if (Float.floatToIntBits(prezzoS) != Float.floatToIntBits(other.prezzoS))
+			return false;
+		if (Float.floatToIntBits(prezzoV) != Float.floatToIntBits(other.prezzoV))
+			return false;
+		if (tipo == null) {
+			if (other.tipo != null)
+				return false;
+		} else if (!tipo.equals(other.tipo))
+			return false;
+		return true;
 	}
+
 	
 }

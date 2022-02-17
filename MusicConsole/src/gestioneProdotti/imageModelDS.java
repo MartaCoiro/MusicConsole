@@ -14,16 +14,21 @@ import it.unisa.utils.Utility;
 public class imageModelDS implements ProductModelImage<image> {
 
 		/*private DataSource ds;*/
-		private DataSource ds = null;
+		//private DataSource ds = null;
+		private Connection connection;
 		
-		public imageModelDS(DataSource ds) {
+		/*public imageModelDS(DataSource ds) {
 			this.ds = ds;
-			/*System.out.println(ds);*/
+			/*System.out.println(ds);
+		}*/
+		
+		public imageModelDS(Connection connection) {
+			this.connection = connection;
 		}
 		
 		@Override
 		public Collection<image> doRetrieveAll() throws SQLException {
-			Connection connection = null;
+			//Connection connection = null;
 			PreparedStatement preparedStatement = null;
 			
 			String selectSQL = "SELECT * FROM  image";
@@ -35,7 +40,7 @@ public class imageModelDS implements ProductModelImage<image> {
 			Collection<image> im = new LinkedList<image>();
 			
 			try {
-				connection = ds.getConnection(); //recupero connessione dal data source
+				//connection = ds.getConnection(); //recupero connessione dal data source
 				preparedStatement = connection.prepareStatement(selectSQL);
 				
 				Utility.print("doRetrieveAll: " + preparedStatement.toString());
@@ -49,14 +54,8 @@ public class imageModelDS implements ProductModelImage<image> {
 					
 					im.add(bean);
 				}
-			} finally {
-				try {
-				if(preparedStatement != null)
-					preparedStatement.close();
-				}finally {
-				if(connection != null)
-					connection.close();
-				}
+			} catch(SQLException e) {
+				e.printStackTrace();
 			}
 			return im;
 		}
@@ -64,7 +63,7 @@ public class imageModelDS implements ProductModelImage<image> {
 		@Override
 		public image doRetrieveByKey(String parola) throws SQLException {
 			
-			Connection connection = null;
+			//Connection connection = null;
 			PreparedStatement preparedStatement = null;
 
 			image bean = new image();
@@ -72,7 +71,7 @@ public class imageModelDS implements ProductModelImage<image> {
 			String selectSQL = " SELECT * FROM  image  WHERE IMAGEFILENAME = ? ";
 			
 			try {
-				connection = ds.getConnection();
+				//connection = ds.getConnection();
 				preparedStatement = connection.prepareStatement(selectSQL);
 				preparedStatement.setString(1, parola);
 
@@ -83,14 +82,9 @@ public class imageModelDS implements ProductModelImage<image> {
 					bean.setImageFileName(rs.getString("imageFileName"));
 				}
 
-			} finally {
-				try {
-					if (preparedStatement != null)
-						preparedStatement.close();
-				} finally {
-					if (connection != null)
-						connection.close();
-				}
+			} catch(SQLException e) {
+				e.printStackTrace();
+			
 			}
 			return bean;
 			}
@@ -98,15 +92,15 @@ public class imageModelDS implements ProductModelImage<image> {
 		
 		@Override
 		public void doSave(image item) throws SQLException {
-			Connection connection = null;
+			//Connection connection = null;
 			PreparedStatement preparedStatement = null;
 
 			String insertSQL = "INSERT INTO image (IMAGEID, IMAGEFILENAME) VALUES (?, ?)";
 
 			try {
-				connection = ds.getConnection();
+				//connection = ds.getConnection();
 				
-				connection.setAutoCommit(false);
+				//connection.setAutoCommit(false);
 				
 				preparedStatement = connection.prepareStatement(insertSQL);
 				preparedStatement.setInt(1, item.getImageId());
@@ -114,15 +108,9 @@ public class imageModelDS implements ProductModelImage<image> {
 
 				preparedStatement.executeUpdate();
 
-				connection.commit();
-			} finally {
-				try {
-					if (preparedStatement != null)
-						preparedStatement.close();
-				} finally {
-					if (connection != null)
-						connection.close();
-				}
+				//connection.commit();
+			} catch(SQLException e) {
+				e.printStackTrace();
 			}
 
 		}
@@ -135,7 +123,7 @@ public class imageModelDS implements ProductModelImage<image> {
 
 		@Override
 		public synchronized boolean doDelete(int code) throws SQLException {
-			Connection connection = null;
+			//Connection connection = null;
 			PreparedStatement preparedStatement = null;
 
 			int result = 0;
@@ -143,20 +131,15 @@ public class imageModelDS implements ProductModelImage<image> {
 			String deleteSQL = "DELETE FROM image WHERE IMAGEID = ?";
 
 			try {
-				connection = ds.getConnection();
+				//connection = ds.getConnection();
 				preparedStatement = connection.prepareStatement(deleteSQL);
 				preparedStatement.setInt(1, code);
 
 				result = preparedStatement.executeUpdate();
 
-			} finally {
-				try {
-					if (preparedStatement != null)
-						preparedStatement.close();
-				} finally {
-					if (connection != null)
-						connection.close();
-				}
+			} catch(SQLException e) {
+				e.printStackTrace();
+		
 			}
 			return (result != 0);
 		}

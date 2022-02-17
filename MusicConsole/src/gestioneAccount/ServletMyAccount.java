@@ -2,6 +2,7 @@ package gestioneAccount;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Iterator;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
+import it.unisa.utils.DBConnectionPool;
 import it.unisa.utils.PasswordHasher;
 import it.unisa.utils.Utility;
 
@@ -31,14 +33,19 @@ public class ServletMyAccount extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-		
-		DataSource ds = (DataSource)getServletContext().getAttribute("DataSource");
+		Connection ds = null;
+		try {
+			ds = DBConnectionPool.getConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		//DataSource ds = (DataSource)getServletContext().getAttribute("DataSource");
 		
 		ProfiloModelDS model1 = new ProfiloModelDS(ds);
 		AccountModelDS model = new AccountModelDS(ds);
 		
 		response.setContentType("text/html");//tipo di file
-		
+		 
 		String ele1 = request.getParameter("nome");
 		String ele2 = request.getParameter("cognome");
 		String ele3 = request.getParameter("email");
@@ -56,7 +63,7 @@ public class ServletMyAccount extends HttpServlet {
 			String pa = PasswordHasher.scramble(p.getPassword());
 			AccountUtente pr = model.doRetrieveByKey(p.getUsername(),pa);
 			
-			if(!ele1.equals(p.getNome())){
+			if(!ele1.equals(p.getNome())){ 
 				p.setNome(ele1);
 				model1.doUpdate("nome", ele1, profil.getUsername());
 			}
@@ -86,7 +93,7 @@ public class ServletMyAccount extends HttpServlet {
 				model1.doUpdate("password", ele8, profil.getUsername());
 				//cripto la sua password
 				String npas = PasswordHasher.scramble(ele8);
-				model.doUpdate("password", npas, pr.getNickname());
+				model.doUpdate(npas, pr.getNickname());
 			}
 		
 			getServletContext().getRequestDispatcher("/MyAccount.jsp").forward(request, response); //reindiriziamo alla view		

@@ -6,6 +6,7 @@ import java.security.GeneralSecurityException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -27,6 +28,7 @@ import javax.sql.DataSource;
 
 import com.mysql.cj.util.Base64Decoder;
 
+import it.unisa.utils.DBConnectionPool;
 import it.unisa.utils.PasswordHasher;
 import it.unisa.utils.Utility;
 import gestioneCarrello.Carrello;
@@ -47,7 +49,7 @@ import gestioneProdotti.PodcastModelDS;
 @WebServlet("/select")
 public class SelectUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doPost(request, response);
@@ -57,7 +59,13 @@ public class SelectUser extends HttpServlet {
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();//stampa solo caratteri
 		
-		DataSource ds = (DataSource)getServletContext().getAttribute("DataSource");
+		//DataSource ds = (DataSource)getServletContext().getAttribute("DataSource");
+		Connection ds = null;
+		try {
+			ds = DBConnectionPool.getConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 		ProfiloModelDS model1 = new ProfiloModelDS(ds);
 		AccountModelDS model = new AccountModelDS(ds);
@@ -93,6 +101,7 @@ public class SelectUser extends HttpServlet {
 			}
 		else {
 			Collection<AccountUtente> au =  model.doRetrieveAll();
+
 			 for(Iterator<AccountUtente> aa = au.iterator();aa.hasNext();) {
 				 AccountUtente el = (AccountUtente)aa.next();
 				//criptiamo la password inserita per controllare se è giusta
@@ -101,7 +110,7 @@ public class SelectUser extends HttpServlet {
 			   String pass = el.getPassword();//STRINGA RECUPERATA DAL DB
 					
 			   if((pass.equals(cryptedPasI))&&(el.getNickname().equals(name))) {
-						
+					System.out.println("ok");
 								 currentSession.setMaxInactiveInterval(60*60);
 								 currentSession.setAttribute("acc", name);
 								 currentSession.setAttribute("p", pr);

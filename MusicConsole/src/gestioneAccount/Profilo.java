@@ -114,14 +114,74 @@ public class Profilo implements Serializable {
 		public void print() {
 			System.out.printf("%20s | %20s | %20s | %20s | %10s | %20s | %20s | %20s \n", nome,cognome,citta,indirizzo,telefono,email,username,password);
 		}
-		
+
 		@Override
-		public String toString() {
-			return nome + "," +  cognome + "," + citta + "," + indirizzo + "," + telefono + "," + email + "," + username + "," + password;
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + ((citta == null) ? 0 : citta.hashCode());
+			result = prime * result + ((cognome == null) ? 0 : cognome.hashCode());
+			result = prime * result + ((email == null) ? 0 : email.hashCode());
+			result = prime * result + id;
+			result = prime * result + ((indirizzo == null) ? 0 : indirizzo.hashCode());
+			result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+			result = prime * result + ((password == null) ? 0 : password.hashCode());
+			result = prime * result + ((telefono == null) ? 0 : telefono.hashCode());
+			result = prime * result + ((username == null) ? 0 : username.hashCode());
+			return result;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (!(obj instanceof Profilo))
+				return false;
+			Profilo other = (Profilo) obj;
+			if (citta == null) {
+				if (other.citta != null)
+					return false;
+			} else if (!citta.equals(other.citta))
+				return false;
+			if (cognome == null) {
+				if (other.cognome != null)
+					return false;
+			} else if (!cognome.equals(other.cognome))
+				return false;
+			if (email == null) {
+				if (other.email != null)
+					return false;
+			} else if (!email.equals(other.email))
+				return false;
+			if (id != other.id)
+				return false;
+			if (indirizzo == null) {
+				if (other.indirizzo != null)
+					return false;
+			} else if (!indirizzo.equals(other.indirizzo))
+				return false;
+			if (nome == null) {
+				if (other.nome != null)
+					return false;
+			} else if (!nome.equals(other.nome))
+				return false;
+			if (password == null) {
+				if (other.password != null)
+					return false;
+			} else if (!password.equals(other.password))
+				return false;
+			if (telefono == null) {
+				if (other.telefono != null)
+					return false;
+			} else if (!telefono.equals(other.telefono))
+				return false;
+			if (username == null) {
+				if (other.username != null)
+					return false;
+			} else if (!username.equals(other.username))
+				return false;
+			return true;
 		}
 		
-		@Override  //ci dice se ci sono errori
-		public boolean equals(Object other) { //restituisce true se vero
-			return this.getNome() == ((Profilo) other).getNome();
-		}
+		
 }

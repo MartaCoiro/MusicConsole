@@ -1,6 +1,7 @@
 package gestioneCarrello;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -24,6 +25,7 @@ import gestioneAcquisti.Ordini;
 import gestioneAcquisti.OrdiniModelDS;
 import gestioneProdotti.Magazzino;
 import gestioneProdotti.MagazzinoModelDS;
+import it.unisa.utils.DBConnectionPool;
 import it.unisa.utils.Utility;
 
 @WebServlet("/ServletSped")
@@ -39,7 +41,14 @@ public class ServletSped extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
-		DataSource ds = (DataSource)getServletContext().getAttribute("DataSource");
+		//DataSource ds = (DataSource)getServletContext().getAttribute("DataSource");
+		
+		Connection ds=null;
+		try {
+			ds=DBConnectionPool.getConnection();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
 		
 		response.setContentType("text/html");//tipo di file
 		

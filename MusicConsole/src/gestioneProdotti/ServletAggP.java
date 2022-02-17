@@ -2,6 +2,7 @@ package gestioneProdotti;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import javax.sql.DataSource;
 
+import it.unisa.utils.DBConnectionPool;
 import it.unisa.utils.Utility;
 
 @MultipartConfig
@@ -32,7 +34,14 @@ public class ServletAggP extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
-		DataSource ds = (DataSource)getServletContext().getAttribute("DataSource");
+		//DataSource ds = (DataSource)getServletContext().getAttribute("DataSource");
+		
+		Connection ds=null;
+		try {
+			ds=DBConnectionPool.getConnection();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
 		
 		response.setContentType("text/html");//tipo di file
 		

@@ -1,6 +1,7 @@
 package gestioneCarrello;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -19,6 +20,7 @@ import org.json.JSONArray;
 import gestioneProdotti.Magazzino;
 import gestioneProdotti.MagazzinoModelDS;
 import gestioneProdotti.Playlist;
+import it.unisa.utils.DBConnectionPool;
 import it.unisa.utils.Utility;
 
 
@@ -35,8 +37,13 @@ public class ServletElimina extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 	
-		DataSource ds = (DataSource)getServletContext().getAttribute("DataSource");
-	
+		//DataSource ds = (DataSource)getServletContext().getAttribute("DataSource");
+		Connection ds = null;
+		try {
+			ds = DBConnectionPool.getConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		String codprod = request.getParameter("codprod");
 		Integer cod = Integer.parseInt(codprod);
 		

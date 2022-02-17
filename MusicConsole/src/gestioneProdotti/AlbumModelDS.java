@@ -15,15 +15,16 @@ import it.unisa.utils.Utility;
 
 public class AlbumModelDS implements ProductModelAlbum<Album> {
 
-	private DataSource ds = null;
+	//private DataSource ds = null;
+	private Connection connection;
 	
-	public AlbumModelDS(DataSource ds) {
-		this.ds = ds;
+	public AlbumModelDS(Connection connection) {
+		this.connection = connection;
 	}
 	
 	@Override
 	public Collection<Album> doRetrieveAll() throws SQLException {
-		Connection connection = null;
+		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
 		String selectSQL = "SELECT * FROM  Album";
@@ -31,7 +32,7 @@ public class AlbumModelDS implements ProductModelAlbum<Album> {
 		Collection<Album> al = new LinkedList<Album>();
 		
 		try {
-			connection = ds.getConnection(); //recupero connessione dal data source
+			//connection = ds.getConnection(); //recupero connessione dal data source
 			preparedStatement = connection.prepareStatement(selectSQL);
 			
 			Utility.print("doRetrieveAll: " + preparedStatement.toString());
@@ -53,14 +54,8 @@ public class AlbumModelDS implements ProductModelAlbum<Album> {
 				
 				al.add(bean);
 			}
-		} finally {
-			try {
-			if(preparedStatement != null)
-				preparedStatement.close();
-			}finally {
-			if(connection != null)
-				connection.close();
-			}
+		} catch(SQLException e){
+			e.printStackTrace();
 		}
 		return al;
 	}
@@ -68,7 +63,7 @@ public class AlbumModelDS implements ProductModelAlbum<Album> {
 	@Override
 	public Album doRetrieveByKey(String nome, String artista) throws SQLException {
 		
-		Connection connection = null;
+		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
 		String selectSQL = " SELECT * FROM  Album  WHERE NOMEALBUM = ? AND NARTISTA = ? ";
@@ -76,7 +71,7 @@ public class AlbumModelDS implements ProductModelAlbum<Album> {
 		Album bean = new Album();
 		
 		try {
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 			preparedStatement.setString(1, nome);
 			preparedStatement.setString(2, artista);
@@ -102,14 +97,8 @@ public class AlbumModelDS implements ProductModelAlbum<Album> {
 			}
 			
 
-		} finally {
-			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
-			} finally {
-				if (connection != null)
-					connection.close();
-			}
+		} catch(SQLException e){
+			e.printStackTrace();
 		}
 		return bean;
 		}
@@ -117,15 +106,15 @@ public class AlbumModelDS implements ProductModelAlbum<Album> {
 	
 	@Override
 	public void doSave(Album item) throws SQLException {
-		Connection connection = null;
+		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		String insertSQL = "INSERT INTO Album (CODICEALBUM, NOMEALBUM, IMGALBUM, nArtista, TIPO, DATAA, DESCRIZIONE, PREZZOS, PREZZOV, PREZZOC) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try {
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
 			
-			connection.setAutoCommit(false);
+			//connection.setAutoCommit(false);
 			
 			preparedStatement = connection.prepareStatement(insertSQL);
 			preparedStatement.setInt(1, item.getCodiceAlbum());
@@ -141,55 +130,49 @@ public class AlbumModelDS implements ProductModelAlbum<Album> {
 
 			preparedStatement.executeUpdate();
 
-			connection.commit();
-		} finally {
-			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
-			} finally {
-				if (connection != null)
-					connection.close();
-			}
+			//connection.commit();
+		} catch(SQLException e){
+			e.printStackTrace();
 		}
 
 	}
 
 	@Override
 		public void doUpdate(String p1, String p2, Integer p3) throws SQLException {
-			Connection connection = null;
+			//Connection connection = null;
 			PreparedStatement preparedStatement = null;
 			
 			if(p1.equals("nome")) {
 			String updateSQL = "UPDATE Album SET NOMEALBUM=? where CODICEALBUM = ?";
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(updateSQL);
 			}else if(p1.equals("artista")) {
 				String updateSQL = "UPDATE Album SET NARTISTA=? where CODICEALBUM = ?";
-				connection = ds.getConnection();
+				//connection = ds.getConnection();
 				preparedStatement = connection.prepareStatement(updateSQL);
 			}else if(p1.equals("img")) {
 				String updateSQL = "UPDATE Album SET IMGALBUM=? where CODICEALBUM = ?";
-				connection = ds.getConnection();
+				//connection = ds.getConnection();
 				preparedStatement = connection.prepareStatement(updateSQL);
 			}else if(p1.equals("tipo")) {
 				String updateSQL = "UPDATE Album SET TIPO=? where CODICEALBUM = ?";
-				connection = ds.getConnection();
+				//connection = ds.getConnection();
 				preparedStatement = connection.prepareStatement(updateSQL);
 			}else if(p1.equals("prezzoS")) {
 				String updateSQL = "UPDATE Album SET PREZZOS=? where CODICEALBUM = ?";
-				connection = ds.getConnection();
+				//connection = ds.getConnection();
 				preparedStatement = connection.prepareStatement(updateSQL);
 			}else if(p1.equals("prezzoV")) {
 				String updateSQL = "UPDATE Album SET PREZZOV=? where CODICEALBUM = ?";
-				connection = ds.getConnection();
+				//connection = ds.getConnection();
 				preparedStatement = connection.prepareStatement(updateSQL);
 			}else if(p1.equals("prezzoC")) {
 				String updateSQL = "UPDATE Album SET PREZZOC=? where CODICEALBUM = ?";
-				connection = ds.getConnection();
+				//connection = ds.getConnection();
 				preparedStatement = connection.prepareStatement(updateSQL);
 			}else if(p1.equals("descrizione")) {
 				String updateSQL = "UPDATE Album SET DESCRIZIONE=? where CODICEALBUM = ?";
-				connection = ds.getConnection();
+				//connection = ds.getConnection();
 				preparedStatement = connection.prepareStatement(updateSQL);
 			}
 			try {
@@ -199,33 +182,27 @@ public class AlbumModelDS implements ProductModelAlbum<Album> {
 				
 				 preparedStatement.executeUpdate();
 			}
-			finally {
-				try {
-					if (preparedStatement != null)
-						preparedStatement.close();
-				} finally {
-					if (connection != null)
-						connection.close();
-				}
+			catch(SQLException e){
+				e.printStackTrace();
 			}
 		}
 
 	@Override
 	public void doUpdatePrezzo(String p1, Float p2, Integer p3) throws SQLException {
-		Connection connection = null;
+		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
 		if(p1.equals("prezzoS")) {
 			String updateSQL = "UPDATE Album SET PREZZOS=? where CODICEALBUM = ?";
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(updateSQL);
 		}else if(p1.equals("prezzoV")) {
 			String updateSQL = "UPDATE Album SET PREZZOV=? where CODICEALBUM = ?";
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(updateSQL);
 		}else if(p1.equals("prezzoC")) {
 			String updateSQL = "UPDATE Album SET PREZZOC=? where CODICEALBUM = ?";
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(updateSQL);
 		}
 		try {
@@ -235,20 +212,14 @@ public class AlbumModelDS implements ProductModelAlbum<Album> {
 			
 			 preparedStatement.executeUpdate();
 		}
-		finally {
-			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
-			} finally {
-				if (connection != null)
-					connection.close();
-			}
+		catch(SQLException e){
+			e.printStackTrace();
 		}
 	}
 
 	@Override
 	public synchronized boolean doDelete(int code) throws SQLException {
-		Connection connection = null;
+		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		int result = 0;
@@ -256,20 +227,14 @@ public class AlbumModelDS implements ProductModelAlbum<Album> {
 		String deleteSQL = "DELETE FROM Album WHERE CODICEALBUM = ?";
 
 		try {
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(deleteSQL);
 			preparedStatement.setInt(1, code);
 
 			result = preparedStatement.executeUpdate();
 
-		} finally {
-			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
-			} finally {
-				if (connection != null)
-					connection.close();
-			}
+		} catch(SQLException e){
+			e.printStackTrace();
 		}
 		return (result != 0);
 	}

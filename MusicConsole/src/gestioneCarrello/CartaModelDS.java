@@ -15,15 +15,17 @@ import it.unisa.utils.Utility;
 
 public class CartaModelDS implements ProductModelCarta<Carta>{
 
-private DataSource ds = null;
+//private DataSource ds = null;
+
+private Connection connection;
 	
-	public CartaModelDS(DataSource ds) {
-		this.ds = ds;
+	public CartaModelDS(Connection connection) {
+		this.connection = connection;
 	}
 	
 	@Override
 	public Collection<Carta> doRetrieveAll() throws SQLException {
-		Connection connection = null;
+		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
 		String selectSQL = "SELECT * FROM  Carta";
@@ -31,7 +33,7 @@ private DataSource ds = null;
 		Collection<Carta> al = new LinkedList<Carta>();
 		
 		try {
-			connection = ds.getConnection(); //recupero connessione dal data source
+			//connection = ds.getConnection(); //recupero connessione dal data source
 			preparedStatement = connection.prepareStatement(selectSQL);
 			
 			Utility.print("doRetrieveAll: " + preparedStatement.toString());
@@ -48,14 +50,8 @@ private DataSource ds = null;
 				bean.setDataa(rs.getString("dataScadenza"));
 				al.add(bean);
 			}
-		} finally {
-			try {
-			if(preparedStatement != null)
-				preparedStatement.close();
-			}finally {
-			if(connection != null)
-				connection.close();
-			}
+		} catch(SQLException e){
+			e.printStackTrace();
 		}
 		return al;
 	}
@@ -63,7 +59,7 @@ private DataSource ds = null;
 	@Override
 	public Carta doRetrieveByKey(int cvv) throws SQLException {
 		
-		Connection connection = null;
+		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		//Carta bean;
@@ -72,7 +68,7 @@ private DataSource ds = null;
 		String selectSQL = " SELECT * FROM  Carta  WHERE CVV = ? ";
 		
 		try {
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 			preparedStatement.setInt(1, cvv);
 		
@@ -89,14 +85,8 @@ private DataSource ds = null;
 				bean.setDataa(rs.getString("dataScadenza"));
 			}
 
-		} finally {
-			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
-			} finally {
-				if (connection != null)
-					connection.close();
-			}
+		} catch(SQLException e){
+			e.printStackTrace();
 		}
 		return bean;
 		}
@@ -104,15 +94,15 @@ private DataSource ds = null;
 	
 	@Override
 	public void doSave(Carta item) throws SQLException {
-		Connection connection = null;
+		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		String insertSQL = "INSERT INTO Carta (UTENTE, CVV, NOME, COGNOME, NUMERO, DATASCADENZA) VALUES (?, ?, ?, ?, ?, ?)";
 
 		try {
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
 			
-			connection.setAutoCommit(false);
+			//connection.setAutoCommit(false);
 			
 			preparedStatement = connection.prepareStatement(insertSQL);
 			preparedStatement.setString(1, item.getUtente());
@@ -124,26 +114,20 @@ private DataSource ds = null;
 			
 			preparedStatement.executeUpdate();
 
-			connection.commit();
-		} finally {
-			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
-			} finally {
-				if (connection != null)
-					connection.close();
-			}
+			//connection.commit();
+		} catch(SQLException e){
+			e.printStackTrace();
 		}
 
 	}
 
 	@Override
 	public void doUpdate(String data, int cvv) throws SQLException {
-		Connection connection = null;
+		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		String updateSQL = "UPDATE Carta SET DATASCADENZA=? where CVV = ?";
-		connection = ds.getConnection();
+		//connection = ds.getConnection();
 		preparedStatement = connection.prepareStatement(updateSQL);
 		
 		try {
@@ -153,21 +137,15 @@ private DataSource ds = null;
 			
 			 preparedStatement.executeUpdate();
 		}
-		finally {
-			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
-			} finally {
-				if (connection != null)
-					connection.close();
-			}
+		catch(SQLException e){
+			e.printStackTrace();
 		}
 
 	}
 	
 	@Override
 	public synchronized boolean doDelete(int cvv) throws SQLException {
-		Connection connection = null;
+		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		int result = 0;
@@ -175,20 +153,14 @@ private DataSource ds = null;
 		String deleteSQL = "DELETE FROM Carta WHERE CVV = ?";
 
 		try {
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(deleteSQL);
 			preparedStatement.setInt(1, cvv);
 
 			result = preparedStatement.executeUpdate();
 
-		} finally {
-			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
-			} finally {
-				if (connection != null)
-					connection.close();
-			}
+		} catch(SQLException e){
+			e.printStackTrace();
 		}
 		return (result != 0);
 	}

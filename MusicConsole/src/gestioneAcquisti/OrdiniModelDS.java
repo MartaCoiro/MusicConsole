@@ -15,15 +15,19 @@ import it.unisa.utils.Utility;
 
 public class OrdiniModelDS implements ProductModelOrdini<Ordini> {
 
-private DataSource ds = null;
-	
-	public OrdiniModelDS(DataSource ds) {
+	private Connection connection;
+//private DataSource ds = null;
+	 
+	/*public OrdiniModelDS(DataSource ds) {
 		this.ds = ds;
+	}*/
+	public OrdiniModelDS(Connection connection) {
+		this.connection = connection;
 	}
-	
-	@Override
-	public Collection<Ordini> doRetrieveAll() throws SQLException {
-		Connection connection = null;
+	  
+@Override
+	public Collection<Ordini> doRetrieveAll() {
+		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
 		String selectSQL = "SELECT * FROM  Ordini";
@@ -31,7 +35,7 @@ private DataSource ds = null;
 		Collection<Ordini> br = new LinkedList<Ordini>();
 		
 		try {
-			connection = ds.getConnection(); //recupero connessione dal data source
+			//connection = ds.getConnection(); //recupero connessione dal data source
 			preparedStatement = connection.prepareStatement(selectSQL);
 			
 			Utility.print("doRetrieveAll: " + preparedStatement.toString());
@@ -54,21 +58,15 @@ private DataSource ds = null;
 				
 				br.add(bean);
 			}
-		} finally {
-			try {
-			if(preparedStatement != null)
-				preparedStatement.close();
-			}finally {
-			if(connection != null)
-				connection.close();
-			}
+		} catch(SQLException e) {
+			e.printStackTrace();
 		}
 		return br;
 	}
 
 	@Override
 	public Collection<Ordini> doRetrieveAllOrdinato() throws SQLException {
-		Connection connection = null;
+		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
 		String selectSQL = "SELECT * FROM  Ordini ORDER BY data DESC";
@@ -76,7 +74,7 @@ private DataSource ds = null;
 		Collection<Ordini> br = new LinkedList<Ordini>();
 		
 		try {
-			connection = ds.getConnection(); //recupero connessione dal data source
+			//connection = ds.getConnection(); //recupero connessione dal data source
 			preparedStatement = connection.prepareStatement(selectSQL);
 			
 			Utility.print("doRetrieveAllOrdinato: " + preparedStatement.toString());
@@ -99,31 +97,25 @@ private DataSource ds = null;
 				
 				br.add(bean);
 			}
-		} finally {
-			try {
-			if(preparedStatement != null)
-				preparedStatement.close();
-			}finally {
-			if(connection != null)
-				connection.close();
-			}
+		} catch(SQLException e) {
+			e.printStackTrace();
 		}
 		return br;
 	}
 	
 	@Override
-	public Collection<Ordini> doRetrieveByKey(String parola) throws SQLException {
+	public Collection<Ordini> doRetrieveByKey(String parola) {
 		
-		Connection connection = null;
+		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
 		Collection<Ordini> br = new LinkedList<Ordini>();
 		
 		
-		String selectSQL = " SELECT * FROM  Ordini  WHERE utente = ? ORDER BY data DESC";
+		String selectSQL = " SELECT * FROM  Ordini  WHERE UTENTE = ? ORDER BY data DESC";
 		
 		try {
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 			preparedStatement.setString(1, parola);
 
@@ -147,30 +139,24 @@ private DataSource ds = null;
 				br.add(bean);
 				}
 
-		} finally {
-			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
-			} finally {
-				if (connection != null)
-					connection.close();
-			}
+		} catch(SQLException e) {
+			e.printStackTrace();
 		}
 		return br;
 		}
 	
-	
+	 
 	@Override
-	public void doSave(Ordini item) throws SQLException {
-		Connection connection = null;
+	public void doSave(Ordini item) {
+		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		String insertSQL = "INSERT INTO Ordini (COD, UTENTE, DATA, INDICE, NOME, AUTORE, TIPO, COSTO, TOT, STATO, QUANTITà) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try {
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
 			
-			connection.setAutoCommit(false);
+			//connection.setAutoCommit(false);
 			
 			preparedStatement = connection.prepareStatement(insertSQL);
 			preparedStatement.setInt(1, item.getCod());
@@ -187,67 +173,49 @@ private DataSource ds = null;
 			
 			preparedStatement.executeUpdate();
 
-			connection.commit();
-		} finally {
-			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
-			} finally {
-				if (connection != null)
-					connection.close();
-			}
+			//connection.commit();
+		} catch(SQLException e) {
+			e.printStackTrace();
 		}
 		return;
 	}
 
 	@Override
 	public void doUpdate(String val, int ind) throws SQLException {
-		Connection connection = null;
+		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
 		String updateSQL = "UPDATE Ordini SET STATO = ? where INDICE = ?";
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(updateSQL);
 			try {
 				preparedStatement.setString(1, val);
 				preparedStatement.setInt(2, ind);
 				preparedStatement.executeUpdate();
 	}
-			finally {
-				try {
-					if (preparedStatement != null)
-						preparedStatement.close();
-				} finally {
-					if (connection != null)
-						connection.close();
+			catch(SQLException e) {
+				e.printStackTrace();
 			}
-		}
 }
 
 	@Override
-	public synchronized boolean doDelete(int code) throws SQLException {
-		Connection connection = null;
+	public synchronized boolean doDelete(int indice) throws SQLException {
+		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		int result = 0;
 
-		String deleteSQL = "DELETE FROM Ordini WHERE COD = ?";
+		String deleteSQL = "DELETE FROM Ordini WHERE INDICE = ?";
 
 		try {
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(deleteSQL);
-			preparedStatement.setInt(1, code);
+			preparedStatement.setInt(1, indice);
 
 			result = preparedStatement.executeUpdate();
 
-		} finally {
-			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
-			} finally {
-				if (connection != null)
-					connection.close();
-			}
+		} catch(SQLException e) {
+			e.printStackTrace();
 		}
 		return (result != 0);
 	}
@@ -255,14 +223,14 @@ private DataSource ds = null;
 	@Override
 	public Collection<Ordini> getIndici() throws SQLException {
 		
-		Connection connection = null;
+		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		String selectSQL = " SELECT indice FROM  Ordini ";
 		Collection<Ordini> br = new LinkedList<Ordini>();
 		
 		try {
-			connection = ds.getConnection();
+			//connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 
 			ResultSet rs = preparedStatement.executeQuery();
@@ -274,14 +242,8 @@ private DataSource ds = null;
 				br.add(bean);	
 			}
 
-		} finally {
-			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
-			} finally {
-				if (connection != null)
-					connection.close();
-			}
+		} catch(SQLException e) {
+			e.printStackTrace();
 		}
 		return br;
 		}
