@@ -6,6 +6,7 @@ import java.security.GeneralSecurityException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -27,6 +28,7 @@ import javax.sql.DataSource;
 
 import com.mysql.cj.util.Base64Decoder;
 
+import it.unisa.utils.DBConnectionPool;
 import it.unisa.utils.PasswordHasher;
 import it.unisa.utils.Utility;
 import gestioneCarrello.Carrello;
@@ -57,7 +59,13 @@ public class SelectUser extends HttpServlet {
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();//stampa solo caratteri
 		
-		DataSource ds = (DataSource)getServletContext().getAttribute("DataSource");
+		//DataSource ds = (DataSource)getServletContext().getAttribute("DataSource");
+		Connection ds = null;
+		try {
+			ds = DBConnectionPool.getConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 		ProfiloModelDS model1 = new ProfiloModelDS(ds);
 		AccountModelDS model = new AccountModelDS(ds);

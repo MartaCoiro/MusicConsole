@@ -9,6 +9,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.spec.InvalidKeySpecException;
+import java.sql.Connection;
 import java.sql.SQLException;
 
 import javax.crypto.spec.SecretKeySpec;
@@ -21,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
+import it.unisa.utils.DBConnectionPool;
 import it.unisa.utils.PasswordHasher;
 import it.unisa.utils.Utility;
 import java.util.ArrayList;
@@ -42,8 +44,13 @@ public class ServletReg extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException{
 		
-		DataSource ds = (DataSource)getServletContext().getAttribute("DataSource");
-		
+		//DataSource ds = (DataSource)getServletContext().getAttribute("DataSource");
+		Connection ds = null;
+		try {
+			ds = DBConnectionPool.getConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		AccountModelDS model = new AccountModelDS(ds);
 		ProfiloModelDS model1 = new ProfiloModelDS(ds);
 		
