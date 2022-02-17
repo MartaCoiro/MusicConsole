@@ -11,7 +11,7 @@ public interface ProductModel<T> { //voglio renderla generica e la definisco su 
 			
 			public boolean doSave(T item) throws SQLException;
 			
-			public void doUpdate(String p1, String p2, String p3) throws SQLException;
+			public void doUpdate(String p1, String p2) throws SQLException;
 
 			public boolean doDelete(String utente) throws SQLException;
 		}

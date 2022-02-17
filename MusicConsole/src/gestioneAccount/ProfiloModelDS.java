@@ -21,7 +21,7 @@ public class ProfiloModelDS implements ProductModelProfilo<Profilo> {
 	public ProfiloModelDS(Connection connection) {
 		this.connection = connection;
 	}
-	
+	 
 	@Override
 	public Collection<Profilo> doRetrieveAll() throws SQLException {
 		//Connection connection = null;
@@ -60,13 +60,13 @@ public class ProfiloModelDS implements ProductModelProfilo<Profilo> {
 	}
 
 	@Override
-	public Profilo doRetrieveByKey(String nome) throws SQLException {
+	public Profilo doRetrieveByKey(String nome) {
 		
 		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		//Profilo bean;
-		Profilo bean = new Profilo();
+		Profilo bean = null;
 		
 		String selectSQL = " SELECT * FROM  profilo  WHERE USERNAME = ? ";
 		
@@ -78,6 +78,7 @@ public class ProfiloModelDS implements ProductModelProfilo<Profilo> {
 			ResultSet rs = preparedStatement.executeQuery();
 			
 			while (rs.next()) {
+				 bean = new Profilo();
 				bean.setId(rs.getInt("id"));
 				bean.setNome(rs.getString("nome"));
 				bean.setCognome(rs.getString("cognome"));
@@ -100,7 +101,7 @@ public class ProfiloModelDS implements ProductModelProfilo<Profilo> {
 	
 	
 	@Override
-	public void doSave(Profilo item) throws SQLException {
+	public boolean doSave(Profilo item)  {
 		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -129,14 +130,16 @@ public class ProfiloModelDS implements ProductModelProfilo<Profilo> {
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
-
+		return true;
 	}
 
-	@Override
-	public void doUpdate(String p1, String p2, String p3) throws SQLException {
+@Override
+	public boolean doUpdate(String p1, String p2, String p3)  {
 		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
+		try {
+			
 		if(p1.equals("nome")) {
 		String updateSQL = "UPDATE profilo SET NOME=? where USERNAME=?";
 		//connection = ds.getConnection();
@@ -170,22 +173,26 @@ public class ProfiloModelDS implements ProductModelProfilo<Profilo> {
 			//connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(updateSQL);
 		}
-		try {
-			
+		
 			preparedStatement.setString(1, p2);
 			preparedStatement.setString(2, p3);
 			
 			/*Utility.print("doUpdate: " + preparedStatement.toString());*/
+			if (preparedStatement.executeUpdate()==0) {
+				return false;
+			}
 			
 			 preparedStatement.executeUpdate();
+			 return true;
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
 		}
+		return false;
 	}
 
 	@Override
-	public synchronized boolean doDelete(int code) throws SQLException {
+	public synchronized boolean doDelete(int code)  {
 		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 

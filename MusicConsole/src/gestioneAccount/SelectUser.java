@@ -49,7 +49,7 @@ import gestioneProdotti.PodcastModelDS;
 @WebServlet("/select")
 public class SelectUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doPost(request, response);
@@ -101,6 +101,7 @@ public class SelectUser extends HttpServlet {
 			}
 		else {
 			Collection<AccountUtente> au =  model.doRetrieveAll();
+
 			 for(Iterator<AccountUtente> aa = au.iterator();aa.hasNext();) {
 				 AccountUtente el = (AccountUtente)aa.next();
 				//criptiamo la password inserita per controllare se è giusta
@@ -109,7 +110,7 @@ public class SelectUser extends HttpServlet {
 			   String pass = el.getPassword();//STRINGA RECUPERATA DAL DB
 					
 			   if((pass.equals(cryptedPasI))&&(el.getNickname().equals(name))) {
-						
+					System.out.println("ok");
 								 currentSession.setMaxInactiveInterval(60*60);
 								 currentSession.setAttribute("acc", name);
 								 currentSession.setAttribute("p", pr);

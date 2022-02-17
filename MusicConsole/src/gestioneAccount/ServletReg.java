@@ -35,7 +35,7 @@ import java.util.List;
 @WebServlet("/ServletReg")
 public class ServletReg extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doPost(request, response);
@@ -55,7 +55,7 @@ public class ServletReg extends HttpServlet {
 		ProfiloModelDS model1 = new ProfiloModelDS(ds);
 		
 		response.setContentType("text/html");//tipo di file
-		 
+		  
 		String encryptedPassword;
 		
 		//prendo i valori passati
@@ -77,15 +77,12 @@ public class ServletReg extends HttpServlet {
 		
 		account.setNickname(name);
        
-		try {
+		//try {
 			//criptiamo la password
 				encryptedPassword = PasswordHasher.scramble(p);
 				account.setPassword(encryptedPassword);
 				 
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		//}
 		
 		 //account = new AccountUtente(name,encryptedPassword);
 
@@ -99,7 +96,7 @@ public class ServletReg extends HttpServlet {
 		pro.setUsername(name);
 		pro.setPassword(p);
 		
-	try {
+	//try {
 		
 		/*
 		//criptiamo la password
@@ -117,23 +114,20 @@ public class ServletReg extends HttpServlet {
 		currentSession.setMaxInactiveInterval(60*60);
 		currentSession.setAttribute("p", pro);
 		currentSession.setAttribute("nome", name);
-			/*request.setAttribute("p", profil);*/
 			
-			
-			AccountUtente m =model.doRetrieveByKey(name,p); 
-			String k=m.getNickname();
-				boolean val = model.doSave(account);//controlla se quell'utente è presente o meno, se non presente entra
-				if(val==true) {
+			if(model.doRetrieveByKey(name,encryptedPassword)==null) {
+				model.doSave(account);//controlla se quell'utente è presente o meno, se non presente entra
 				model1.doSave(pro);
 				getServletContext().getRequestDispatcher("/login.jsp").forward(request, response); //reindiriziamo alla view		
+				return;
+			}
+				else {
+					request.setAttribute("presente", true);
+					getServletContext().getRequestDispatcher("/registrazione.jsp").forward(request, response); //reindiriziamo alla view
+					return;	
 				}
-			}
-			 catch(SQLException e){ //se invece l'utente è presente
-			Utility.print(e);
-			request.setAttribute("presente", true);
-			getServletContext().getRequestDispatcher("/registrazione.jsp").forward(request, response); //reindiriziamo alla view
-			request.setAttribute("error", e.getMessage());
-			}
+			
+	//}
 		}
 }
 		

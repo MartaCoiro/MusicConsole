@@ -47,8 +47,8 @@ public class AccountModelDS implements ProductModel<AccountUtente> {
 				
 				ResultSet rs = preparedStatement.executeQuery();	
 				
-				if(!rs.next())
-					return null;
+				/*if(!rs.next())
+					return null;*/
 			
 				while(rs.next()) {
 					AccountUtente bean = new AccountUtente();
@@ -62,7 +62,7 @@ public class AccountModelDS implements ProductModel<AccountUtente> {
 			}
 			return account;
 		}
-
+ 
 
 		public AccountUtente doRetrieveByKey(String utente, String pass) {
 			
@@ -70,9 +70,9 @@ public class AccountModelDS implements ProductModel<AccountUtente> {
 			PreparedStatement preparedStatement = null;
 
 			AccountUtente bean = null;
-			
+			 
 			String selectSQL = " SELECT * FROM  AccountUtente  WHERE NICKNAME = ? AND PASSWORD = ? ";
-			
+			 
 			try {
 				//connection = ds.getConnection();
 				preparedStatement = connection.prepareStatement(selectSQL);
@@ -94,7 +94,7 @@ public class AccountModelDS implements ProductModel<AccountUtente> {
 			}
 		
 		
-		public boolean doSave(AccountUtente item)throws SQLException  {
+		public boolean doSave(AccountUtente item)  {
 			//Connection connection = null;
 			PreparedStatement preparedStatement = null;
 
@@ -117,26 +117,28 @@ public class AccountModelDS implements ProductModel<AccountUtente> {
 			}
 			return true;
 		}
+ 
 
-
-		public void doUpdate(String p1, String p2, String p3) throws SQLException {
+		public void doUpdate(String p1, String p2) throws SQLException  {
 			//Connection connection = null;
 			PreparedStatement preparedStatement = null;
 			
-			if(p1.equals("password")) {
+			//if(p1.equals("password")) {
 			String updateSQL = "UPDATE accountutente SET PASSWORD=? where NICKNAME=?";
 			//connection = ds.getConnection();
-			preparedStatement = connection.prepareStatement(updateSQL);
-			}else if(p1.equals("nickname")) {
+			
+				preparedStatement = connection.prepareStatement(updateSQL);
+			
+			/*}else if(p1.equals("nickname")) {
 				String updateSQL = "UPDATE accountutente SET NICKNAME=? where NICKNAME=?";
 				//connection = ds.getConnection();
 				preparedStatement = connection.prepareStatement(updateSQL);
-			}
+			}*/
 			
 			try {
 				
-				preparedStatement.setString(1, p2);
-				preparedStatement.setString(2, p3);
+				preparedStatement.setString(1, p1);
+				preparedStatement.setString(2, p2);
 				
 				Utility.print("doUpdate: " + preparedStatement.toString());
 				
@@ -150,7 +152,7 @@ public class AccountModelDS implements ProductModel<AccountUtente> {
 
 		
 
-		public synchronized boolean doDelete(String utente) throws SQLException {
+		public synchronized boolean doDelete(String utente)  {
 			//Connection connection = null;
 			PreparedStatement preparedStatement = null;
 

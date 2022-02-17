@@ -29,7 +29,7 @@ public class Ordini {
 		this.tipo= tipo;
 		this.costo = costo;
 		this.tot = tot;
-		}
+		} 
 
 	public Ordini() {
 		quantità = 0;

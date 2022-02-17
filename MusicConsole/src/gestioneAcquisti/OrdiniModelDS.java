@@ -17,16 +17,16 @@ public class OrdiniModelDS implements ProductModelOrdini<Ordini> {
 
 	private Connection connection;
 //private DataSource ds = null;
-	
+	 
 	/*public OrdiniModelDS(DataSource ds) {
 		this.ds = ds;
 	}*/
 	public OrdiniModelDS(Connection connection) {
 		this.connection = connection;
 	}
-	
-	@Override
-	public Collection<Ordini> doRetrieveAll() throws SQLException {
+	  
+@Override
+	public Collection<Ordini> doRetrieveAll() {
 		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
@@ -104,7 +104,7 @@ public class OrdiniModelDS implements ProductModelOrdini<Ordini> {
 	}
 	
 	@Override
-	public Collection<Ordini> doRetrieveByKey(String parola) throws SQLException {
+	public Collection<Ordini> doRetrieveByKey(String parola) {
 		
 		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -112,7 +112,7 @@ public class OrdiniModelDS implements ProductModelOrdini<Ordini> {
 		Collection<Ordini> br = new LinkedList<Ordini>();
 		
 		
-		String selectSQL = " SELECT * FROM  Ordini  WHERE utente = ? ORDER BY data DESC";
+		String selectSQL = " SELECT * FROM  Ordini  WHERE UTENTE = ? ORDER BY data DESC";
 		
 		try {
 			//connection = ds.getConnection();
@@ -145,9 +145,9 @@ public class OrdiniModelDS implements ProductModelOrdini<Ordini> {
 		return br;
 		}
 	
-	
+	 
 	@Override
-	public void doSave(Ordini item) throws SQLException {
+	public void doSave(Ordini item) {
 		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -199,18 +199,18 @@ public class OrdiniModelDS implements ProductModelOrdini<Ordini> {
 }
 
 	@Override
-	public synchronized boolean doDelete(int code) throws SQLException {
+	public synchronized boolean doDelete(int indice) throws SQLException {
 		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		int result = 0;
 
-		String deleteSQL = "DELETE FROM Ordini WHERE COD = ?";
+		String deleteSQL = "DELETE FROM Ordini WHERE INDICE = ?";
 
 		try {
 			//connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(deleteSQL);
-			preparedStatement.setInt(1, code);
+			preparedStatement.setInt(1, indice);
 
 			result = preparedStatement.executeUpdate();
 

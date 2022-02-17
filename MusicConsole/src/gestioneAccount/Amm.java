@@ -10,16 +10,16 @@ public class Amm implements Serializable{
 		String utente;
 		String password;
 		
-		public Amm(String ruolo, String utente,String password) { 
-			this.ruolo = ruolo;
+		public Amm(String utente,String password,String ruolo) { 
 			this.utente = utente;
 			this.password = password;
+			this.ruolo = ruolo;
 			}
 		
 		public Amm() { 
-			ruolo = "";
 			utente = "";
 			password = "";
+			ruolo = "";
 			}
 		
 		
@@ -51,6 +51,11 @@ public class Amm implements Serializable{
 			System.out.printf("%10s | %8s \n", utente,password);
 		}
 
+		@Override
+		public String toString() {
+			return utente + " " +  password + " " + ruolo;
+		} 
+		
 		@Override
 		public int hashCode() {
 			final int prime = 31;

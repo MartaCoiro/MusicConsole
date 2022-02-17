@@ -45,7 +45,7 @@ public class ServletMyAccount extends HttpServlet {
 		AccountModelDS model = new AccountModelDS(ds);
 		
 		response.setContentType("text/html");//tipo di file
-		
+		 
 		String ele1 = request.getParameter("nome");
 		String ele2 = request.getParameter("cognome");
 		String ele3 = request.getParameter("email");
@@ -93,7 +93,7 @@ public class ServletMyAccount extends HttpServlet {
 				model1.doUpdate("password", ele8, profil.getUsername());
 				//cripto la sua password
 				String npas = PasswordHasher.scramble(ele8);
-				model.doUpdate("password", npas, pr.getNickname());
+				model.doUpdate(npas, pr.getNickname());
 			}
 		
 			getServletContext().getRequestDispatcher("/MyAccount.jsp").forward(request, response); //reindiriziamo alla view		

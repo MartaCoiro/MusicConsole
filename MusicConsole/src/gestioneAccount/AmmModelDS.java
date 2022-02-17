@@ -21,17 +21,17 @@ public class AmmModelDS implements ProductModelAmm<Amm> {
 	public AmmModelDS(Connection connection) {
 		this.connection = connection;
 	}
-	
+	 
 	@Override
-	public Collection<Amm> doRetrieveAll(String order) throws SQLException {
+	public Collection<Amm> doRetrieveAll() throws SQLException {
 		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
 		String selectSQL = "SELECT * FROM  Amm";
 		
-		if(order != null && !order.equals("")) {
+		/*if(order != null && !order.equals("")) {
 			selectSQL += " ORDER BY " + order;
-		}
+		}*/
 		
 		Collection<Amm> account = new LinkedList<Amm>();
 		
@@ -58,13 +58,13 @@ public class AmmModelDS implements ProductModelAmm<Amm> {
 	}
 
 	@Override
-	public Amm doRetrieveByKey(String utente, String pass) throws SQLException {
+	public Amm doRetrieveByKey(String utente, String pass) {
 		
 		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		//Amm bean;
-		Amm bean = new Amm();
+		Amm bean = null;
 		
 		String selectSQL = " SELECT * FROM  Amm  WHERE UTENTE = ? AND PASSWORD = ? ";
 		
@@ -77,8 +77,9 @@ public class AmmModelDS implements ProductModelAmm<Amm> {
 			ResultSet rs = preparedStatement.executeQuery();
 
 			//bean = new Amm(rs.getString("ruolo"),rs.getString("utente"),rs.getString("password"));
-			
+	  		
 			while (rs.next()) {
+				bean = new Amm();
 				bean.setUtente(rs.getString("utente"));
 				bean.setPassword(rs.getString("password"));
 				bean.setRuolo(rs.getString("ruolo"));
@@ -92,7 +93,7 @@ public class AmmModelDS implements ProductModelAmm<Amm> {
 	
 	
 	@Override
-	public void doSave(Amm item) throws SQLException {
+	public boolean doSave(Amm item) {
 		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -114,7 +115,7 @@ public class AmmModelDS implements ProductModelAmm<Amm> {
 		}  catch(SQLException e) {
 			e.printStackTrace();
 		}
-
+		return true;
 	}
 
 	@Override
@@ -124,13 +125,13 @@ public class AmmModelDS implements ProductModelAmm<Amm> {
 	}
 
 	@Override
-	public synchronized boolean doDelete(String nickname) throws SQLException {
+	public synchronized boolean doDelete(String nickname)  {
 		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		int result = 0;
 
-		String deleteSQL = "DELETE FROM Amm WHERE CODE = ?";
+		String deleteSQL = "DELETE FROM Amm WHERE UTENTE = ?";
 
 		try {
 			//connection = ds.getConnection();

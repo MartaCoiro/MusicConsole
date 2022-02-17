@@ -34,6 +34,7 @@ import gestioneAccount.AccountUtente;
 import it.unisa.utils.DBConnectionPool;
 
 public class AccountModelTest {
+	
 	private AccountModelDS dao;
 	private static IDatabaseTester t;
 	Connection db;
@@ -53,8 +54,8 @@ public class AccountModelTest {
 	   t.setDataSet(initialState);
 	   t.onSetup();
   }
- 
-   
+  
+    
    @Before
    public void setUp() throws Exception {//impostiamo il db ad uno stato iniziale
 	   try {
@@ -64,13 +65,10 @@ public class AccountModelTest {
 	   }
 	    dao = new AccountModelDS(db);
 	    ut1 = creaUtenteRegistrato("p.paola","e21fc56c1a272b630e0d1439079d0598cf8b8329");
-		//ut2 = creaUtenteRegistrato("m.maria","825e064b2c85b54b1e40c143e31f24c19bbac07b");
 		ut2 = new AccountUtente();
 		ut2.setNickname("m.maria");
 		ut2.setPassword("825e064b2c85b54b1e40c143e31f24c19bbac07b");
 	    dao.doSave(ut1);
-		//dao.doSave(ut2);
-		//dao.doDelete(ut2.getNickname());
 	 }
 
    @After
@@ -98,8 +96,35 @@ public class AccountModelTest {
        assertNull(dao.doRetrieveByKey(ut2.getNickname(),ut2.getPassword()));
    }
 
+   @Test
+   public void doRetrieveByNickname() {
+   	AccountUtente utenteSucc = dao.doRetrieveByKey(ut1.getNickname(),ut1.getPassword());
+       assertEquals("p.paola", utenteSucc.getNickname());
+   }
 
-	  
+   @Test
+   public void doRetrieveByPassword() {
+   	AccountUtente utenteSucc = dao.doRetrieveByKey(ut1.getNickname(),ut1.getPassword());
+       assertEquals("e21fc56c1a272b630e0d1439079d0598cf8b8329", utenteSucc.getPassword());
+   }
+
+   @Test
+   public void doSave() {
+	   AccountUtente utN = creaUtenteRegistrato("c.carlo","e21fc56c1a272b630e0d1439079d0598cf8b8329");
+	   boolean succ = dao.doSave(utN);
+       assertEquals(true, succ);
+       utN = dao.doRetrieveByKey(utN.getNickname(), utN.getPassword());
+       assertEquals(true,dao.doDelete(utN.getNickname()));
+   }
+   
+   @Test
+   public void TestDeleteUserExisting () {
+       assertEquals(true,dao.doDelete(ut1.getNickname()));
+       assertEquals(true,dao.doSave(ut1));
+       //ut1 = userDAO.getUserByUsername("SampleUsername");
+       assertNotEquals("000", ut1.getNickname());
+   }
+	   
 	  private AccountUtente creaUtenteRegistrato(String nickname,String pass) {
 			AccountUtente x = new AccountUtente();
 			x.setNickname(nickname);
