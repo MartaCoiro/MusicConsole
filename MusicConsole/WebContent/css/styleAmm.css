@@ -1,0 +1,122 @@
+body{
+	background-size: 1396px 700px !important;
+	overflow:hidden;
+}
+
+div.titolo{
+	height: 80%;
+	background-image:none;
+}
+
+h1.display-1#tit{
+	z-index: 3;
+	font-size: 550%;
+	position:relative;
+	left:1%;
+}	
+
+h1#accedi{
+	line-height:3;
+	position:relative;
+	text-align:right;
+	left:-15%;
+}
+
+div.campi{
+		position:relative;
+		left:60%;
+		top:-17%;
+}
+
+input.bottoni{
+		left:55%;
+		top:10%;
+		/*position:relative;*/
+	
+	}
+	
+
+@media screen and (max-width: 978px) {
+	
+	body{
+		background-size: 978px 1080px;
+		overflow:hidden;
+	}
+	
+	div.titolo{
+		width:100%;
+		background-image:none;
+		left:20%;
+	}
+	
+	h1.display-1#tit{
+	z-index: 3;
+	font-size: 450%;
+	position:relative;
+	left:6%;
+}
+	
+	h1#accedi{
+		text-align:center;
+		line-height:2;
+		position:relative;
+		left:1%;
+	}
+	
+	div.campi{
+		position:relative;
+		left:35%;
+		top:-40%;
+	}
+	
+	
+	input.bottoni{
+		left:55%;
+		top:10%;
+	
+	}
+	
+	
+}
+
+@media screen and (max-width: 600px) {
+	
+	body{
+		background-size: 600px 1080px;
+		overflow:hidden;
+	}
+	
+	div.titolo{
+		width:85%;
+		background-image:none;
+	}
+	
+	h1.display-1#tit{
+	z-index: 3;
+	font-size: 350%;
+	position:relative;
+	left:17%;
+}	
+	
+	h1#accedi{
+		text-align:center;
+		line-height:2;
+		position:relative;
+		left:4%;
+	}
+	
+	div.campi{
+		position:relative;
+		left:18%;
+		top:-40%;
+	}
+	
+	
+	input.bottoni{
+		left:50%;
+		top:10%;
+	
+	}
+	
+	
+}

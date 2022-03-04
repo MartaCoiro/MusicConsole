@@ -1,0 +1,148 @@
+body{
+	background-repeat: no-repeat;
+	background-size:cover;
+}
+
+button.B{
+	border-color:#00ff00;
+	display:line;
+	background:#000040 !important; 
+	color:#f400f4 !important; 
+  	border-color:purple !important;
+  	left:80% !important;
+  	/*margin-left:80%;*/
+  	font-family:maiandra gd !important; 
+  	font-size:140%;
+  	font-weight:bold; 
+  	padding: 5px 10px;  
+  	cursor: pointer;  
+	position:relative;
+	/*bottom:800% !important;*/
+	margin-top:-10% !important;
+}
+
+
+h2.inte{
+	font-size:300%;
+	color:white;
+	text-align:center;
+	bottom: 800% !important;
+}
+
+p.pro{
+	display:line;
+	font-size:200%;
+	color:white;
+	text-align:left;
+	text-decoration:underline;
+	font-family:maiandra gd	;
+	font-weight:bold;
+}
+
+.table-hover{
+	
+	margin-top:-2%;
+}
+
+tr{
+	font-size:180%;
+	color:white;
+	font-weight:bold;
+	font-family:maiandra gd	;
+}
+
+.edit {  
+  background:#000040;  
+  color:#f400f4; 
+  border-color:purple;
+  margin-left:2%;
+  font-family:maiandra gd; 
+  font-size:140%;
+  font-weight:bold; 
+  padding: 5px 10px;  
+  cursor: pointer;  
+} 
+
+.save {  
+  display: none;  
+  background: #32AD60;  
+  color: #ffffff;  
+  /*background: darken(#32AD60, 10%);  */
+  color:black; 
+  background:transparent;
+  border-color:purple; 
+   padding: 5px 10px;  
+  cursor: pointer;  
+}   
+
+@media screen and (max-width: 978px) {
+	
+	
+/*body{
+	background-size: 978px 1020px;
+	/*overflow:hidden;*/
+	/*}
+	
+div.titolo{
+	height: 100%;
+	background-image: url(../imgs/onda.gif);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	/*background-attachment: fixed; fa si che il titolo si muova allo scorrere della pagina*/
+/*}
+
+h1#tit{
+	z-index: 1;
+	font-size: 500%;
+	font-family: maiandra gd;
+	font-weight: lighter;
+	font-style: oblique;
+	text-align: center;
+	color: white;
+	}
+
+	h1.display-1#tit{
+	font-size: 80px;
+	z-index:1;
+	}
+}*/
+
+@media screen and (max-width: 640px) {
+
+body{
+	background-size: 800px 1080px;
+	}
+	
+div.titolo{
+	height: 100%;
+	background-image: url(../imgs/onda.gif);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	/*background-attachment: fixed; fa si che il titolo si muova allo scorrere della pagina*/
+}
+
+h1#tit{
+	z-index: 1;
+	font-size: 500%;
+	font-family: maiandra gd;
+	font-weight: lighter;
+	font-style: oblique;
+	text-align: center;
+	color: white;
+	}
+
+	h1.display-1#tit{
+	font-size: 80px;
+	z-index:1;
+	}
+	
+	.table-hover{
+	
+	margin-top:-5%;
+	margin-left:-5%;
+}
+}
+
+}

@@ -1,0 +1,162 @@
+body{
+	background-repeat: no-repeat;
+	/*background-size: cover;*/
+	background-size: 400% 300%;
+	
+}
+
+div.titolo{
+	height: 100%;
+	background-image: url(../imgs/onda.gif);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	/*background-attachment: fixed; fa si che il titolo si muova allo scorrere della pagina*/
+}
+	
+	button.dropdown-toggle{
+	border-radius:10px;
+	margin-left:50%;
+	margin-top:-12%;
+	font-weight:bold;
+	color:#f06;
+	font-size:large;
+}
+
+ul.dropdown-menu{
+	font-size: 100%;
+	font-family: maiandra gd;
+	font-weight: lighter;
+	font-style: oblique;
+	text-align:center;
+	line-height:2;
+
+}
+
+h1#tit{
+	z-index: 1;
+	font-size: 7rem;
+	font-family: maiandra gd;
+	font-weight: lighter;
+	font-style: oblique;
+	text-align: center;
+	color: white;
+}
+
+div.contenitore{
+	display:flex;
+	flex-wrap:wrap;
+	justify-content: space-around;
+}
+
+div.contenitore1{
+	display:flex;
+	flex-wrap:wrap;
+	justify-content: space-around;
+	position:relative;
+	bottom:210%;
+
+}
+
+div.contenitore2{
+	display:flex;
+	flex-wrap:wrap;
+	justify-content: space-around;
+	position:absolute;
+	top:auto;
+
+}
+
+.rounded-circle{
+	/*height: 250px;
+	width: 300px;*/
+	height: 220px;
+	width: 250px;
+}
+
+p.t{
+	color:white;
+	text-align: center;
+	font-size: 100%;
+	font-family: courier;
+	font-weight: bold;
+	font-style: oblique;
+	margin-top: 10px;
+	line-height:2;
+}
+
+a.sezione{
+	color:white;
+	font-family: helvetica;
+	font-weight: lighter;
+	font-size: 2rem;
+	text-align: center;
+	/*line-height:3.5;*/
+	
+}
+
+h2{
+	font-family:  maiandra gd;
+	font-weight: bold;
+	font-size: 35px;
+	color:white;
+	
+}
+
+a.sezione:hover{
+	color:#f06;
+	
+}
+
+input.play{
+	background-color:white;
+	font-weight: bold; 
+	box-shadow: 5px 5px 5px black;
+	color:#f06;
+	font-family: cursive-family;
+	font-size:large;
+	border-radius: 30%;
+	margin-left:1%;
+	margin-top:1%;
+}
+
+#pulsante{
+	background-color:white;
+	font-weight: bold; 
+	box-shadow: 5px 5px 5px black;
+	color:#f06;
+	font-family: cursive-family;
+	font-size:xx-large;
+	margin-left:30%;
+	margin-top:2%;
+	padding:3%;
+	border-radius:30%;
+}
+
+input.info{
+	border-radius: 100%;
+	background-color:white;
+	font-weight: normal; 
+	box-shadow: 5px 5px 5px black;
+	color:#f06;
+	font-size:x-large;
+	padding: 2% 2%;
+	position:relative;
+}
+
+input.play:hover{
+	opacity:0.5;
+}
+
+input.info:hover{
+	opacity:0.5;
+}
+	
+
+
+
+
+
+	
+	
+
