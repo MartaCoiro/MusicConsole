@@ -1,0 +1,20 @@
+h1{
+	
+	position:relative;
+	text-align:center;
+	margin-top:-20%;
+}
+div.titolo{
+	position:relative;
+	text-align:center;
+	margin-top:3%;
+	font-family:maiandra gd;
+	font-size:100%;
+}
+
+@media (max-width: 978px){
+
+div.titolo{
+	margin-left:-20%;
+}	
+}

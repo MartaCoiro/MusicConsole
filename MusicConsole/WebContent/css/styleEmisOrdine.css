@@ -1,0 +1,44 @@
+body{
+	overflow:auto !important;
+	background-size: 1300px 900px !important;
+	background-repeat: repeat !important;
+}
+
+h1{
+	font-family:maiandra gd;
+	text-align:center;
+}
+
+h3{
+	font-family:maiandra gd;
+	text-align:center;
+}
+
+h6.text-right{
+	font-weight:bolder !important;
+}
+
+h2{
+	margin-left:2%;
+	font-family:maiandra gd;
+	font-weight:bold !important;
+	text-decoration:underline;
+}
+
+div.titolo{
+	height: 80%;
+	background-image:none;
+}
+
+div.container, option{
+	font-family: maiandra gd !important;
+	font-weight: lighter;
+	font-size:12pt;
+}
+div.mt-5{
+	background-color: #d0d0d0!important;
+}
+input.btn{
+	color: #ffffff !important;
+	background-color: #000000 !important;
+}
