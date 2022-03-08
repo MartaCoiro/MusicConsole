@@ -30,7 +30,7 @@ public class ServletModBrano extends HttpServlet {
 	}
 
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+	public void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
 		//DataSource ds = (DataSource)getServletContext().getAttribute("DataSource");
@@ -87,7 +87,7 @@ public class ServletModBrano extends HttpServlet {
 			if(!nome.toLowerCase().equals(a.getTitolo().toLowerCase())) {
 				if(nome.length()==0) {
 					request.setAttribute("pre", true);
-					getServletContext().getRequestDispatcher("/editBrano.jsp").forward(request, response); //reindiriziamo alla view		
+					request.getServletContext().getRequestDispatcher("/editBrano.jsp").forward(request, response); //reindiriziamo alla view		
 					return;
 				}else {
 				model.doUpdate("nome", nome, aa.getCodice());
@@ -106,7 +106,7 @@ public class ServletModBrano extends HttpServlet {
 			//controllo prezzo
 			if(prez.length()==0) {
 				request.setAttribute("pre", true);
-				getServletContext().getRequestDispatcher("/editBrano.jsp").forward(request, response); //reindiriziamo alla view		
+				request.getServletContext().getRequestDispatcher("/editBrano.jsp").forward(request, response); //reindiriziamo alla view		
 				return;
 			}
 			Float prezzo = Float.parseFloat(prez);
@@ -117,7 +117,7 @@ public class ServletModBrano extends HttpServlet {
 			if(!nomeA.toLowerCase().equals(a.getCantante().toLowerCase())) {
 				if(nomeA.length()==0) {
 					request.setAttribute("pre", true);
-					getServletContext().getRequestDispatcher("/editBrano.jsp").forward(request, response); //reindiriziamo alla view		
+					request.getServletContext().getRequestDispatcher("/editBrano.jsp").forward(request, response); //reindiriziamo alla view		
 					return;
 				}else {
 				model.doUpdate("artista", nomeA, aa.getCodice());
@@ -134,7 +134,6 @@ public class ServletModBrano extends HttpServlet {
 			}
 			//controllo suono
 			if(soundname.length()>0) {
-				System.out.println(soundname);
 				if(!soundname.toLowerCase().equals(a.getSuono().toLowerCase())) {
 					model.doUpdate("suono", soundname, aa.getCodice());
 				}
@@ -150,7 +149,7 @@ public class ServletModBrano extends HttpServlet {
 					//controllo nome
 					if(nome.length()==0) {
 						request.setAttribute("pre", true);
-						getServletContext().getRequestDispatcher("/editBrano.jsp").forward(request, response); //reindiriziamo alla view		
+						request.getServletContext().getRequestDispatcher("/editBrano.jsp").forward(request, response); //reindiriziamo alla view		
 						return;
 					}
 					//controllo nome artista

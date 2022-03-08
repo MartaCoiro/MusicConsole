@@ -63,14 +63,14 @@ public class ServletRegTest extends Mockito {
     
     @Test
     public void TestRegistrazioneUsernameEsistente() throws ServletException, IOException {
-    	request.setParameter("nome", "Paolo");
-        request.setParameter("cognome", "Bianchi");
+    	request.setParameter("nome", "Katia");
+        request.setParameter("cognome", "Buonocore");
         request.setParameter("citta'", "Napoli");
         request.setParameter("indirizzo", "Via dei fiori");
         request.setParameter("telefono", "1234567890");
-        request.setParameter("email", "paolobianchi@gmail.com");
-        request.setParameter("nickname", "p.bianchi");
-        request.setParameter("password", "paolo");
+        request.setParameter("email", "k.buonocore@gmail.com");
+        request.setParameter("nickname", "k.buonocore");
+        request.setParameter("password", "123");
         servlet.doPost(request, response);
         assertTrue(true, String.valueOf(request.getAttribute("presente")));
 
@@ -87,12 +87,9 @@ public class ServletRegTest extends Mockito {
     		e.printStackTrace();
     	}
     	
-        
         AccountModelDS daoA = new AccountModelDS(db);
         daoA.doDelete("m.rossi");
  
-        
-        
         request=null;
         response=null;
     }

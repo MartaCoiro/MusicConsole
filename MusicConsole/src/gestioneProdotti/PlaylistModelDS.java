@@ -103,7 +103,7 @@ public class PlaylistModelDS implements ProductModelPlaylist<Playlist> {
 		//Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
-		String insertSQL = "INSERT INTO playlist (NOMEUTENTE, NOME, NOMEBRANO, NUMBRANI, NOMEARTISTA) VALUES (?, ?, ?, ?, ?)";
+		String insertSQL = "INSERT INTO playlist (ID, NOMEUTENTE, NOME, NOMEBRANO, NUMBRANI, NOMEARTISTA) VALUES (?, ?, ?, ?, ?, ?)";
 
 		try {
 			//connection = ds.getConnection();
@@ -111,12 +111,12 @@ public class PlaylistModelDS implements ProductModelPlaylist<Playlist> {
 			//connection.setAutoCommit(false);
 			
 			preparedStatement = connection.prepareStatement(insertSQL);
-			//preparedStatement.setInt(1, item.getId());
-			preparedStatement.setString(1, item.getNomeUtente());
-			preparedStatement.setString(2, item.getNome());
-			preparedStatement.setString(3, item.getNomeBrano());
-			preparedStatement.setInt(4, item.getNumBrani());
-			preparedStatement.setString(5, item.getNomeArtista());
+			preparedStatement.setInt(1, item.getId());
+			preparedStatement.setString(2, item.getNomeUtente());
+			preparedStatement.setString(3, item.getNome());
+			preparedStatement.setString(4, item.getNomeBrano());
+			preparedStatement.setInt(5, item.getNumBrani());
+			preparedStatement.setString(6, item.getNomeArtista());
 			
 			if(preparedStatement.executeUpdate()==0) {
 				return false;

@@ -30,7 +30,7 @@ public class ServletAggB extends HttpServlet {
 	}
 
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+	public void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
 		//DataSource ds = (DataSource)getServletContext().getAttribute("DataSource");
@@ -42,7 +42,7 @@ public class ServletAggB extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		response.setContentType("text/html");//tipo di file
+		//response.setContentType("text/html");//tipo di file
 		
 		HttpSession currentSession = request.getSession();
 		ArrayList<String> l = (ArrayList<String>)currentSession.getAttribute("lprod");
@@ -70,7 +70,7 @@ public class ServletAggB extends HttpServlet {
 		Float prezzo = Float.parseFloat(prez);
 		
 		String soundname = null;
-		String pathsound = "C:\\Users\\ACER\\eclipse-workspace1\\MusicConsole\\WebContent\\brani";
+		String pathsound = "C:\\Users\\utente\\eclipse-workspace1\\MusicConsole\\WebContent\\brani";
 		Part sound = request.getPart("suono");
 		if(sound!=null) {
 			soundname = request.getPart("suono").getSubmittedFileName();
@@ -100,7 +100,7 @@ public class ServletAggB extends HttpServlet {
 				Brano ele1 = (Brano)i.next();
 				if(ele1.getCodice().equals(codice)) {
 					request.setAttribute("err", true);
-					getServletContext().getRequestDispatcher("/NuovoBrano.jsp").forward(request, response); //reindiriziamo alla view
+					request.getServletContext().getRequestDispatcher("/NuovoBrano.jsp").forward(request, response); //reindiriziamo alla view
 					return;
 					}
 			}
@@ -110,7 +110,7 @@ public class ServletAggB extends HttpServlet {
 				if(ele1.getCantante().toLowerCase().equals(artista.toLowerCase())) {
 					if(ele1.getTitolo().toLowerCase().equals(nome.toLowerCase())) {
 						request.setAttribute("berr", true);
-						getServletContext().getRequestDispatcher("/NuovoBrano.jsp").forward(request, response); //reindiriziamo alla view
+						request.getServletContext().getRequestDispatcher("/NuovoBrano.jsp").forward(request, response); //reindiriziamo alla view
 						return;
 					}
 				}
@@ -123,11 +123,11 @@ public class ServletAggB extends HttpServlet {
 				l.add(tipo);
 				currentSession.setAttribute("yes", true);
 				currentSession.setAttribute("lprod", l);
-				getServletContext().getRequestDispatcher("/magazzino.jsp").forward(request, response); //reindiriziamo alla view
+				request.getServletContext().getRequestDispatcher("/magazzino.jsp").forward(request, response); //reindiriziamo alla view
 					}
 			else {
 				request.setAttribute("sb", true);
-				getServletContext().getRequestDispatcher("/NuovoBrano.jsp").forward(request, response); //reindiriziamo alla view
+				request.getServletContext().getRequestDispatcher("/NuovoBrano.jsp").forward(request, response); //reindiriziamo alla view
 				return;
 				}
 		}

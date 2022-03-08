@@ -1,4 +1,3 @@
-
 package Test.Servlet;
 
 import org.junit.After;
@@ -12,6 +11,8 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 
 import gestioneAccount.SelectUser;
+
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
@@ -28,51 +29,41 @@ public class SelectUserTest extends Mockito {
     @InjectMocks
     private SelectUser servlet;
 
-   
-
-    @BeforeEach
+   @BeforeEach
     void setUp() throws Exception {
         request = new MockHttpServletRequest();
         response = new MockHttpServletResponse(); 
         MockitoAnnotations.initMocks(this);
     }
     
-    
     @Test
     public void TestCampiNonInseriti () throws ServletException, IOException{
         request.setParameter("nickname", "");
         request.setParameter("password", "");
         servlet.doPost(request, response);
-        assertTrue(true, String.valueOf(request.getAttribute("presente")));
-
+        assertTrue(true,String.valueOf(request.getAttribute("presente")));
     }
 
-    
     @Test
     public void TestLoginCorretto () throws ServletException, IOException{
-        request.setParameter("nickname", "marta_coiro");
+        request.setParameter("nickname", "k.buonocore");
         request.setParameter("password", "123");
         servlet.doPost(request, response);
         assertNull(request.getAttribute("presente"));
-
     }
     
     @Test
     public void TestLoginNonCorretto () throws ServletException, IOException{
-        request.setParameter("nickname", "marta");
+        request.setParameter("nickname", "aa");
         request.setParameter("password", "123");
         servlet.doPost(request, response);
-        assertTrue(true, String.valueOf(request.getAttribute("presente")));
-        
-
+        assertTrue(true,String.valueOf(request.getAttribute("presente")));
     }
-    
-    
-    
-   @AfterEach
+   
+    @AfterEach
     void tearDown() throws Exception {
-        request=null;
-        response=null;
+        request = null;
+        response = null;
     }
     
 }

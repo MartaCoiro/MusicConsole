@@ -34,7 +34,7 @@ public class ServletElimina extends HttpServlet {
 		doPost(request, response);
 	}
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+	public void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 	
 		//DataSource ds = (DataSource)getServletContext().getAttribute("DataSource");
@@ -109,7 +109,7 @@ public class ServletElimina extends HttpServlet {
 				}
 			}
 				currentSession.setAttribute("carrello", c);
-				getServletContext().getRequestDispatcher(response.encodeURL("/Carrello.jsp")).forward(request, response);
+				request.getServletContext().getRequestDispatcher(response.encodeURL("/Carrello.jsp")).forward(request, response);
 	
 		}
 

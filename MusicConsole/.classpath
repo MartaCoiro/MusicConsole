@@ -26,7 +26,7 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="C:/Users/Cuccaro/Desktop/Rituccia/Ingegneria del software/java-json.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Cuccaro/Desktop/Rituccia/Ingegneria del software/mysql-connector-java-8.0.14.jar"/>
+	<classpathentry kind="lib" path="C:/Users/utente/Desktop/java-json.jar"/>
+	<classpathentry kind="lib" path="C:/Users/utente/Desktop/mysql-connector-java-8.0.12.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

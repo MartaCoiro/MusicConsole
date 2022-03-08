@@ -27,7 +27,7 @@ public class ServletAggStato extends HttpServlet {
 		doPost(request, response);
 	}
 
-		protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+		public void doPost(HttpServletRequest request, HttpServletResponse response) 
 				throws ServletException, IOException {
 		
 			//DataSource ds = (DataSource)getServletContext().getAttribute("DataSource");
@@ -58,10 +58,11 @@ public class ServletAggStato extends HttpServlet {
 				
 				currentSession.setAttribute("lordini", ordini);
 				request.setAttribute("conf", "true");
-				getServletContext().getRequestDispatcher(response.encodeURL("/ordini.jsp")).forward(request, response); //reindiriziamo alla view	
+				request.getServletContext().getRequestDispatcher(response.encodeURL("/ordini.jsp")).forward(request, response); //reindiriziamo alla view	
 				
 		}
 			catch(SQLException e){
+				request.setAttribute("conf", null);
 				Utility.print(e);
 				request.setAttribute("error", e.getMessage());
 				}

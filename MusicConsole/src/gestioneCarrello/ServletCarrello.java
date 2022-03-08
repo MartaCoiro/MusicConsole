@@ -25,7 +25,7 @@ import it.unisa.utils.Utility;
 public class ServletCarrello extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+	public void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 	
 		//DataSource ds = (DataSource)getServletContext().getAttribute("DataSource");
@@ -66,7 +66,7 @@ public class ServletCarrello extends HttpServlet {
 		}
 			
 			currentSession.setAttribute("tot", tot);
-			getServletContext().getRequestDispatcher("/Carrello.jsp").forward(request, response); //reindiriziamo alla view	
+			request.getServletContext().getRequestDispatcher("/Carrello.jsp").forward(request, response); //reindiriziamo alla view	
 		
 		}
 		catch(SQLException e){ 

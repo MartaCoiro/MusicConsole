@@ -29,7 +29,7 @@ public class ServletCarta extends HttpServlet {
 	}
 
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+	public void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
 		//DataSource ds = (DataSource)getServletContext().getAttribute("DataSource");
@@ -52,7 +52,7 @@ public class ServletCarta extends HttpServlet {
 					if(ele.getUtente().equals(ut)) {
 						currentSession.setAttribute("posCard", true);
 						currentSession.setAttribute("cart", ele);
-						getServletContext().getRequestDispatcher("/checkout.jsp").forward(request, response);
+						request.getServletContext().getRequestDispatcher("/checkout.jsp").forward(request, response);
 						return;
 					}
 					else {currentSession.setAttribute("posCard", false);}
@@ -60,7 +60,7 @@ public class ServletCarta extends HttpServlet {
 			}
 			else {currentSession.setAttribute("posCard", false);}
 			
-			getServletContext().getRequestDispatcher("/checkout.jsp").forward(request, response);
+			request.getServletContext().getRequestDispatcher("/checkout.jsp").forward(request, response);
 	}catch(SQLException e){
 		Utility.print(e);
 		request.setAttribute("error", e.getMessage());

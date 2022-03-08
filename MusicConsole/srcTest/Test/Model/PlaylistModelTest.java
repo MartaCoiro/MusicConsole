@@ -79,6 +79,7 @@ public class PlaylistModelTest {
 		   System.out.println("Sono entrato nella tearDown");
 		   daoP.doDelete(p2.getNomeBrano(),p2.getNomeArtista(),p2.getNome(),p2.getNomeUtente());
 		   daoP.doDeletep(p1.getId());
+		   daoA.doDelete(ut1.getNickname());
 		   //daoP.doDeleteProd(p2.getNomeBrano(), p2.getNomeArtista());
 	   }
 	   

@@ -79,7 +79,7 @@ public class CarrelloModelTest {
 	   public void tearDown() throws Exception {
 		   System.out.println("Sono entrato nella tearDown");
 		   daoU.doDelete(ut1.getNickname());
-		   //daoU.doDelete(ut3.getNickname());
+		   daoU.doDelete(ut3.getNickname());
 		   daoO.doDelete(car1.getCod());
 		   daoO.doDelete(car2.getCod());
 		   }

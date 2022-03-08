@@ -44,55 +44,57 @@ public class ServletAmmTest extends Mockito {
         request.setParameter("username", "k.buonocore");
         request.setParameter("password", "123");
         servlet.doPost(request, response);
-        assertFalse(Boolean.getBoolean("yes"));
-
+        String oracolo = "ordini";
+       assertEquals(oracolo,request.getAttribute("ruolo"));
     }
     
-  
+ 
     @Test
     public void TestLoginCorrettoGestoreCatalogo () throws ServletException, IOException{
         request.setParameter("username", "m.coiro");
         request.setParameter("password", "456");
         servlet.doPost(request, response);
-        assertFalse(Boolean.getBoolean("yes"));
-        
+        assertFalse(false,String.valueOf(request.getAttribute("yes")));
+
     }
-    
     
     @Test
     public void TestLoginCorrettoGestoreMagazzino () throws ServletException, IOException{
         request.setParameter("username", "r.cuccaro");
         request.setParameter("password", "789");
         servlet.doPost(request, response);
-        assertFalse(Boolean.getBoolean("yes"));
-    
+        //Boolean oracle = false;
+        assertFalse(false,String.valueOf(request.getAttribute("yes")));
+
     }
     
+
     
     @Test
     public void TestLoginCampiNonInseriti () throws ServletException, IOException {
     	request.setParameter("username", "");
         request.setParameter("password", "");
         servlet.doPost(request, response);
-        assertFalse(Boolean.getBoolean("yes"));
-
+        //Boolean oracle = true;
+        assertTrue(true, String.valueOf(request.getAttribute("presente")));
     }
-    
     
     @Test
     public void TestLoginErrato () throws ServletException, IOException {
     	 request.setParameter("username", "marios");
          request.setParameter("password", "rossis");
          servlet.doPost(request, response);
-         assertFalse(Boolean.getBoolean("yes"));
+         assertTrue(true, String.valueOf(request.getAttribute("presente")));
 
+
+       
     }
 
 
     @AfterEach
     void tearDown() throws Exception {
-        request=null;
-        response=null;
+        request = null;
+        response = null;
     }
     
 }

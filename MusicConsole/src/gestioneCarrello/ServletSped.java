@@ -38,7 +38,7 @@ public class ServletSped extends HttpServlet {
 		doPost(request, response);
 		}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+	public void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
 		//DataSource ds = (DataSource)getServletContext().getAttribute("DataSource");
@@ -50,7 +50,7 @@ public class ServletSped extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		response.setContentType("text/html");//tipo di file
+		//response.setContentType("text/html");//tipo di file
 		
 		CarrelloModelDS model = new CarrelloModelDS(ds);
 		OrdiniModelDS model1 = new OrdiniModelDS(ds);
@@ -94,7 +94,7 @@ public class ServletSped extends HttpServlet {
 					}
 					if(ele.getCvv()==cvv) {
 						request.setAttribute("error", true);
-						getServletContext().getRequestDispatcher("/checkout.jsp").forward(request, response);
+						request.getServletContext().getRequestDispatcher("/checkout.jsp").forward(request, response);
 						return;
 					}
 				}
@@ -107,7 +107,7 @@ public class ServletSped extends HttpServlet {
 					Carta ele = (Carta)i.next();
 					if((ele.getCvv()==cvv)&&(!ele.getUtente().equals(ut))) {
 						request.setAttribute("error", true);
-						getServletContext().getRequestDispatcher("/ServletCarta").forward(request, response);
+						request.getServletContext().getRequestDispatcher("/ServletCarta").forward(request, response);
 						return;
 					}
 				}
