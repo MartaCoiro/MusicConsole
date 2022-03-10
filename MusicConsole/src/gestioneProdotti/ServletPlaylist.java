@@ -24,7 +24,7 @@ import java.util.List;
 public class ServletPlaylist extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-   protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+   public void doGet(HttpServletRequest request, HttpServletResponse response) 
 		   throws ServletException, IOException {
 		
 		//DataSource ds = (DataSource)getServletContext().getAttribute("DataSource");
@@ -38,7 +38,7 @@ public class ServletPlaylist extends HttpServlet {
 		String plist = request.getParameter("plist");
 	
 		HttpSession currentSession = request.getSession();
-		Collection<?> prB = (Collection<?>)currentSession.getAttribute("prB");
+		//Collection<?> prB = (Collection<?>)currentSession.getAttribute("prB");
 		String ut = (String)currentSession.getAttribute("acc");
 		
 				String qstring=request.getQueryString();
@@ -70,7 +70,7 @@ public class ServletPlaylist extends HttpServlet {
 				if((ele.getNome().equals(plist))&&(ele.getNomeUtente().equals(ut))) {
 				if((ele.getNomeBrano().equals(brano))&&(ele.getNomeArtista().equals(artista))) {
 					request.setAttribute("no", true);
-					getServletContext().getRequestDispatcher("/home.jsp").forward(request, response); //reindiriziamo alla view
+					request.getServletContext().getRequestDispatcher("/home.jsp").forward(request, response); //reindiriziamo alla view
 					return;
 				}
 				}
@@ -92,7 +92,7 @@ public class ServletPlaylist extends HttpServlet {
 				}
 				
 			request.setAttribute("no", false);
-			getServletContext().getRequestDispatcher("/home.jsp").forward(request, response); //reindiriziamo alla view
+			request.getServletContext().getRequestDispatcher("/home.jsp").forward(request, response); //reindiriziamo alla view
 		}
 		catch(SQLException e){ 
 			Utility.print(e);

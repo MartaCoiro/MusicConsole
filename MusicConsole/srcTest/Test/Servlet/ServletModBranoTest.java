@@ -66,7 +66,7 @@ public class ServletModBranoTest extends Mockito{
 	public void TestModificaNomeBranoCampoVuoto() throws  ServletException, IOException {
 		request.setParameter("nome","");
 		request.setParameter("codice","15");
-		request.setParameter("imaggine","img15.png");
+		request.setParameter("immagine","img15.png");
 		request.setParameter("artista","Blanco");
 		request.setParameter("tipo","Brano");
 		request.setParameter("genere","pop");
@@ -83,7 +83,7 @@ public class ServletModBranoTest extends Mockito{
 	public void TestModificaPrezzoBranoCampoVuoto() throws  ServletException, IOException {
 		request.setParameter("nome","Blu Celeste");
 		request.setParameter("codice","15");
-		request.setParameter("imaggine","img15.png");
+		request.setParameter("immagine","img15.png");
 		request.setParameter("artista","Blanco");
 		request.setParameter("tipo","Brano");
 		request.setParameter("genere","pop");
@@ -100,7 +100,7 @@ public class ServletModBranoTest extends Mockito{
 	public void TestModificaArtistaBranoCampoVuoto() throws  ServletException, IOException {
 		request.setParameter("nome","Blu Celeste");
 		request.setParameter("codice","15");
-		request.setParameter("imaggine","img15.png");
+		request.setParameter("immagine","img15.png");
 		request.setParameter("artista","");
 		request.setParameter("tipo","Brano");
 		request.setParameter("genere","pop");
@@ -117,7 +117,7 @@ public class ServletModBranoTest extends Mockito{
 	public void TestModificaNomeBranoditipoAlbumCampoVuoto() throws  ServletException, IOException {
 		request.setParameter("nome","");
 		request.setParameter("codice","15");
-		request.setParameter("imaggine","img15.png");
+		request.setParameter("immagine","img15.png");
 		request.setParameter("artista","Blanco");
 		request.setParameter("tipo","Album");
 		request.setParameter("genere","pop");
@@ -129,6 +129,165 @@ public class ServletModBranoTest extends Mockito{
         servlet.doPost(request, response);
 		assertEquals(true,request.getAttribute("pre"));
 	}
+	
+	@Test
+	public void TestModificaArtistaBranodiTipoAlbumCampoVuoto() throws  ServletException, IOException {
+		request.setParameter("nome","Blu Celeste");
+		request.setParameter("codice","15");
+		request.setParameter("immagine","img15.png");
+		request.setParameter("artista","");
+		request.setParameter("tipo","Album");
+		request.setParameter("genere","pop");
+		request.setParameter("descrizione","Interessante");
+		request.setParameter("prezzo","0.9");
+		request.setParameter("suono","bluCeleste.mp3");
+		HttpSession currentsession = request.getSession();
+        currentsession.setAttribute("bra", b1);
+        servlet.doPost(request, response);
+		assertEquals(true,request.getAttribute("pre"));
+	}
+	
+	@Test
+	public void TestModificaCodiceBranodiTipoAlbumCampoVuoto() throws  ServletException, IOException {
+		request.setParameter("nome","Blu Celeste");
+		request.setParameter("codice","");
+		request.setParameter("immagine","img15.png");
+		request.setParameter("artista","Blanco");
+		request.setParameter("tipo","Album");
+		request.setParameter("genere","pop");
+		request.setParameter("descrizione","Interessante");
+		request.setParameter("prezzo","0.9");
+		request.setParameter("suono","bluCeleste.mp3");
+		HttpSession currentsession = request.getSession();
+        currentsession.setAttribute("bra", b1);
+        servlet.doPost(request, response);
+		assertEquals(true,request.getAttribute("pre"));
+	}
+	
+	@Test
+	public void TestModificaPrezzoBranodiTipoAlbumCampoVuoto() throws  ServletException, IOException {
+		request.setParameter("nome","Blu Celeste");
+		request.setParameter("codice","15");
+		request.setParameter("immagine","img15.png");
+		request.setParameter("artista","Blanco");
+		request.setParameter("tipo","Album");
+		request.setParameter("genere","pop");
+		request.setParameter("descrizione","Interessante");
+		request.setParameter("prezzoS","");
+		request.setParameter("prezzoV","");
+		request.setParameter("prezzoC","");
+		request.setParameter("suono","bluCeleste.mp3");
+		HttpSession currentsession = request.getSession();
+        currentsession.setAttribute("bra", b1);
+        servlet.doPost(request, response);
+		assertEquals(true,request.getAttribute("pre"));
+	}
+	
+	@Test
+	public void TestModificaBranodiTipoAlbumConcodicegi‡Esistente() throws  ServletException, IOException {
+		request.setParameter("nome","Blu Celeste");
+		request.setParameter("codice","100");
+		request.setParameter("immagine","img15.png");
+		request.setParameter("artista","Blanco");
+		request.setParameter("tipo","Album");
+		request.setParameter("genere","pop");
+		request.setParameter("descrizione","Interessante");
+		request.setParameter("prezzoS","10.2");
+		request.setParameter("prezzoV","6.5");
+		request.setParameter("prezzoC","7.1");
+		request.setParameter("suono","bluCeleste.mp3");
+		HttpSession currentsession = request.getSession();
+        currentsession.setAttribute("bra", b1);
+        servlet.doPost(request, response);
+		assertEquals(true,request.getAttribute("ercod"));
+	}
+	
+
+	@Test
+	public void TestModificaArtistaBranodiTipoPodcastCampoVuoto() throws  ServletException, IOException {
+		request.setParameter("nome","Blu Celeste");
+		request.setParameter("codice","15");
+		request.setParameter("immagine","img15.png");
+		request.setParameter("artista","");
+		request.setParameter("tipo","Podcast");
+		request.setParameter("genere","pop");
+		request.setParameter("descrizione","Interessante");
+		request.setParameter("prezzo","0.9");
+		request.setParameter("suono","bluCeleste.mp3");
+		HttpSession currentsession = request.getSession();
+        currentsession.setAttribute("bra", b1);
+        servlet.doPost(request, response);
+		assertEquals(true,request.getAttribute("pre"));
+	}
+	
+	@Test
+	public void TestModificaNomeBranoditipoPodcastCampoVuoto() throws  ServletException, IOException {
+		request.setParameter("nome","");
+		request.setParameter("codice","15");
+		request.setParameter("immagine","img15.png");
+		request.setParameter("artista","Blanco");
+		request.setParameter("tipo","Podcast");
+		request.setParameter("genere","pop");
+		request.setParameter("descrizione","Interessante");
+		request.setParameter("prezzo","0.9");
+		request.setParameter("suono","bluCeleste.mp3");
+		HttpSession currentsession = request.getSession();
+        currentsession.setAttribute("bra", b1);
+        servlet.doPost(request, response);
+		assertEquals(true,request.getAttribute("pre"));
+	}
+	
+	@Test
+	public void TestModificaPrezzoBranodiTipoPodcastCampoVuoto() throws  ServletException, IOException {
+		request.setParameter("nome","Blu Celeste");
+		request.setParameter("codice","15");
+		request.setParameter("immagine","img15.png");
+		request.setParameter("artista","Blanco");
+		request.setParameter("tipo","Podcast");
+		request.setParameter("genere","pop");
+		request.setParameter("descrizione","Interessante");
+		request.setParameter("prezzo","");
+		request.setParameter("suono","bluCeleste.mp3");
+		HttpSession currentsession = request.getSession();
+        currentsession.setAttribute("bra", b1);
+        servlet.doPost(request, response);
+		assertEquals(true,request.getAttribute("pre"));
+	}
+	
+	@Test
+	public void TestModificaBranodiTipoPodcastConnomegi‡Esistente() throws  ServletException, IOException {
+		request.setParameter("nome","audio racconti");
+		request.setParameter("codice","15");
+		request.setParameter("immagine","img15.png");
+		request.setParameter("artista","Blanco");
+		request.setParameter("tipo","Podcast");
+		request.setParameter("genere","pop");
+		request.setParameter("descrizione","Interessante");
+		request.setParameter("prezzo","10.2");
+		request.setParameter("suono","bluCeleste.mp3");
+		HttpSession currentsession = request.getSession();
+        currentsession.setAttribute("bra", b1);
+        servlet.doPost(request, response);
+		assertEquals(true,request.getAttribute("ercod1"));
+	}
+	
+	@Test
+	public void TestModificaBranodiTipoPodcastconGenerenonValido() throws  ServletException, IOException {
+		request.setParameter("nome","Blu Celeste");
+		request.setParameter("codice","15");
+		request.setParameter("immagine","img15.png");
+		request.setParameter("artista","Blanco");
+		request.setParameter("tipo","Podcast");
+		request.setParameter("genere","bohh");
+		request.setParameter("descrizione","Interessante");
+		request.setParameter("prezzo","10.2");
+		request.setParameter("suono","bluCeleste.mp3");
+		HttpSession currentsession = request.getSession();
+        currentsession.setAttribute("bra", b1);
+        servlet.doPost(request, response);
+		assertEquals(true,request.getAttribute("g"));
+	}
+	
 	 private Brano creaBrano(int cod,String nome,float durata,String artista,String img,String genere,String tipo,String suono,float prezzo,String descrizione) {
 			Brano x = new Brano();
 			x.setCodice(cod);

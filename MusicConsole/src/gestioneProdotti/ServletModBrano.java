@@ -155,14 +155,14 @@ public class ServletModBrano extends HttpServlet {
 					//controllo nome artista
 					if(nomeA.length()==0) {
 						request.setAttribute("pre", true);
-						getServletContext().getRequestDispatcher("/editBrano.jsp").forward(request, response); //reindiriziamo alla view		
+						request.getServletContext().getRequestDispatcher("/editBrano.jsp").forward(request, response); //reindiriziamo alla view		
 						return;
 					}
 					//controllo codice
 					String c = request.getParameter("codice");
 					if(c.length()==0) {
 						request.setAttribute("pre", true);
-						getServletContext().getRequestDispatcher("/editBrano.jsp").forward(request, response); //reindiriziamo alla view		
+						request.getServletContext().getRequestDispatcher("/editBrano.jsp").forward(request, response); //reindiriziamo alla view		
 						return;
 					}
 					Integer cod = Integer.parseInt(c);
@@ -172,7 +172,7 @@ public class ServletModBrano extends HttpServlet {
 					String prez3 = request.getParameter("prezzoC");
 					if((prez1.length()==0)||(prez2.length()==0)||(prez3.length()==0)) {
 						request.setAttribute("pre", true);
-						getServletContext().getRequestDispatcher("/editBrano.jsp").forward(request, response); //reindiriziamo alla view		
+						request.getServletContext().getRequestDispatcher("/editBrano.jsp").forward(request, response); //reindiriziamo alla view		
 						return;
 					}
 					Float prezzoC = Float.parseFloat(prez3);
@@ -213,7 +213,7 @@ public class ServletModBrano extends HttpServlet {
 						 Album ele2 = (Album)i.next();
 						if(ele2.getCodiceAlbum()==cod) {
 							request.setAttribute("ercod", true);
-							getServletContext().getRequestDispatcher("/editBrano.jsp").forward(request, response); //reindiriziamo alla view		
+							request.getServletContext().getRequestDispatcher("/editBrano.jsp").forward(request, response); //reindiriziamo alla view		
 							return;
 								}
 						 }
@@ -225,19 +225,19 @@ public class ServletModBrano extends HttpServlet {
 					//controllo nome artista
 					if(nomeA.length()==0) {
 						request.setAttribute("pre", true);
-						getServletContext().getRequestDispatcher("/editBrano.jsp").forward(request, response); //reindiriziamo alla view		
+						request.getServletContext().getRequestDispatcher("/editBrano.jsp").forward(request, response); //reindiriziamo alla view		
 						return;
 					}
 					//controllo nome
 					if(nome.length()==0) {
 						request.setAttribute("pre", true);
-						getServletContext().getRequestDispatcher("/editBrano.jsp").forward(request, response); //reindiriziamo alla view		
+						request.getServletContext().getRequestDispatcher("/editBrano.jsp").forward(request, response); //reindiriziamo alla view		
 						return;
 					}
 					//controllo dei prezzi
 					if(prez.length()==0) {
 						request.setAttribute("pre", true);
-						getServletContext().getRequestDispatcher("/editBrano.jsp").forward(request, response); //reindiriziamo alla view		
+						request.getServletContext().getRequestDispatcher("/editBrano.jsp").forward(request, response); //reindiriziamo alla view		
 						return;
 					}
 					Float prezzo = Float.parseFloat(prez);
@@ -273,7 +273,7 @@ public class ServletModBrano extends HttpServlet {
 						 Podcast ele2 = (Podcast)i.next();
 						if(ele2.getNomePodcast().toLowerCase().equals(nome)) {
 							request.setAttribute("ercod1", true);
-							getServletContext().getRequestDispatcher("/editBrano.jsp").forward(request, response); //reindiriziamo alla view		
+							request.getServletContext().getRequestDispatcher("/editBrano.jsp").forward(request, response); //reindiriziamo alla view		
 							return;
 								}
 						 }
@@ -286,7 +286,7 @@ public class ServletModBrano extends HttpServlet {
 					model.doUpdate("genere", genere, aa.getCodice());
 				}else {
 					request.setAttribute("g", true);
-					getServletContext().getRequestDispatcher("/editBrano.jsp").forward(request, response); //reindiriziamo alla view		
+					request.getServletContext().getRequestDispatcher("/editBrano.jsp").forward(request, response); //reindiriziamo alla view		
 					return;
 				}
 			}

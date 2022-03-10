@@ -24,7 +24,7 @@ import java.util.List;
 public class ServletNewPlaylist extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		//DataSource ds = (DataSource)getServletContext().getAttribute("DataSource");
 		Connection ds = null;
@@ -36,7 +36,7 @@ public class ServletNewPlaylist extends HttpServlet {
 		
 		PlaylistModelDS model = new PlaylistModelDS(ds);
 		
-		response.setContentType("text/html");//tipo di file
+		//response.setContentType("text/html");//tipo di file
 		
 		String namep = request.getParameter("nome");
 		
@@ -53,7 +53,7 @@ public class ServletNewPlaylist extends HttpServlet {
 		try {
 			if(namep.equals("")) {
 				request.setAttribute("si", false);
-				getServletContext().getRequestDispatcher("/listaplaylist.jsp").forward(request, response); //reindiriziamo alla view
+				request.getServletContext().getRequestDispatcher("/listaplaylist.jsp").forward(request, response); //reindiriziamo alla view
 				return;
 			}
 			
@@ -62,7 +62,7 @@ public class ServletNewPlaylist extends HttpServlet {
 				Playlist ele = (Playlist)i.next();
 				if((ele.getNome().equals(namep))&&(ele.getNomeUtente().equals(nut))) {
 					request.setAttribute("si", true);
-					getServletContext().getRequestDispatcher("/listaplaylist.jsp").forward(request, response); //reindiriziamo alla view
+					request.getServletContext().getRequestDispatcher("/listaplaylist.jsp").forward(request, response); //reindiriziamo alla view
 					return;
 				}
 			}
