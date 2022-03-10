@@ -1,5 +1,6 @@
 package Test.Servlet;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -19,6 +20,8 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 
 import gestioneAccount.AccountModelDS;
+import gestioneAccount.Profilo;
+import gestioneAccount.ProfiloModelDS;
 import gestioneAccount.ServletReg;
 import it.unisa.utils.DBConnectionPool;
 
@@ -43,11 +46,14 @@ public class ServletRegTest extends Mockito {
         MockitoAnnotations.initMocks(this);
     }
     
-   
-    
-    @Test
+   @Test
     public void TestNuovaRegistrazione() throws ServletException, IOException {
-    	request.setParameter("nome", "Maria");
+	   try {
+   		db = DBConnectionPool.getConnection();
+   	} catch (SQLException e) {
+   		e.printStackTrace();
+   	}
+	   request.setParameter("nome", "Maria");
         request.setParameter("cognome", "Rossi");
         request.setParameter("citta'", "Firenze");
         request.setParameter("indirizzo", "Via dei palazzi");
@@ -57,10 +63,11 @@ public class ServletRegTest extends Mockito {
         request.setParameter("password", "maria");
         servlet.doPost(request, response);
         assertNull(request.getAttribute("presente"));
-
+		ProfiloModelDS daoP = new ProfiloModelDS(db);
+       	Profilo p = daoP.doRetrieveByKey("m.rossi");
+        daoP.doDelete(p.getId());
     }
-    
-    
+       
     @Test
     public void TestRegistrazioneUsernameEsistente() throws ServletException, IOException {
     	request.setParameter("nome", "Katia");
@@ -72,12 +79,9 @@ public class ServletRegTest extends Mockito {
         request.setParameter("nickname", "k.buonocore");
         request.setParameter("password", "123");
         servlet.doPost(request, response);
-        assertTrue(true, String.valueOf(request.getAttribute("presente")));
-
+        assertEquals(true, request.getAttribute("presente"));
+       
     }
-    
-    
-    
     
     @AfterEach
     void tearDown() throws Exception {
@@ -86,9 +90,8 @@ public class ServletRegTest extends Mockito {
     	} catch (SQLException e) {
     		e.printStackTrace();
     	}
-    	
-        AccountModelDS daoA = new AccountModelDS(db);
-        daoA.doDelete("m.rossi");
+    	 AccountModelDS daoA = new AccountModelDS(db);
+    	 daoA.doDelete("m.rossi");
  
         request=null;
         response=null;
