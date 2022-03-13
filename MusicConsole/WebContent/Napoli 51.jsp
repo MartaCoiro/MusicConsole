@@ -42,7 +42,7 @@ stickyNav();
 <script>
 function passa(){
 	var xhttp = new XMLHttpRequest();
-	$.getJSON("ServletInf?prezzo=6.50&autore=Nicola%20Siciliano&nome=Napoli51&tipo=Streaming",function(result){
+	$.getJSON("ServletInf?prezzo=6.50&autore=Nicola%20Siciliano&nome=Napoli%2051&tipo=Streaming",function(result){
 		if(result.flag){
 		alert("Elemento aggiunto al carrello");
 		} else{
@@ -55,7 +55,7 @@ function passa(){
 <script>
 function passa1(){
 	var xhttp = new XMLHttpRequest();
-	$.getJSON("ServletInf?prezzo=25.50&autore=Nicola%20Siciliano&nome=Napoli51&tipo=Vinile",function(result){
+	$.getJSON("ServletInf?prezzo=25.50&autore=Nicola%20Siciliano&nome=Napoli%2051&tipo=Vinile",function(result){
 		if(result.flag){
 		alert("Elemento aggiunto al carrello");
 		}else{
@@ -68,7 +68,7 @@ function passa1(){
 <script>
 function passa2(){
 	var xhttp = new XMLHttpRequest();
-	$.getJSON("ServletInf?prezzo=17.50&autore=Nicola%20Siciliano&nome=Napoli51&tipo=CD",function(result){
+	$.getJSON("ServletInf?prezzo=17.50&autore=Nicola%20Siciliano&nome=Napoli%2051&tipo=CD",function(result){
 		if(result.flag){
 		alert("Elemento aggiunto al carrello");
 		}else{

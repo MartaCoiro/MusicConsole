@@ -115,9 +115,9 @@ Collection<?> car = (Collection<?>)session.getAttribute("carrello"); //collectio
  			if((bean.getTipo().equals("CD"))||(bean.getTipo().equals("Vinile"))) {
  				request.setAttribute("sip", true);
  			}
- 			if(session.getAttribute("noD")!=null){
+ 			if((session.getAttribute("noD")!=null)||(session.getAttribute("noD")==null)){
  				String btt = String.valueOf(session.getAttribute("noD"));
- 				if(btt.equals("true")){
+ 				if((btt.equals("true"))&&((request.getAttribute("NomeprodND").toString().toLowerCase().equals(bean.getNome().toLowerCase()))&&(request.getAttribute("AutoreprodND").toString().toLowerCase().equals(bean.getAutore().toLowerCase()))&&(request.getAttribute("TipoprodND").toString().toLowerCase().equals(bean.getTipo().toLowerCase())))){
  					no = true;
   %>
  <tr>
@@ -180,7 +180,8 @@ if(no==false){
   <br> <a class="car" href="ServletCarta">Completa l'ordine</a>
 <%
 		}
-session.setAttribute("noD", false);
+
+session.setAttribute("noD", null);
 }
 %>
   </p>

@@ -114,6 +114,23 @@ public class ServletModBranoTest extends Mockito{
 	}
 	
 	@Test
+	public void TestModificaBranodconGenerenonValido() throws  ServletException, IOException {
+		request.setParameter("nome","Blu Celeste");
+		request.setParameter("codice","15");
+		request.setParameter("immagine","img15.png");
+		request.setParameter("artista","Blanco");
+		request.setParameter("tipo","Brano");
+		request.setParameter("genere","bohh");
+		request.setParameter("descrizione","Interessante");
+		request.setParameter("prezzo","10.2");
+		request.setParameter("suono","bluCeleste.mp3");
+		HttpSession currentsession = request.getSession();
+        currentsession.setAttribute("bra", b1);
+        servlet.doPost(request, response);
+		assertEquals(true,request.getAttribute("g"));
+	}
+	
+	@Test
 	public void TestModificaNomeBranoditipoAlbumCampoVuoto() throws  ServletException, IOException {
 		request.setParameter("nome","");
 		request.setParameter("codice","15");
@@ -269,23 +286,6 @@ public class ServletModBranoTest extends Mockito{
         currentsession.setAttribute("bra", b1);
         servlet.doPost(request, response);
 		assertEquals(true,request.getAttribute("ercod1"));
-	}
-	
-	@Test
-	public void TestModificaBranodiTipoPodcastconGenerenonValido() throws  ServletException, IOException {
-		request.setParameter("nome","Blu Celeste");
-		request.setParameter("codice","15");
-		request.setParameter("immagine","img15.png");
-		request.setParameter("artista","Blanco");
-		request.setParameter("tipo","Podcast");
-		request.setParameter("genere","bohh");
-		request.setParameter("descrizione","Interessante");
-		request.setParameter("prezzo","10.2");
-		request.setParameter("suono","bluCeleste.mp3");
-		HttpSession currentsession = request.getSession();
-        currentsession.setAttribute("bra", b1);
-        servlet.doPost(request, response);
-		assertEquals(true,request.getAttribute("g"));
 	}
 	
 	 private Brano creaBrano(int cod,String nome,float durata,String artista,String img,String genere,String tipo,String suono,float prezzo,String descrizione) {

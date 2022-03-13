@@ -222,11 +222,15 @@ public class OrdiniModelDS implements ProductModelOrdini<Ordini> {
 			preparedStatement.setInt(1, indice);
 
 			result = preparedStatement.executeUpdate();
+			if(result==0) {
+				return false;
+			}
+			return true;
 
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
-		return (result != 0);
+		return false;
 	}
 	
 	@Override

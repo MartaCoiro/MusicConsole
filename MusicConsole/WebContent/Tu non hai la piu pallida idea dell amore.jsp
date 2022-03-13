@@ -41,7 +41,7 @@ stickyNav();
 <script>
 function passa(){
 	var xhttp = new XMLHttpRequest();
-	$.getJSON("ServletInf?prezzo=10.50&autore=Marcella%20Bella&nome=Tu%20non%20hai%20la%20più%20pallida%20idea%20dell%20amore&tipo=Streaming",function(result){
+	$.getJSON("ServletInf?prezzo=10.50&autore=Marcella%20Bella&nome=Tu%20non%20hai%20la%20piu%20pallida%20idea%20dell%20amore&tipo=Streaming",function(result){
 		if(result.flag){
 		alert("Elemento aggiunto al carrello");
 		}else{
@@ -54,7 +54,7 @@ function passa(){
 <script>
 function passa1(){
 	var xhttp = new XMLHttpRequest();
-	$.getJSON("ServletInf?prezzo=57.50&autore=Marcella%20Bella&nome=Tu%20non%20hai%20la%20più%20pallida%20idea%20dell%20amore&tipo=Vinile",function(result){
+	$.getJSON("ServletInf?prezzo=57.50&autore=Marcella%20Bella&nome=Tu%20non%20hai%20la%20piu%20pallida%20idea%20dell%20amore&tipo=Vinile",function(result){
 		if(result.flag){
 			alert("Elemento aggiunto al carrello");
 		}else{
@@ -67,7 +67,7 @@ function passa1(){
 <script>
 function passa2(){
 	var xhttp = new XMLHttpRequest();
-	$.getJSON("ServletInf?prezzo=22.50&autore=Marcella%20Bella&nome=Tu%20non%20hai%20la%20più%20pallida%20idea%20dell%20amore&tipo=CD",function(result){
+	$.getJSON("ServletInf?prezzo=22.50&autore=Marcella%20Bella&nome=Tu%20non%20hai%20la%20piu%20pallida%20idea%20dell%20amore&tipo=CD",function(result){
 		if(result.flag){
 			alert("Elemento aggiunto al carrello");
 		}else{

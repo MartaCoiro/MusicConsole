@@ -132,16 +132,31 @@ public class ServletModBrano extends HttpServlet {
 			if((picName==null)||(picName.length()==0)) {
 				picName=aa.getImgBrano();
 			}
+			
+			if(!genere.toLowerCase().equals(a.getGenere().toLowerCase())) {
+				if(genere.equals("pop")||(genere.equals("classico"))||(genere.equals("indie"))||(genere.equals("rap"))||(genere.equals("neomelodico"))||(genere.equals("freestyle"))||(genere.endsWith("hip-hop"))) {
+					model.doUpdate("genere", genere, aa.getCodice());
+				}else {
+					request.setAttribute("g", true);
+					request.getServletContext().getRequestDispatcher("/editBrano.jsp").forward(request, response); //reindiriziamo alla view		
+					return;
+				}
+			}
+			
 			//controllo suono
 			if(soundname.length()>0) {
 				if(!soundname.toLowerCase().equals(a.getSuono().toLowerCase())) {
 					model.doUpdate("suono", soundname, aa.getCodice());
 				}
 			}
+			
 			if(soundname.length()==0) {
 				soundname=aa.getSuono();
 			}
+			
+			
 		}
+	
 //Album
 			if(!tipo.toLowerCase().equals(a.getTipo().toLowerCase())) {
 				/*model.doUpdate("tipo", tipo, aa.getCodice());*/
@@ -280,15 +295,7 @@ public class ServletModBrano extends HttpServlet {
 					model2.doSave(o);
 					model.doDelete(aa.getCodice());
 				}
-			}
-			if(!genere.toLowerCase().equals(a.getGenere().toLowerCase())) {
-				if(genere.equals("pop")||(genere.equals("classico"))||(genere.equals("indie"))||(genere.equals("rap"))||(genere.equals("neomelodico"))||(genere.equals("freestyle"))||(genere.endsWith("hip-hop"))) {
-					model.doUpdate("genere", genere, aa.getCodice());
-				}else {
-					request.setAttribute("g", true);
-					request.getServletContext().getRequestDispatcher("/editBrano.jsp").forward(request, response); //reindiriziamo alla view		
-					return;
-				}
+			
 			}
 			request.setAttribute("buon", true);
 			getServletContext().getRequestDispatcher("/ServletProd?tipo=catalogo").forward(request, response); //reindiriziamo alla view		

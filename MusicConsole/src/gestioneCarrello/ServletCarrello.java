@@ -53,9 +53,12 @@ public class ServletCarrello extends HttpServlet {
 					Collection<Magazzino> m = model1.doRetrieveAll();
 					for(Iterator<Magazzino> i = m.iterator();i.hasNext();) {
 						Magazzino ele1 = (Magazzino)i.next();
-						if((ele1.getNome().equals(ele.getNome())&&(ele1.getAutore().equals(ele.getAutore()))&&(ele1.getTipo().equals(ele.getTipo())))){
+						if((ele1.getNome().toLowerCase().equals(ele.getNome().toLowerCase())&&(ele1.getAutore().toLowerCase().equals(ele.getAutore().toLowerCase()))&&(ele1.getTipo().toLowerCase().equals(ele.getTipo().toLowerCase())))){
 							if(ele1.getQuantità()<ele.getQuantità()) {
 								currentSession.setAttribute("noD", true);
+								request.setAttribute("NomeprodND",ele.getNome());
+								request.setAttribute("AutoreprodND",ele.getAutore());
+								request.setAttribute("TipoprodND",ele.getTipo());
 							}
 							else {
 								currentSession.setAttribute("noD", false);

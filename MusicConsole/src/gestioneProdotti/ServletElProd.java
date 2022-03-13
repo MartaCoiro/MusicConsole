@@ -52,6 +52,7 @@ public class ServletElProd extends HttpServlet {
 		PodcastModelDS model3 = new PodcastModelDS(ds);
 		PlaylistModelDS model4 = new PlaylistModelDS(ds);
 		CarrelloModelDS model5 = new CarrelloModelDS(ds);
+		MagazzinoModelDS model6 = new MagazzinoModelDS(ds);
 		
 		HttpSession currentSession = request.getSession();
 		
@@ -62,6 +63,8 @@ public class ServletElProd extends HttpServlet {
 			Collection<Brano> b = model2.doRetrieveAll();
 			Collection<Podcast> p = model3.doRetrieveAll();
 			Collection<Carrello> cc = model5.doRetrieveAll();
+			Collection<Magazzino> mm = model6.doRetrieveAll();
+			
 			if(tipo.toLowerCase().equals("album")) {
 				for(Iterator<Album> i = a.iterator(); i.hasNext();) {
 					Album ele1 = (Album)i.next();
@@ -71,6 +74,12 @@ public class ServletElProd extends HttpServlet {
 							Carrello elcar = (Carrello)ii.next();
 							if((elcar.getNome().equals(nome))&&(elcar.getAutore().equals(autore))) {
 								model5.doDelete(elcar.getCod());
+							}
+						}
+						for(Iterator<Magazzino> iii = mm.iterator(); iii.hasNext();) {
+							Magazzino elm = (Magazzino)iii.next();
+							if((elm.getNome().equals(nome))&&(elm.getAutore().equals(autore))) {
+								model6.doDelete(elm.getCod());
 							}
 						}
 					}

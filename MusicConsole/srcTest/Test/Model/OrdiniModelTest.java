@@ -135,7 +135,7 @@ public class OrdiniModelTest {
 	    
 	    @Test
 	    public void TestdeleteOrdineNotExist() throws Exception {
-	    	Ordini ord = creaOrdine(15,2,"false",12,ut1.getNickname(),"Achille Lauro","1969","Vinile",25.5f,25.5f);		
+	    	Ordini ord = creaOrdine(15,2,"false",100,ut1.getNickname(),"Achille Lauro","1969","Vinile",25.5f,25.5f);		
 	    	ord.setData(dat);
 	    	assertFalse(daoO.doDelete(ord.getIndice()));
 	    }
